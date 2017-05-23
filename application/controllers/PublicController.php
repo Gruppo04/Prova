@@ -11,6 +11,10 @@ class PublicController extends Zend_Controller_Action
     {
     }
     
+    public function aziendeAction()
+    {
+    }
+    
     public function viewstaticAction()
     {
     	$page = $this->_getParam('staticPage');
