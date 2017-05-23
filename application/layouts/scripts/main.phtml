@@ -1,0 +1,65 @@
+<?php echo $this->doctype() ?>	<!-- Inietto il doctype definito in Bootstrap-->
+<html>
+<head>
+    
+    <?= $this->headMeta(); ?>	<!-- Inietto le proprietà della head -->
+    <?= $this->headLink(); ?>
+    <?= $this->headTitle(); ?>
+
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Sito specializzato nella distribuzione gratuita di coupon">
+    <meta name="keywords" content="coupon, coupon is life , coupon per smartphone , coupon per la casa , coupon per la scuola , aziende jesi , coupon jesi ">
+    <meta name="author" content="Gruppo 04">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../../public/css/cssBootstrap/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../../public/css/cssBootstrap/modern-business.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../../public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <?= $this->render('_navbar.phtml') ?>
+    <?php echo $this->layout()->content; ?>
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12"  style="text-align: center; background-color:#222222;">
+
+            <p style="color: #9D9D9D"><strong>Gruppo 04 - 2016, All Rights Reserved</strong>
+            <br>
+            <span> Aturalyage Samith - Bianchini Giovanni - Cardinali Michele - Tesei Riccardo </span>
+
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="../../public/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../../public/js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+    
+</body>
+</html>
+
