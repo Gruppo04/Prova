@@ -8,3 +8,6 @@
 *Inserire nel layout la visualizzazione delle categorie
 
 ********************************************************************************
+
+2017/05/23
+-Aggiunto file aziende.phtml
