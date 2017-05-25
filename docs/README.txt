@@ -11,3 +11,7 @@
 
 2017/05/23
 -Aggiunto file aziende.phtml
+
+*******************************************************************************
+CHECK DEPLOY SUL WEBSERVER
+-le immagini non vengono visualizzate

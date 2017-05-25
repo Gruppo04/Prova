@@ -5,11 +5,10 @@
         <group>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/public/aziende.phtml</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/controllers/PublicController.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/Catalogo.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/Bootstrap.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/layouts/scripts/main.phtml</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/layouts/scripts/_navbar.phtml</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/public/faq.phtml</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/resources/Categoria.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/public/index.phtml</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/resources/Azienda.php</file>
         </group>
     </open-files>
