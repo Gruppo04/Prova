@@ -22,7 +22,7 @@ class Application_Form_Public_Registrazione extends Zend_Form
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
             'required' => 'true',
-            'placeholder' => 'gg-mm-aaaa',
+            'placeholder' => 'aaaa-mm-gg',
             'filters' => array('StringTrim')));
             //'validators' => array(array('Date', 'format' => 'dd mm yyyy'))));
         
