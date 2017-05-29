@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Public_Registrazione extends Zend_Form
+class Application_Form_Public_User extends Zend_Form
 {
     public function init() {
         
@@ -35,7 +35,7 @@ class Application_Form_Public_Registrazione extends Zend_Form
             'label' => 'Provincia',
             'required' => 'true',
             'filters' => array('StringTrim')));
-            //'validators' => array('Alpha','allowwhitespace' => 'true')));
+            //'validators' => array('Alpha','allowwhitespace')));
         
         $this->addElement('text', 'citta', array(
             'label' => 'Comune',
@@ -70,6 +70,9 @@ class Application_Form_Public_Registrazione extends Zend_Form
 //        $this->addElement('password', '', array(
 //            'label' => 'Conferma la password',
 //            'required' => 'true'));
+        $this->addElement('hidden', 'livello', array(
+            'label' => 'Livello di accesso',
+            'value' => 'user'));
         
         $this->addElement('submit', 'add', array(
              'label' => 'Registrati'));

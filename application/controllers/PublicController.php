@@ -10,7 +10,7 @@ class PublicController extends Zend_Controller_Action
 	$this->_helper->layout->setLayout('main');
         $this->_catalogoModel = new Application_Model_Catalogo();
         $this->_utentiModel = new Application_Model_Utenti();
-        $this->view->registrazioneForm = $this->getRegistrazioneForm();
+        $this->view->userForm = $this->getUserForm();
     }
     
     public function indexAction()
@@ -43,25 +43,14 @@ class PublicController extends Zend_Controller_Action
             $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
             return $this->render('logreg');
         }
-        $anagrafica = array($form->getValue('nome'),
-            $form->getValue('cognome'),
-            $form->getValue('data_di_nascita'),
-            $form->getValue('genere'),
-            $form->getValue('provincia'),
-            $form->getValue('citta'),
-            $form->getValue('telefono'),
-            $form->getValue('email'));
-        $credenziali = array($form->getValue('username'),
-             $form->getValue('password'));
-       	$this->_utentiModel->registraUtente($anagrafica);
-        $this->_utentiModel->registraCredenziali($credenziali);
-        $this->setDescription('Utente registrato correttamente.');
+        $values = $form->getValues();
+       	$this->_utentiModel->registraUser($values);
     }
     
-    private function getRegistrazioneForm()
+    private function getUserForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_Public_Registrazione();
+        $this->_form = new Application_Form_Public_User();
         $this->_form->setAction($urlHelper->url(array(
                         'controller' => 'public',
                         'action' => 'registra'),
