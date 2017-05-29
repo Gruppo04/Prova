@@ -12,8 +12,8 @@ class Application_Form_Public_Registrazione extends Zend_Form
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array('Alpha','allowwhitespace' => 'true')));
+            'filters' => array('StringTrim')));
+            //'validators' => array('Alpha','allowwhitespace' => 'true')));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
@@ -23,8 +23,8 @@ class Application_Form_Public_Registrazione extends Zend_Form
             'label' => 'Data di nascita',
             'required' => 'true',
             'placeholder' => 'gg-mm-aaaa',
-            'filters' => array('StringTrim'),
-            'validators' => array(array('Date', 'format' => 'dd mm yyyy'))));
+            'filters' => array('StringTrim')));
+            //'validators' => array(array('Date', 'format' => 'dd mm yyyy'))));
         
         $this->addElement('radio', 'genere', array(
             'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),
@@ -34,14 +34,14 @@ class Application_Form_Public_Registrazione extends Zend_Form
         $this->addElement('text', 'provincia', array(
             'label' => 'Provincia',
             'required' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array('Alpha','allowwhitespace' => 'true')));
+            'filters' => array('StringTrim')));
+            //'validators' => array('Alpha','allowwhitespace' => 'true')));
         
-        $this->addElement('text', 'città', array(
+        $this->addElement('text', 'citta', array(
             'label' => 'Comune',
             'required' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array('Alpha','allowwhitespace' => 'true')));
+            'filters' => array('StringTrim')));
+            //'validators' => array('Alpha','allowwhitespace' => 'true')));
         
         $this->addElement('text', 'telefono', array(
             'label' => 'Numero di telefono',

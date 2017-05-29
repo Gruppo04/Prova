@@ -12,8 +12,7 @@ class Application_Resource_Azienda extends Zend_Db_Table_Abstract
     
     public function getAziende()
     {
-        $select = $this->select()
-                        ->where('id = 1');
+        $select = $this->select();
         return $this ->fetchAll($select);        
     }
 }
