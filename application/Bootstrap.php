@@ -37,6 +37,17 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap	// extends definisc
 	$loader->registerNamespace('App_');
         $this->getResourceLoader()
              ->addResourceType('modelResource','models/resources','Resource');
-  	}
+    }
+    
+//    protected function _initDbParms()
+//    {
+//    	include_once (APPLICATION_PATH . '/../include/connectZP.php');
+//	$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+//    			'host'     => $HOST,
+//    			'username' => $USER,
+//    			'password' => $PASSWORD,
+//    			'dbname'   => $DB));  
+//	Zend_Db_Table_Abstract::setDefaultAdapter($db);
+//    }
 }
 

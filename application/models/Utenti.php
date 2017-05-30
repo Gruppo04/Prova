@@ -11,5 +11,9 @@ class Application_Model_Utenti extends App_Model_Abstract
     {
     	return $this->getResource('Utenti')->registraUser($info);
     }
- 
+    
+    public function getUtenteByNome($info)
+    {
+    	return $this->getResource('Utenti')->getUtenteByNome($info);
+    }
 }

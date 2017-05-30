@@ -3,7 +3,8 @@
 class PublicController extends Zend_Controller_Action
 {
     protected $_catalogoModel;
-    protected $_form;
+    protected $_formReg;
+    protected $_formLog;
     protected $_authService;
     
     public function init()
@@ -41,53 +42,51 @@ class PublicController extends Zend_Controller_Action
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('index','public');
         }
-	$form=$this->_form;
-        if (!$form->isValid($_POST)) {
-            $form->setDescription('Attenzione: alcuni dati inseriti sono errati.');
+	$formReg=$this->_formReg;
+        if (!$formReg->isValid($_POST)) {
             return $this->render('logreg');
         }
-        $values = $form->getValues();
+        $values = $formReg->getValues();
        	$this->_utentiModel->registraUser($values);
     }
     
     private function getLoginForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_Public_Auth_Login();
-        $this->_form->setAction($urlHelper->url(array(
+        $this->_formLog = new Application_Form_Public_Auth_Login();
+        $this->_formLog->setAction($urlHelper->url(array(
                         'controller' => 'public',
-                        'action' => 'login'),
+                        'action' => 'authenticate'),
                         'default'
                         ));
-        return $this->_form;
+        return $this->_formLog;
     }
     
     private function getUserForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_form = new Application_Form_Public_User();
-        $this->_form->setAction($urlHelper->url(array(
+        $this->_formReg = new Application_Form_Public_User();
+        $this->_formReg->setAction($urlHelper->url(array(
                         'controller' => 'public',
                         'action' => 'registra'),
                         'default'
                         ));
-        return $this->_form;
+        return $this->_formReg;
     }
     
     public function authenticateAction()
     {
-        if (!$this->getRequest()->isPost()) {
+        $request = $this->getRequest();
+        if (!$request->isPost()) {
             $this->_helper->redirector('logreg','public');
         }
-	$form = $this->_form;
-        if (!$form->isValid($request->getPost())) {
-            $form->setDescription('Nome utente o password errati.');
-        	return $this->render('logreg');
-        }
-        if (false === $this->_authService->authenticate($form->getValues())) {
-            $form->setDescription('Impossibile accedere');
+	$formLog = $this->_formLog;
+        if (!$formLog->isValid($request->getPost())) {
             return $this->render('logreg');
         }
-        return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
+        if (false === $this->_authService->authenticate($formLog->getValues())) {
+            return $this->render('logreg');
+        }
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->livello);
     }
 }

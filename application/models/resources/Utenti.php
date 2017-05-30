@@ -14,4 +14,9 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract	// viene bypass
     {
         return $this->insert($info);
     }
+    
+    public function getUtenteByNome($username)
+    {
+        return $this->fetchRow($this->select()->where('username = ?', $username));
+    }
 }
