@@ -12,12 +12,18 @@ class Application_Form_Public_User extends Zend_Form
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array('StringTrim')));
-            //'validators' => array('Alpha','allowwhitespace' => 'true')));
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha',
+                    'allowWhiteSpace'=>true))));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
-            'required' => 'true'));
+            'required' => 'true',
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha',
+                'allowWhiteSpace'=>true))));
         
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
@@ -27,21 +33,25 @@ class Application_Form_Public_User extends Zend_Form
             //'validators' => array(array('Date', 'format' => 'dd mm yyyy'))));
         
         $this->addElement('radio', 'genere', array(
-            'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),
+            'MultiOptions' => array('M' => 'M', 'F' => 'F'),
             'value' => 'M',
             'required' => 'true'));
         
         $this->addElement('text', 'provincia', array(
             'label' => 'Provincia',
             'required' => 'true',
-            'filters' => array('StringTrim')));
-            //'validators' => array('Alpha','allowwhitespace')));
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha',
+                    'allowWhiteSpace'=>true))));
         
         $this->addElement('text', 'citta', array(
             'label' => 'Comune',
             'required' => 'true',
-            'filters' => array('StringTrim')));
-            //'validators' => array('Alpha','allowwhitespace' => 'true')));
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha',
+                    'allowWhiteSpace'=>true))));
         
         $this->addElement('text', 'telefono', array(
             'label' => 'Numero di telefono',
@@ -71,7 +81,6 @@ class Application_Form_Public_User extends Zend_Form
 //            'label' => 'Conferma la password',
 //            'required' => 'true'));
         $this->addElement('hidden', 'livello', array(
-            'label' => 'Livello di accesso',
             'value' => 'user'));
         
         $this->addElement('submit', 'add', array(

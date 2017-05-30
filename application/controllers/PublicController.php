@@ -4,13 +4,16 @@ class PublicController extends Zend_Controller_Action
 {
     protected $_catalogoModel;
     protected $_form;
+    protected $_authService;
     
     public function init()
     {
 	$this->_helper->layout->setLayout('main');
         $this->_catalogoModel = new Application_Model_Catalogo();
         $this->_utentiModel = new Application_Model_Utenti();
+        $this->_authService = new Application_Service_Auth();
         $this->view->userForm = $this->getUserForm();
+        $this->view->loginForm = $this->getLoginForm();
     }
     
     public function indexAction()
@@ -47,6 +50,18 @@ class PublicController extends Zend_Controller_Action
        	$this->_utentiModel->registraUser($values);
     }
     
+    private function getLoginForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_form = new Application_Form_Public_Auth_Login();
+        $this->_form->setAction($urlHelper->url(array(
+                        'controller' => 'public',
+                        'action' => 'login'),
+                        'default'
+                        ));
+        return $this->_form;
+    }
+    
     private function getUserForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
@@ -57,5 +72,22 @@ class PublicController extends Zend_Controller_Action
                         'default'
                         ));
         return $this->_form;
+    }
+    
+    public function authenticateAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('logreg','public');
+        }
+	$form = $this->_form;
+        if (!$form->isValid($request->getPost())) {
+            $form->setDescription('Nome utente o password errati.');
+        	return $this->render('logreg');
+        }
+        if (false === $this->_authService->authenticate($form->getValues())) {
+            $form->setDescription('Impossibile accedere');
+            return $this->render('logreg');
+        }
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->role);
     }
 }

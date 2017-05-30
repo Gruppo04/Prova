@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Public_Auth_Login extends App_Form_Abstract
+class Application_Form_Public_Auth_Login extends Zend_Form
 {
     public function init()
     {               
