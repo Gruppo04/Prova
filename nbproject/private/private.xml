@@ -3,16 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/configs/application.ini</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/controllers/PublicController.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/services/Auth.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/admin/amministrazione.phtml</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/forms/Public/Auth/Login.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/controllers/PublicController.php</file>
             <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/forms/Public/User.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/library/App/Controller/Plugin/Acl.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/Bootstrap.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/Utenti.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/Admin.php</file>
-            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/models/resources/Utenti.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/forms/Admin/Formstaff.php</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/admin/formstaff.phtml</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/layouts/scripts/_navbar.phtml</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/views/scripts/public/logreg.phtml</file>
+            <file>file:/C:/xampp/htdocs/Coupon-Is-Life/application/controllers/AdminController.php</file>
         </group>
     </open-files>
 </project-private>
