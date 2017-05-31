@@ -10,6 +10,7 @@ class UserController extends Zend_Controller_Action
 
     public function indexAction()
     {
+        return $this->_helper->redirector('index','public');
     }  
 
     public function logoutAction()

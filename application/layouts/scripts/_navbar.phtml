@@ -62,13 +62,58 @@
                             </li>
                         </ul>
                     </li>
-                    <li>
-                        <a href="<?= $this->url(array(
-                                    'controller' => 'public',
-                                    'action'     => 'logreg'), 
-                                    'default',true); 
-                                    ?>">Login/Registrati</a>
-                    </li>
+                    <?php
+                        switch ($this->authInfo('livello')){
+                            case 'user':?>
+                            <li>
+                                <a href="#">Gestione Profilo</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->url(array(
+                                            'controller' => 'user',
+                                            'action'     => 'logout'), 
+                                            'default',true); 
+                                            ?>">Logout</a>
+                            </li>
+                            <?php break;
+                        
+                            case 'staff':?>
+                            <li>
+                                <a href="#">Strumenti Staff</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->url(array(
+                                            'controller' => 'staff',
+                                            'action'     => 'logout'), 
+                                            'default',true); 
+                                            ?>">Logout</a>
+                            </li>
+                            <?php break;
+                        
+                            case 'admin':?>
+                            <li>
+                                <a href="#">Strumenti Amministratore</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->url(array(
+                                            'controller' => 'user',
+                                            'action'     => 'logout'), 
+                                            'default',true); 
+                                            ?>">Logout</a>
+                            </li>
+                            <?php break;
+                        
+                            default:?>
+                            <li>
+                                <a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'logreg'), 
+                                        'default',true); 
+                                        ?>">Login/Registrati</a>
+                            </li>
+                        <?php
+                            break;
+                            }?>
                 </ul>
                       <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
