@@ -1,0 +1,27 @@
+
+ <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Pagina delle Categorie</h1>
+        <p>Bla bla bla bla bla bla...
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Example row of columns -->
+      <div class="row">
+            <?php foreach ($this->categorie as $categoria) :?>
+                <div class="col-md-4">
+                    <?php echo '<h2>' . $categoria->nome . '</h2>';
+                    echo '<img src="../../../public/images/elettronica.jpg" width="300" height="150">';
+                    echo '<p>' . $categoria->descrizione . '</p>'; ?>
+                    <p><a class="btn btn-default" href="categorie.html" role="button">Vedi i dettagli &raquo;</a></p> 
+                </div>
+            <?php endforeach ?>
+          <p>Qualche frase di scena con i brand all'ultima moda</p>
+        </div>
+
+    </div>
+<!-- /.container -->
+</div>

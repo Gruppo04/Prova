@@ -27,6 +27,12 @@ class PublicController extends Zend_Controller_Action
         $this->view->assign(array('aziende' => $az));
     }
     
+    public function categorieAction()
+    {
+        $cat=$this->_catalogoModel->getCategorie();
+        $this->view->assign(array('categorie' => $cat));
+    }
+    
     public function viewstaticAction()
     {
     	$page = $this->_getParam('staticPage');

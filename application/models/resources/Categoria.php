@@ -10,8 +10,9 @@ class Application_Resource_Categoria extends Zend_Db_Table_Abstract	// viene byp
     {
     }
     
-//    public function getCatById($id)
-//    {
-//        return $this->find($id)->current();
-//    }
+    public function getCategorie()
+    {
+        $select = $this->select();
+        return $this ->fetchAll($select);
+    }
 }

@@ -6,9 +6,9 @@ class Application_Model_Catalogo extends App_Model_Abstract
     {
     }
     
-    public function getCatById($id)
+    public function getCategorie()
     {
-        return $this->getResource('Categoria')->getCatById($id);
+        return $this->getResource('Categoria')->getCategorie();
     }
     
     public function getAziende()

@@ -10,9 +10,6 @@ class Application_Form_Public_Auth_Login extends Zend_Form
     	
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim', 'StringToLower'),
-            'validators' => array(
-                array('StringLength', true, array(3, 25))
-            ),
             'required'   => true,
             'label'      => 'Username',
             //'decorators' => $this->elementDecorators,
@@ -20,9 +17,6 @@ class Application_Form_Public_Auth_Login extends Zend_Form
         
         $this->addElement('password', 'password', array(
             'filters'    => array('StringTrim'),
-            'validators' => array(
-                array('StringLength', true, array(3, 25))
-            ),
             'required'   => true,
             'label'      => 'Password',
             //'decorators' => $this->elementDecorators,
