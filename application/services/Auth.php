@@ -2,7 +2,7 @@
 
 class Application_Service_Auth
 {
-    protected $_utentuiModel;
+    protected $_utentiModel;
     protected $_auth;
 
     public function __construct()

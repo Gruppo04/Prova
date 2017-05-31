@@ -87,6 +87,7 @@ class PublicController extends Zend_Controller_Action
         if (false === $this->_authService->authenticate($formLog->getValues())) {
             return $this->render('logreg');
         }
-        return $this->_helper->redirector('index', $this->_authService->getIdentity()->livello);
+        $livello = $this->_authService->getIdentity()->livello;
+        return $this->_helper->redirector('index', $livello);
     }
 }

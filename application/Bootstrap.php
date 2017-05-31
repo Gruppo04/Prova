@@ -4,7 +4,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap	// extends definisc
 {
     protected  $_view;
     
-        protected function _initRequest()
+    protected function _initRequest()
     // Aggiunge un'istanza di Zend_Controller_Request_Http nel Front_Controller
     // che permette di utilizzare l'helper baseUrl() nel Bootstrap.php
     // Necessario solo se la Document-root di Apache non è la cartella public/
@@ -39,15 +39,15 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap	// extends definisc
              ->addResourceType('modelResource','models/resources','Resource');
     }
     
-//    protected function _initDbParms()
-//    {
-//    	include_once (APPLICATION_PATH . '/../include/connectZP.php');
-//	$db = new Zend_Db_Adapter_Pdo_Mysql(array(
-//    			'host'     => $HOST,
-//    			'username' => $USER,
-//    			'password' => $PASSWORD,
-//    			'dbname'   => $DB));  
-//	Zend_Db_Table_Abstract::setDefaultAdapter($db);
-//    }
+    protected function _initDbParms()
+    {
+    	include_once (APPLICATION_PATH . '/../include/connectZP.php');
+	$db = new Zend_Db_Adapter_Pdo_Mysql(array(
+    			'host'     => $HOST,
+    			'username' => $USER,
+    			'password' => $PASSWORD,
+    			'dbname'   => $DB));  
+	Zend_Db_Table_Abstract::setDefaultAdapter($db);
+    }
 }
 
