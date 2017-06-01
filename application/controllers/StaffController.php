@@ -2,6 +2,8 @@
 
 class StaffController extends Zend_Controller_Action
 {	
+    protected $_authService;
+
     public function init()
     {
         $this->_helper->layout->setLayout('main');
@@ -10,8 +12,12 @@ class StaffController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        return $this->_helper->redirector('index','public');
-    }  
+        return $this->_helper->redirector('strumenti','staff');
+    }
+    
+    public function strumentiAction()
+    {
+    }
 
     public function logoutAction()
     {

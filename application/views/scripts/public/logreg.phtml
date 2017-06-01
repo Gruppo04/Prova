@@ -1,8 +1,35 @@
-<div class="static">
-    <h3>Login</h3>
-    <?php echo $this->loginForm; ?>
-    <br>
-    <h5>se non hai ancora un account</h5>
-    <h3>Registrati</h3>
-    <?php echo $this->userForm; ?>
+<br/>
+<br/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-login">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <a href="#" class="active" id="login-form-link">Login</a>
+                        </div>
+                        <div class="col-xs-6">
+                            <a href="#" id="register-form-link">Registrati</a>
+                        </div>
+                    </div>
+                    <hr>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="login-form" style="display: block; text-align:center">
+                                <?php echo $this->loginForm; ?>
+                            </div>
+
+                            <div id="register-form"style="display: none; text-align:center">
+                                <?php echo $this->userForm; ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
