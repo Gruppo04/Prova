@@ -3,7 +3,6 @@
 class AdminController extends Zend_Controller_Action {
     
     protected $_adminModel;
-    protected $_utentiModel;
     protected $_authService;
     protected $_formStaff;
 
@@ -12,7 +11,6 @@ class AdminController extends Zend_Controller_Action {
     public function init() {
 	$this->_helper->layout->setLayout('main');
         $this->_adminModel = new Application_Model_Admin();
-        $this->_utentiModel = new Application_Model_Utenti();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
     }
@@ -59,18 +57,18 @@ class AdminController extends Zend_Controller_Action {
             return $this->render('formstaff');
         }
         $values = $formStaff->getValues();
-       	$this->_utentiModel->registraStaff($values);
+       	$this->_adminModel->registraStaff($values);
     }
     
     public function staffAction()
     {
-        $staff=$this->_utentiModel->getStaff();
+        $staff=$this->_adminModel->getStaff();
         $this->view->assign(array('staff' => $staff));
     }
 
     public function usersAction()
     {
-        $users=$this->_utentiModel->getUsers();
+        $users=$this->_adminModel->getUsers();
         $this->view->assign(array('users' => $users));
     }
 }

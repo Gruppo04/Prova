@@ -2,7 +2,7 @@
     <br><br>
     <table border>
         <tr><th>ID</th><th>Nome</th><th>Cognome</th><th>Sesso</th><th>Data di nascita</th>
-            <th>Provincia</th><th>Citt&agrave;</th><th>email</th><th>Telefono</th>
+            <th>Provincia</th><th>Comune</th><th>email</th><th>Telefono</th>
             <th>Username</th><th>Password</th>
         <?php
             foreach ($this->users as $user){
@@ -12,7 +12,7 @@
                 else{
                     $telefono = $user->telefono;
                 }
-            echo '<tr><td>' . $user->id . '</td>'
+            echo '<tr><td><a href="#">' . $user->id . '</a></td>'
                     . '<td>' . $user->nome . '</td>'
                     . '<td>' . $user->cognome . '</td>'
                     . '<td>' . $user->genere . '</td>'

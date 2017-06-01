@@ -2,12 +2,12 @@
 
 class Application_Service_Auth
 {
-    protected $_utentiModel;
+    protected $_guestModel;
     protected $_auth;
 
     public function __construct()
     {
-        $this->_utentiModel = new Application_Model_Utenti();
+        $this->_guestModel = new Application_Model_Guest();
     }
     
     public function authenticate($credenziali)
@@ -19,7 +19,7 @@ class Application_Service_Auth
         if (!$result->isValid()) {
             return false;
         }
-        $utente = $this->_utentiModel->getUtenteByNome($credenziali['username']);
+        $utente = $this->_guestModel->getUtenteByNome($credenziali['username']);
         $auth->getStorage()->write($utente);
         return true;
     }
