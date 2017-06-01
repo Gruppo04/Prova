@@ -1,0 +1,23 @@
+<div class="static">
+    <br>
+    <h5>Registrazione membro staff avvenuta con successo!</h5>
+    <br>
+    <ul>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'formstaff',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Aggiungi altri membri</a>
+        </li>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla pagina di amministrazione</a>
+        </li>
+    </ul>
+</div>
+
+

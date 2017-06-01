@@ -3,6 +3,7 @@
 class PublicController extends Zend_Controller_Action
 {
     protected $_catalogoModel;
+    protected $_utentiModel;
     protected $_formReg;
     protected $_formLog;
     protected $_authService;
