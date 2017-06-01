@@ -1,6 +1,6 @@
 <?php
 
-class Application_Resource_Utenti extends Zend_Db_Table_Abstract	// viene bypassata la cartella Models perchè così è stato detto all'Autoloader
+class Application_Resource_Utenti extends Zend_Db_Table_Abstract
 {
     protected $_name	 = 'utenti';
     protected $_primary	 = 'id';
@@ -22,6 +22,19 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract	// viene bypass
     
     public function getUtenteByNome($username)
     {
-        return $this->fetchRow($this->select()->where('username = ?', $username));
+        $select = $this->select()->where('username = ?', $username);
+        return $this->fetchRow($select);
+    }
+    
+    public function getUsers()
+    {
+        $select = $this->select()->where('livello = ?', 'user');
+        return $this->fetchAll($select);
+    }
+    
+    public function getStaff()
+    {
+        $select = $this->select()->where('livello = ?', 'staff')->order('id');
+        return $this->fetchAll($select);
     }
 }

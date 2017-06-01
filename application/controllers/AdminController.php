@@ -61,5 +61,16 @@ class AdminController extends Zend_Controller_Action {
         $values = $formStaff->getValues();
        	$this->_utentiModel->registraStaff($values);
     }
+    
+    public function staffAction()
+    {
+        $staff=$this->_utentiModel->getStaff();
+        $this->view->assign(array('staff' => $staff));
+    }
 
+    public function usersAction()
+    {
+        $users=$this->_utentiModel->getUsers();
+        $this->view->assign(array('users' => $users));
+    }
 }

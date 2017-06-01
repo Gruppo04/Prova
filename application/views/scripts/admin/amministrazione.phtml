@@ -9,7 +9,12 @@
         <br><br>
         <fieldset>
             <legend>Gestione utenti</legend>
-            <li>Modifica/cancella utente</li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'users',
+                                    ), 
+                                    'default',true); 
+                        ?>">Modifica/cancella utente</li>
         </fieldset>
         <br><br>
         <fieldset>
@@ -20,13 +25,23 @@
                                     ), 
                                     'default',true); 
                         ?>">Inserisci membro staff</a></li>
-            <li>Modifica/cancella membro staff</li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'staff',
+                                    ), 
+                                    'default',true); 
+                        ?>">Modifica/cancella membro staff</a></li>
         </fieldset>
         <br><br>
         <fieldset>
             <legend>Gestione categorie di prodotti</legend>
             <li>Inserisci nuova categoria</li>
             <li>Modifica/cancella categoria</li>  
+        </fieldset>
+        <br><br>
+        <fieldset>
+            <legend>Gestione offerte</legend>
+            <li>Visualizza statistiche relative ai coupon</li>
         </fieldset>
     </ul>
 </div>

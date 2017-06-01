@@ -1,0 +1,15 @@
+<div class="container">
+    <br><br>
+    <table border>
+        <tr><th>ID</th><th>Nome</th><th>Cognome</th><th>email</th><th>Username</th><th>Password</th>
+        <?php
+            foreach ($this->staff as $membrostaff){
+            echo '<tr><td><a href="#">' . $membrostaff->id . '</a></td>'
+                    . '<td>' . $membrostaff->nome . '</td>'
+                    . '<td>' . $membrostaff->cognome . '</td>'
+                    . '<td>' . $membrostaff->email . '</td>'
+                    . '<td>' . $membrostaff->username . '</td>'
+                    . '<td>' . $membrostaff->password . '</td>';
+        }?>
+    </table>
+</div>
