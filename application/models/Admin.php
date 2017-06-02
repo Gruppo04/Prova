@@ -20,5 +20,10 @@ class Application_Model_Admin extends App_Model_Abstract
     {
     	return $this->getResource('Utenti')->registraStaff($info);
     }
+    
+    public function registraFaq($info)
+    {
+    	return $this->getResource('Faq')->registraFaq($info);
+    }
 
 }

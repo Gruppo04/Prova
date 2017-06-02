@@ -5,6 +5,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_adminModel;
     protected $_authService;
     protected $_formStaff;
+    protected $_formFaq;
 
     /* FUNZIONI GENERICHE */
     
@@ -13,6 +14,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
+        $this->view->faqForm = $this->getFaqForm();
     }
 
     public function indexAction()
@@ -65,10 +67,35 @@ class AdminController extends Zend_Controller_Action {
         $staff=$this->_adminModel->getStaff();
         $this->view->assign(array('staff' => $staff));
     }
-
+    
+    /* FUNZIONI PER LA GESTIONE DEGLI UTENTI REGISTRATI */
+    
     public function usersAction()
     {
         $users=$this->_adminModel->getUsers();
         $this->view->assign(array('users' => $users));
+    }
+    
+    /* FUNZIONI PER LA GESTIONE DELLE FAQ */
+    
+    public function formfaqAction()
+    {
+    }
+    
+    private function getFaqForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formFaq = new Application_Form_Admin_Formfaq();
+        $this->_formFaq->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'registrafaq'),
+                        'default'
+                        ));
+        return $this->_formFaq;
+    }
+    public function registrafaqAction()
+    {
+        $faq=$this->_adminModel->getUsers();
+        $this->view->assign(array('faq' => $faq));
     }
 }

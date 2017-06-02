@@ -43,9 +43,15 @@
             <legend>Gestione promozioni</legend>
             <li>Visualizza statistiche relative ai coupon</li>
         </fieldset>
+        <br><br>
         <fieldset>
             <legend>Gestione FAQ</legend>
-            <li>Aggiungi domanda frequente</li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'formfaq',
+                                    ), 
+                                    'default',true); 
+                        ?>">Aggiungi domanda frequente</a></li>
             <li>Modifica/cancella domanda frequente</li>
         </fieldset>
     </ul>
