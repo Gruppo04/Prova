@@ -1,0 +1,12 @@
+<div class="container">
+    <br><br>
+    <table border>
+        <tr><th>ID</th><th>Domanda</th><th>Risposta</th>
+        <?php
+            foreach ($this->faq as $domanda){
+            echo '<tr><td><a href="#">' . $domanda->id . '</a></td>'
+                    . '<td>' . $domanda->domanda . '</td>'
+                    . '<td>' . $domanda->risposta . '</td>';
+        }?>
+    </table>
+</div>

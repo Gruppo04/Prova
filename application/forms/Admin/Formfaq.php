@@ -13,6 +13,7 @@ class Application_Form_Admin_Formfaq extends Zend_Form
         	'cols' => '100', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus'  => true,
             'placeholder' => 'Inserisci il testo della domanda',
             'validators' => array(array('StringLength',true, array(1,2500)))
         ));
@@ -26,11 +27,8 @@ class Application_Form_Admin_Formfaq extends Zend_Form
             'validators' => array(array('StringLength',true, array(1,2500)))
         ));
         
-        $this->addElement('hidden', 'livello', array(
-            'value' => 'staff'));
-        
         $this->addElement('submit', 'add', array(
-             'label' => 'Aggiungi la FAQ'));
+             'label' => 'Inserisci FAQ'));
     }
 
 }

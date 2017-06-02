@@ -1,0 +1,23 @@
+<div class="container">
+    <br><br>
+    <table border>
+        <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
+            <th>Tipologia</th><th>Immagine</th>
+        <?php
+            foreach ($this->aziende as $azienda){
+                if($azienda->immagine==null){
+                    $immagine = 'NON DISPONIBILE';
+                }
+                else{
+                    $immagine = $azienda->immagine;
+                }
+            echo '<tr><td><a href="#">' . $azienda->id . '</a></td>'
+                    . '<td>' . $azienda->nome . '</td>'
+                    . '<td>' . $azienda->descrizione . '</td>'
+                    . '<td>' . $azienda->ragione_sociale . '</td>'
+                    . '<td>' . $azienda->localizzazione . '</td>'
+                    . '<td>' . $azienda->tipologia . '</td>'
+                    . '<td>' . $immagine . '</td>';
+        }?>
+    </table>
+</div>

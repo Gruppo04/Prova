@@ -3,8 +3,34 @@
     <ul>
         <fieldset>
             <legend>Gestione aziende</legend>
-            <li>Inserisci azienda</li>
-            <li>Modifica/cancella azienda</li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'formazienda',
+                                    ), 
+                                    'default',true); 
+            ?>">Inserisci azienda</a></li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'aziende',
+                                    ), 
+                                    'default',true); 
+                        ?>"> Modifica/cancella azienda</a></li>
+        </fieldset>
+        <br><br>
+        <fieldset>
+            <legend>Gestione categorie di prodotti</legend>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'formcategoria',
+                                    ), 
+                                    'default',true); 
+                        ?>">Inserisci nuova categoria</a></li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'categorie',
+                                    ), 
+                                    'default',true); 
+                        ?>">Modifica/cancella categoria</a></li>  
         </fieldset>
         <br><br>
         <fieldset>
@@ -34,12 +60,6 @@
         </fieldset>
         <br><br>
         <fieldset>
-            <legend>Gestione categorie di prodotti</legend>
-            <li>Inserisci nuova categoria</li>
-            <li>Modifica/cancella categoria</li>  
-        </fieldset>
-        <br><br>
-        <fieldset>
             <legend>Gestione promozioni</legend>
             <li>Visualizza statistiche relative ai coupon</li>
         </fieldset>
@@ -52,7 +72,12 @@
                                     ), 
                                     'default',true); 
                         ?>">Aggiungi domanda frequente</a></li>
-            <li>Modifica/cancella domanda frequente</li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'faq',
+                                    ), 
+                                    'default',true); 
+                        ?>">Modifica/cancella domanda frequente</a></li>
         </fieldset>
     </ul>
 </div>

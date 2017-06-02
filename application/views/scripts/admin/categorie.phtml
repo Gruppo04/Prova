@@ -1,0 +1,20 @@
+<div class="container">
+    <br><br>
+    <table border>
+        <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
+        <?php
+            foreach ($this->categorie as $categoria){
+                if($categoria->immagine==null){
+                    $immagine = 'NON DISPONIBILE';
+                }
+                else{
+                    $immagine = $categoria->immagine;
+                }
+            echo '<tr><td><a href="#">' . $categoria->id . '</a></td>'
+                    . '<td>' . $categoria->nome . '</td>'
+                    . '<td>' . $categoria->descrizione . '</td>'
+                    . '<td>' . $immagine . '</td>';
+        }?>
+    </table>
+</div>
+

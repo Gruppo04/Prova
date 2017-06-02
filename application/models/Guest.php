@@ -8,12 +8,12 @@ class Application_Model_Guest extends App_Model_Abstract
     
     public function getCategorie()
     {
-        return $this->getResource('Categoria')->getCategorie();
+        return $this->getResource('Categorie')->getCategorie();
     }
     
     public function getAziende()
     {
-        return $this->getResource('Azienda')->getAziende();
+        return $this->getResource('Aziende')->getAziende();
     }
     
     public function getFaq()

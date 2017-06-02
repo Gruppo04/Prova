@@ -6,6 +6,8 @@ class AdminController extends Zend_Controller_Action {
     protected $_authService;
     protected $_formStaff;
     protected $_formFaq;
+    protected $_formAzienda;
+    protected $_formCategoria;
 
     /* FUNZIONI GENERICHE */
     
@@ -15,6 +17,8 @@ class AdminController extends Zend_Controller_Action {
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
         $this->view->faqForm = $this->getFaqForm();
+        $this->view->aziendaForm = $this->getAziendaForm();
+        $this->view->categoriaForm = $this->getCategoriaForm();
     }
 
     public function indexAction()
@@ -29,6 +33,88 @@ class AdminController extends Zend_Controller_Action {
     
     public function amministrazioneAction()
     {
+    }
+    
+    /* FUNZIONI PER LA GESTIONE DELLE AZIENDE */
+    
+    public function formaziendaAction()
+    {
+    }
+    
+    public function aziendeAction()
+    {
+        $aziende=$this->_adminModel->getAziende();
+        $this->view->assign(array('aziende' => $aziende));
+    }
+    
+    public function registraaziendaAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formazienda');
+        }
+	$formAzienda=$this->_formAzienda;
+        if (!$formAzienda->isValid($_POST)) {
+            return $this->render('formazienda');
+        }
+        $values = $formAzienda->getValues();
+       	$this->_adminModel->registraAzienda($values);
+    }
+    
+    private function getAziendaForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formAzienda = new Application_Form_Admin_Formazienda();
+        $this->_formAzienda->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'registraazienda'),
+                        'default'
+                        ));
+        return $this->_formAzienda;
+    }
+    
+    /* FUNZIONI PER LA GESTIONE DELLE CATEGORIE */
+    
+    public function formcategoriaAction()
+    {
+    }
+    
+    public function categorieAction()
+    {
+        $categorie=$this->_adminModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie));
+    }
+    
+    public function registracategoriaAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formcategoria');
+        }
+	$formCategoria=$this->_formCategoria;
+        if (!$formCategoria->isValid($_POST)) {
+            return $this->render('formcategoria');
+        }
+        $values = $formCategoria->getValues();
+       	$this->_adminModel->registraCategoria($values);
+    }
+    
+    private function getCategoriaForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formCategoria = new Application_Form_Admin_Formcategoria();
+        $this->_formCategoria->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'registracategoria'),
+                        'default'
+                        ));
+        return $this->_formCategoria;
+    }
+    
+    /* FUNZIONI PER LA GESTIONE DEGLI UTENTI REGISTRATI */
+    
+    public function usersAction()
+    {
+        $users=$this->_adminModel->getUsers();
+        $this->view->assign(array('users' => $users));
     }
     
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
@@ -68,13 +154,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('staff' => $staff));
     }
     
-    /* FUNZIONI PER LA GESTIONE DEGLI UTENTI REGISTRATI */
-    
-    public function usersAction()
-    {
-        $users=$this->_adminModel->getUsers();
-        $this->view->assign(array('users' => $users));
-    }
+    /* FUNZIONI PER LA GESTIONE DELLE PROMOZIONI */
     
     /* FUNZIONI PER LA GESTIONE DELLE FAQ */
     
@@ -93,9 +173,24 @@ class AdminController extends Zend_Controller_Action {
                         ));
         return $this->_formFaq;
     }
+    
     public function registrafaqAction()
     {
-        $faq=$this->_adminModel->getUsers();
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formfaq');
+        }
+	$formFaq=$this->_formFaq;
+        if (!$formFaq->isValid($_POST)) {
+            return $this->render('formfaq');
+        }
+        $values = $formFaq->getValues();
+       	$this->_adminModel->registraFaq($values);
+    }
+    
+    public function faqAction()
+    {
+        $faq=$this->_adminModel->getFaq();
         $this->view->assign(array('faq' => $faq));
     }
+
 }

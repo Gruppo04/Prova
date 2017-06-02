@@ -11,6 +11,7 @@ class Application_Form_Public_Auth_Login extends Zend_Form
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim', 'StringToLower'),
             'required'   => true,
+            'autofocus'  => true,
             'label'      => 'Username',
             //'decorators' => $this->elementDecorators,
             ));

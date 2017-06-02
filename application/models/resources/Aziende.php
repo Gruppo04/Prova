@@ -1,10 +1,10 @@
 <?php
 
-class Application_Resource_Azienda extends Zend_Db_Table_Abstract
+class Application_Resource_Aziende extends Zend_Db_Table_Abstract
 {
     protected $_name	 = 'aziende';
     protected $_primary	 = 'id';
-    protected $_rowClass = 'Application_Resource_Azienda_Item';
+    protected $_rowClass = 'Application_Resource_Aziende_Item';
     
     public function init()
     {
@@ -14,5 +14,10 @@ class Application_Resource_Azienda extends Zend_Db_Table_Abstract
     {
         $select = $this->select();
         return $this ->fetchAll($select);        
+    }
+    
+    public function registraAzienda($info)
+    {
+        return $this ->insert($info);
     }
 }

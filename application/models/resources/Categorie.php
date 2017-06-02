@@ -1,10 +1,10 @@
 <?php
 
-class Application_Resource_Categoria extends Zend_Db_Table_Abstract	// viene bypassata la cartella Models perchè così è stato detto all'Autoloader
+class Application_Resource_Categorie extends Zend_Db_Table_Abstract
 {
     protected $_name	 = 'categorie';
     protected $_primary	 = 'id';
-    protected $_rowClass = 'Application_Resource_Categoria_Item';
+    protected $_rowClass = 'Application_Resource_Categorie_Item';
     
     public function init()
     {
@@ -15,4 +15,11 @@ class Application_Resource_Categoria extends Zend_Db_Table_Abstract	// viene byp
         $select = $this->select();
         return $this ->fetchAll($select);
     }
+    
+    public function registraCategoria($info)
+    {
+        return $this ->insert($info);
+    }
+    
+    
 }

@@ -16,6 +16,21 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Utenti')->getStaff();
     }
     
+    public function getFaq()
+    {
+    	return $this->getResource('Faq')->getFaq();
+    }
+    
+    public function getAziende()
+    {
+    	return $this->getResource('Aziende')->getAziende();
+    }
+    
+    public function getCategorie()
+    {
+    	return $this->getResource('Categorie')->getCategorie();
+    }
+    
     public function registraStaff($info)
     {
     	return $this->getResource('Utenti')->registraStaff($info);
@@ -24,6 +39,16 @@ class Application_Model_Admin extends App_Model_Abstract
     public function registraFaq($info)
     {
     	return $this->getResource('Faq')->registraFaq($info);
+    }
+    
+    public function registraAzienda($info)
+    {
+    	return $this->getResource('Aziende')->registraAzienda($info);
+    }
+    
+    public function registraCategoria($info)
+    {
+    	return $this->getResource('Categorie')->registraCategoria($info);
     }
 
 }

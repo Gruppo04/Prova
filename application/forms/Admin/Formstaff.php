@@ -1,7 +1,8 @@
 <?php
 
 class Application_Form_Admin_Formstaff extends Zend_Form
-{
+{       
+    
     public function init() {
         
         $this->setMethod('post');
@@ -25,43 +26,6 @@ class Application_Form_Admin_Formstaff extends Zend_Form
                 array('Alpha',
                 'allowWhiteSpace'=>true))));
         
-//        $this->addElement('text', 'data_di_nascita', array(
-//            'label' => 'Data di nascita',
-//            'required' => 'true',
-//            'placeholder' => 'aaaa-mm-gg',
-//            'filters' => array('StringTrim'),
-//            'validators' => array(array('Date'))));
-//        
-//        $this->addElement('radio', 'genere', array(
-//            'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),
-//            'value' => 'M',
-//            'required' => 'true'));
-//        
-//        $this->addElement('text', 'provincia', array(
-//            'label' => 'Provincia',
-//            'required' => 'true',
-//            'filters' => array('StringTrim'),
-//            'validators' => array(
-//                array('Alpha',
-//                    'allowWhiteSpace'=>true))));
-//        
-//        $this->addElement('text', 'citta', array(
-//            'label' => 'Comune',
-//            'required' => 'true',
-//            'filters' => array('StringTrim'),
-//            'validators' => array(
-//                array('Alpha',
-//                    'allowWhiteSpace'=>true))));
-//        
-//        $this->addElement('text', 'telefono', array(
-//            'label' => 'Numero di telefono',
-//            'placeholder' => '(facoltativo)',
-//            'value' => null,
-//            'filters' => array('StringTrim'),
-//            'validators' => array(array(
-//                'StringLength', true, array(9,10)),
-//                'Digits')));
-        
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
             'required' => 'true',
@@ -83,11 +47,15 @@ class Application_Form_Admin_Formstaff extends Zend_Form
 //        $this->addElement('password', '', array(
 //            'label' => 'Conferma la password',
 //            'required' => 'true'));
+        
+//        $this->addElement('hidden', 'data_registrazione', array(
+//            'value' => new Zend_Date()->toString('YYYY-MM-dd HH:mm:ss')));
+        
         $this->addElement('hidden', 'livello', array(
             'value' => 'staff'));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Aggiungi membro staff'));
+             'label' => 'Inserisci membro staff'));
     }
 
 }
