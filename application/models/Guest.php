@@ -16,6 +16,11 @@ class Application_Model_Guest extends App_Model_Abstract
         return $this->getResource('Azienda')->getAziende();
     }
     
+    public function getFaq()
+    {
+        return $this->getResource('Faq')->getFaq();
+    }
+    
     /* I due metodi successivi eseguono le stesse istruzioni, ma si è
     * scelto di separarli in quanto sono azioni concettualmente diverse */
     public function registraUser($info)

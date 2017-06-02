@@ -32,6 +32,12 @@ class PublicController extends Zend_Controller_Action
         $this->view->assign(array('categorie' => $cat));
     }
     
+    public function faqAction() 
+    { 
+        $faq= $this->_guestModel->getFaq(); 
+        $this->view->assign(array('faq'=> $faq));
+    }
+    
     public function viewstaticAction()
     {
     	$page = $this->_getParam('staticPage');
