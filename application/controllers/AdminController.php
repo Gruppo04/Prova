@@ -63,7 +63,7 @@ class AdminController extends Zend_Controller_Action {
     private function getAziendaForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formAzienda = new Application_Form_Admin_Formazienda();
+        $this->_formAzienda = new Application_Form_Admin_Azienda();
         $this->_formAzienda->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'registraazienda'),
@@ -100,7 +100,7 @@ class AdminController extends Zend_Controller_Action {
     private function getCategoriaForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formCategoria = new Application_Form_Admin_Formcategoria();
+        $this->_formCategoria = new Application_Form_Admin_Categoria();
         $this->_formCategoria->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'registracategoria'),
@@ -126,7 +126,7 @@ class AdminController extends Zend_Controller_Action {
     private function getStaffForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formStaff = new Application_Form_Admin_Formstaff();
+        $this->_formStaff = new Application_Form_Admin_Staff();
         $this->_formStaff->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'registrastaff'),
@@ -165,7 +165,7 @@ class AdminController extends Zend_Controller_Action {
     private function getFaqForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formFaq = new Application_Form_Admin_Formfaq();
+        $this->_formFaq = new Application_Form_Admin_Faq();
         $this->_formFaq->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'registrafaq'),

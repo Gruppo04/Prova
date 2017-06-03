@@ -1,18 +1,23 @@
 <?php
 
-class Application_Form_Admin_Formcategoria extends Zend_Form
+class Application_Form_Admin_Azienda extends Zend_Form
 {
+    //protected $_ucFilter;
+    
     public function init() {
         
+        $this->_adminModel = new Application_Model_Admin();
+        //$this->_ucFilter = new Filter_Uc;
         $this->setMethod('post');
-        $this->setName('registrazione categoria');
-        $this->setAction('');
+        $this->setName('registrazione azienda');
+        $this->setAction('');        
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array('StringTrim'),
+            'filters' => array(
+                array('StringTrim')),
             'validators' => array(
                 array('Alpha',
                     'allowWhiteSpace'=>true))));
@@ -27,7 +32,22 @@ class Application_Form_Admin_Formcategoria extends Zend_Form
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
         
-        $this->addElement('file', 'immagine', array(
+        $this->addElement('text', 'ragione_sociale', array(
+            'label' => 'Ragione sociale',
+            'required' => 'true',
+            'filters' => array('StringTrim')));
+        
+        $this->addElement('text', 'localizzazione', array(
+            'label' => 'Localizzazione',
+            'required' => 'true',
+            'filters' => array('StringTrim')));
+        
+        $this->addElement('text', 'tipologia', array(
+            'label' => 'Tipologia',
+            'required' => true,
+            'filters' => array('StringTrim')));
+
+         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/images',
         	'validators' => array( 
@@ -36,7 +56,7 @@ class Application_Form_Admin_Formcategoria extends Zend_Form
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci categoria'));
+             'label' => 'Inserisci azienda'));
     }
 
 }

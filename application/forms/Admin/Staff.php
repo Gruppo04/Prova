@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_Formstaff extends Zend_Form
+class Application_Form_Admin_Staff extends Zend_Form
 {       
     
     public function init() {

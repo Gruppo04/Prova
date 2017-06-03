@@ -8,7 +8,12 @@
         <br><br>
         <fieldset>
             <legend>Gestione promozioni</legend>
-            <li><a href="#">Inserisci coupon</a></li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'formcoupon',
+                                    ), 
+                                    'default',true); 
+            ?>">Inserisci coupon</a></li>
             <li><a href="#">Modifica/cancella coupon</a></li>
         </fieldset>
     </ul>
