@@ -15,16 +15,16 @@ class Application_Form_Admin_Staff extends Zend_Form
             'autofocus' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
@@ -44,15 +44,12 @@ class Application_Form_Admin_Staff extends Zend_Form
             'validators' => array(array(
                 'StringLength', true, array(6,25)))));
         
-//        $this->addElement('password', '', array(
-//            'label' => 'Conferma la password',
-//            'required' => 'true'));
-        
-//        $this->addElement('hidden', 'data_registrazione', array(
-//            'value' => new Zend_Date()->toString('YYYY-MM-dd HH:mm:ss')));
-        
-        $this->addElement('hidden', 'livello', array(
-            'value' => 'staff'));
+        $this->addElement('password', 'verificapassword', array(
+                'label'      => 'Conferma password',
+                'required'   => true,
+                'validators' => array(
+                    array('Identical', false, array('token' => 'password'))
+                    )));
         
         $this->addElement('submit', 'add', array(
              'label' => 'Inserisci membro staff'));

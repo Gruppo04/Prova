@@ -7,6 +7,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_formStaff;
     protected $_formFaq;
     protected $_formAzienda;
+    protected $_aziendaModForm;
     protected $_formCategoria;
 
     /* FUNZIONI GENERICHE */
@@ -18,6 +19,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->staffForm = $this->getStaffForm();
         $this->view->faqForm = $this->getFaqForm();
         $this->view->aziendaForm = $this->getAziendaForm();
+        //$this->view->aziendaModForm = $this->getAziendaModForm(1);
         $this->view->categoriaForm = $this->getCategoriaForm();
     }
 
@@ -40,6 +42,12 @@ class AdminController extends Zend_Controller_Action {
     public function formaziendaAction()
     {
     }
+    
+//    public function formaziendamodAction()
+//    {
+//        $id=getValues("id");
+//        $this->view->_aziendaModForm=getAziendaModForm($id);
+//    }
     
     public function aziendeAction()
     {
@@ -71,6 +79,20 @@ class AdminController extends Zend_Controller_Action {
                         ));
         return $this->_formAzienda;
     }
+    
+//    private function getAziendaModForm($id)
+//    { 
+//        $urlHelper = $this->_helper->getHelper('url');
+//        $this->_formAzienda = new Application_Form_Admin_Azienda();
+//        $this->_formAzienda->setAction($urlHelper->url(array(
+//                        'controller' => 'admin',
+//                        'action' => 'registraazienda'),
+//                        'default'
+//                        ));
+//        $query = $this->_adminModel->getAziendaById($id)->toArray();
+//        $this->_formAzienda->populate($query);
+//        return $this->_formAzienda;
+//    }
     
     /* FUNZIONI PER LA GESTIONE DELLE CATEGORIE */
     
@@ -144,7 +166,15 @@ class AdminController extends Zend_Controller_Action {
         if (!$formStaff->isValid($_POST)) {
             return $this->render('formstaff');
         }
-        $values = $formStaff->getValues();
+        $values = array(
+            'nome'=>$formStaff->getValue('nome'),
+            'cognome'=>$formStaff->getValue('cognome'),
+            'email'=>$formStaff->getValue('email'),
+            'username'=>$formStaff->getValue('username'),
+            'password'=>$formStaff->getValue('password'),
+                );
+        $values['data_registrazione']=date("Y-m-d H:i:s");
+        $values['livello']='staff';
        	$this->_adminModel->registraStaff($values);
     }
     

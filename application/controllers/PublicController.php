@@ -57,7 +57,20 @@ class PublicController extends Zend_Controller_Action
         if (!$formReg->isValid($_POST)) {
             return $this->render('logreg');
         }
-        $values = $formReg->getValues();
+        $values = array(
+            'nome'=>$formReg->getValue('nome'),
+            'cognome'=>$formReg->getValue('cognome'),
+            'data_di_nascita'=>$formReg->getValue('data_di_nascita'),
+            'genere'=>$formReg->getValue('genere'),
+            'provincia'=>$formReg->getValue('provincia'),
+            'citta'=>$formReg->getValue('citta'),            
+            'telefono'=>$formReg->getValue('telefono'),
+            'email'=>$formReg->getValue('email'),
+            'username'=>$formReg->getValue('username'),
+            'password'=>$formReg->getValue('password'),
+                );
+        $values['data_registrazione']=date("Y-m-d H:i:s");
+        $values['livello']='user';
        	$this->_guestModel->registraUser($values);
     }
     

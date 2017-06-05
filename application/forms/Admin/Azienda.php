@@ -6,21 +6,19 @@ class Application_Form_Admin_Azienda extends Zend_Form
     
     public function init() {
         
-        $this->_adminModel = new Application_Model_Admin();
         //$this->_ucFilter = new Filter_Uc;
         $this->setMethod('post');
         $this->setName('registrazione azienda');
-        $this->setAction('');        
+        $this->setAction('');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array(
-                array('StringTrim')),
+            'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
@@ -29,7 +27,8 @@ class Application_Form_Admin_Azienda extends Zend_Form
             'required' => true,
             'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione dell\'azienda',
-            'validators' => array(array('StringLength',true, array(1,1000)))
+            'validators' => array(
+                array('StringLength',true, array(1,1000)))
         ));
         
         $this->addElement('text', 'ragione_sociale', array(
@@ -40,12 +39,18 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('text', 'localizzazione', array(
             'label' => 'Localizzazione',
             'required' => 'true',
-            'filters' => array('StringTrim')));
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'tipologia', array(
             'label' => 'Tipologia',
             'required' => true,
-            'filters' => array('StringTrim')));
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
 
          $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
@@ -58,5 +63,14 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('submit', 'add', array(
              'label' => 'Inserisci azienda'));
     }
+    
+//    public function populate($dati)
+//    {
+//      foreach($dati as $campo => $value)
+//      {
+//        $this->{$campo}->setValue($value);
+//      }
+//      return $this;
+//    }
 
 }

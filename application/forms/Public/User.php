@@ -14,23 +14,25 @@ class Application_Form_Public_User extends Zend_Form
             'autofocus' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
             'required' => 'true',
-            'placeholder' => 'aaaa-mm-gg',
+            'placeholder' => 'gg-mm-aaaa',
             'filters' => array('StringTrim'),
-            'validators' => array(array('Date'))));
+            'validators' => array(
+                array('Date', true, array('locale'=>'it'))
+            )));
         
         $this->addElement('radio', 'genere', array(
             'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),
@@ -42,16 +44,16 @@ class Application_Form_Public_User extends Zend_Form
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'citta', array(
             'label' => 'Comune',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            ));
         
         $this->addElement('text', 'telefono', array(
             'label' => 'Numero di telefono',
@@ -80,11 +82,12 @@ class Application_Form_Public_User extends Zend_Form
             'validators' => array(array(
                 'StringLength', true, array(6,25)))));
         
-//        $this->addElement('password', '', array(
-//            'label' => 'Conferma la password',
-//            'required' => 'true'));
-        $this->addElement('hidden', 'livello', array(
-            'value' => 'user'));
+        $this->addElement('password', 'verificapassword', array(
+                'label'      => 'Conferma password',
+                'required'   => true,
+                'validators' => array(
+                    array('Identical', false, array('token' => 'password'))
+                    )));
         
         $this->addElement('submit', 'add', array(
              'label' => 'Registrati'));

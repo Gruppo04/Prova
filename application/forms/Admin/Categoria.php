@@ -14,8 +14,8 @@ class Application_Form_Admin_Categoria extends Zend_Form
             'autofocus' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true))
+            )));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
