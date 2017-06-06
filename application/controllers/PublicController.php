@@ -44,7 +44,11 @@ class PublicController extends Zend_Controller_Action
     	$this->render($page);
     }
     
-    public function logregAction()
+    public function loginAction()
+    {
+    }
+    
+    public function registerAction()
     {
     }
     
@@ -55,7 +59,7 @@ class PublicController extends Zend_Controller_Action
         }
 	$formReg=$this->_formReg;
         if (!$formReg->isValid($_POST)) {
-            return $this->render('logreg');
+            return $this->render('register');
         }
         $values = array(
             'nome'=>$formReg->getValue('nome'),
@@ -69,6 +73,9 @@ class PublicController extends Zend_Controller_Action
             'username'=>$formReg->getValue('username'),
             'password'=>$formReg->getValue('password'),
                 );
+        if($this->_guestModel->getUtenteByNome($values['username'])!=0) {
+            return $this->formReg->addError('This username already exists');
+        }
         $values['data_registrazione']=date("Y-m-d H:i:s");
         $values['livello']='user';
        	$this->_guestModel->registraUser($values);
@@ -102,14 +109,14 @@ class PublicController extends Zend_Controller_Action
     {
         $request = $this->getRequest();
         if (!$request->isPost()) {
-            $this->_helper->redirector('logreg','public');
+            $this->_helper->redirector('login','public');
         }
 	$formLog = $this->_formLog;
         if (!$formLog->isValid($request->getPost())) {
-            return $this->render('logreg');
+            return $this->render('login');
         }
         if (false === $this->_authService->authenticate($formLog->getValues())) {
-            return $this->render('logreg');
+            return $this->render('login');
         }
         $livello = $this->_authService->getIdentity()->livello;
         return $this->_helper->redirector('index', $livello);

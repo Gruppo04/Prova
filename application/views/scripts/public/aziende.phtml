@@ -9,28 +9,16 @@
 
 <div class="container">
   <!-- Example row of columns -->
-        <div class="row">
-            <?php foreach ($this->aziende as $azienda) :?>
-                <div class="col-md-4">
-                    <?php echo '<h2>' . $azienda->nome . '</h2>';
-                    echo '<img src="../../../public/img/Logo_Fileni.jpg" width="300" height="150">';
-                    echo '<p>' . $azienda->descrizione . '</p>'; ?>
-                    <p><a class="btn btn-default" href="azienda.html" role="button">Vedi i dettagli &raquo;</a></p> 
-                </div>
-            <?php endforeach ?>
-    <div class="col-md-4">  
-      <h2>Zimyl</h2>
-      <img src="../../../public/img/Logo_Zymil.jpg" width="300" height="150">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-      <p><a class="btn btn-default" href="#" role="button">Vedi i dettagli &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-      <h2>Adidas</h2>
-      <img src="../../../public/img/Logo_Adidas.jpg" width="300" height="150">
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-      <p><a class="btn btn-default" href="#" role="button">Vedi i dettagli &raquo;</a></p>
-    </div>
-  </div>
+    <div class="row">
+        <?php foreach ($this->aziende as $azienda) :?>
+            <div class="col-md-4">
+                <?php echo '<h2>' . $azienda->nome . '</h2>';
+                echo $this->generalImg($azienda->immagine,'aziende/' ,array('class' => 'imagefrm'));
+                echo '<p>' . $azienda->descrizione . '</p>'; ?>
+                <p><a class="btn btn-default" href="azienda.html" role="button">Vedi i dettagli &raquo;</a></p> 
+            </div>
+        <?php endforeach ?>
+	</div>
   <hr>
 </div> 
 <!-- /container --> 

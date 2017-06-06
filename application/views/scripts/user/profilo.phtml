@@ -1,0 +1,36 @@
+<div>
+    <br><br>
+    <ul>
+        <fieldset>
+            <legend>Modifica informazioni profilo</legend>
+                <li><a href="<?= $this->url(array(
+                                        'controller' => 'user',
+                                        'action'     => '',
+                                        ), 
+                                        'default',true); 
+                ?>">Modifica dati personali</a></li>
+                <li><a href="<?= $this->url(array(
+                                        'controller' => 'user',
+                                        'action'     => 'formpassword',
+                                        ), 
+                                        'default',true); 
+                            ?>"> Modifica password</a></li>
+        </fieldset>
+        <br><br>
+        <fieldset>
+            <legend>Acquisisci coupon</legend>
+                <li><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'aziende',
+                                        ), 
+                                        'default',true); 
+                ?>">Vai alla pagina delle aziende</a></li>
+                <li><a href="<?= $this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'categorie',
+                                        ), 
+                                        'default',true); 
+                            ?>">Vai alla pagina delle categorie</a></li>
+        </fieldset>
+    </ul>
+</div>

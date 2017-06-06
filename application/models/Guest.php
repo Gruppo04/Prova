@@ -32,4 +32,5 @@ class Application_Model_Guest extends App_Model_Abstract
     {
     	return $this->getResource('Utenti')->getUtenteByNome($info);
     }
+    
 }

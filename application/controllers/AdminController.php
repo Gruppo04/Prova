@@ -9,6 +9,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_formAzienda;
     protected $_aziendaModForm;
     protected $_formCategoria;
+    public $_id;
 
     /* FUNZIONI GENERICHE */
     
@@ -43,11 +44,11 @@ class AdminController extends Zend_Controller_Action {
     {
     }
     
-//    public function formaziendamodAction()
-//    {
-//        $id=getValues("id");
-//        $this->view->_aziendaModForm=getAziendaModForm($id);
-//    }
+    public function formaziendamodAction()
+    {
+        $idmodifica = $_POST;
+        return $this->view->aziendaModForm = $this->getAziendaModForm($idmodifica); 
+    }
     
     public function aziendeAction()
     {
@@ -80,19 +81,20 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formAzienda;
     }
     
-//    private function getAziendaModForm($id)
-//    { 
-//        $urlHelper = $this->_helper->getHelper('url');
-//        $this->_formAzienda = new Application_Form_Admin_Azienda();
-//        $this->_formAzienda->setAction($urlHelper->url(array(
-//                        'controller' => 'admin',
-//                        'action' => 'registraazienda'),
-//                        'default'
-//                        ));
-//        $query = $this->_adminModel->getAziendaById($id)->toArray();
-//        $this->_formAzienda->populate($query);
-//        return $this->_formAzienda;
-//    }
+    private function getAziendaModForm($id)
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formAzienda = new Application_Form_Admin_AziendaMod();
+        $this->_formAzienda->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificaazienda'),
+                        'default'
+                        ));
+        //$id = $_POST;
+        $query = $this->_adminModel->getAziendaById($id)->toArray();
+        $this->_formAzienda->populate($query);
+        return $this->_formAzienda;
+    }
     
     /* FUNZIONI PER LA GESTIONE DELLE CATEGORIE */
     

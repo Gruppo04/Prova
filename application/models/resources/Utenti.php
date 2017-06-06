@@ -37,4 +37,11 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         $select = $this->select()->where('livello = ?', 'staff')->order('id');
         return $this->fetchAll($select);
     }
+    
+    public function modificaPassword($values)
+    {
+        //$select = $this->select()->where('password = ?', $password);
+        //$select = 'SELECT password FROM utenti WHERE password = ' . $values['password'];
+        //$this->fetchOne($select);
+    }
 }

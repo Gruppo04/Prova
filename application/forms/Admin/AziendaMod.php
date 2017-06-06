@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_Azienda extends Zend_Form
+class Application_Form_Admin_AziendaMod extends Zend_Form
 {
     //protected $_ucFilter;
     
@@ -34,8 +34,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('text', 'ragione_sociale', array(
             'label' => 'Ragione sociale',
             'required' => 'true',
-            'filters' => array('StringTrim')
-            ));
+            'filters' => array('StringTrim')));
         
         $this->addElement('text', 'localizzazione', array(
             'label' => 'Localizzazione',
@@ -62,7 +61,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci azienda'));
+             'label' => 'Applica Modifiche'));
     }
     
 //    public function populate($dati)
