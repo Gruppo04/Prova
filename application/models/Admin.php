@@ -26,6 +26,11 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Aziende')->getAziende();
     }
     
+    public function delAzienda($id)
+    {
+    	return $this->getResource('Aziende')->delAzienda($id);
+    }
+    
     public function getAziendaById($id)
     {
     	return $this->getResource('Aziende')->getAziendaById($id);
@@ -49,6 +54,11 @@ class Application_Model_Admin extends App_Model_Abstract
     public function registraAzienda($info)
     {
     	return $this->getResource('Aziende')->registraAzienda($info);
+    }
+    
+    public function modificaAzienda($info, $id)
+    {
+    	return $this->getResource('Aziende')->modificaAzienda($info, $id);
     }
     
     public function registraCategoria($info)

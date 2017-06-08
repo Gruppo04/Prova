@@ -8,7 +8,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         
         //$this->_ucFilter = new Filter_Uc;
         $this->setMethod('post');
-        $this->setName('registrazione azienda');
+        $this->setName('modifica azienda');
         $this->setAction('');
         
         $this->addElement('text', 'nome', array(
@@ -22,7 +22,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-        	'cols' => '50', 'rows' => '5',
+            'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
             'autofocus'  => true,
@@ -44,23 +44,29 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
         
-        $this->addElement('text', 'tipologia', array(
+        $this->addElement('select', 'tipologia', array(
             'label' => 'Tipologia',
             'required' => true,
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true)))
-            ));
+            'multiOptions' => array(
+                ''          => 'Seleziona',
+                'Prodotti'  => 'Prodotti',
+                'Servizi'   => 'Servizi'
+                )));
+        
+        $this->addElement('hidden', 'idModifica',array(
+            'required' => true
+        ));
 
-         $this->addElement('file', 'immagine', array(
+        $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/images',
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 204800),
-        			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
+        			array('Extension', false, array('jpg', 'gif', 'png', 'bmp'))
+                    )));
         
-        $this->addElement('submit', 'add', array(
+        $this->addElement('submit', 'modifiy', array(
              'label' => 'Applica Modifiche'));
     }
     

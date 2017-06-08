@@ -28,11 +28,10 @@ class Application_Form_Public_User extends Zend_Form
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
             'required' => 'true',
-            'placeholder' => 'gg-mm-aaaa',
+            'placeholder' => 'aaaa-mm-gg',
             'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Date', true, array('locale'=>'it'))
-            )));
+            'validators' => array('Date')
+            ));
         
         $this->addElement('radio', 'genere', array(
             'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),

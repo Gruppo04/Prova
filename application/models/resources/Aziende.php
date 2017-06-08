@@ -22,8 +22,20 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);        
     }
     
+    public function delAzienda($id)
+    {
+        //$where = $this->quoteInto('id = ?', $id);
+        return $this->delete($this->_name, "id = $id");
+    }
+    
     public function registraAzienda($info)
     {
         return $this ->insert($info);
+    }
+    
+    public function modificaAzienda($info, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($info, $where);
     }
 }

@@ -17,8 +17,8 @@ class Application_Form_Staff_Coupon extends Zend_Form
             'autofocus' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
-                array('Alpha',
-                    'allowWhiteSpace'=>true))));
+                array('Alpha', true, array('allowWhiteSpace'=>true))
+                )));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
@@ -31,40 +31,44 @@ class Application_Form_Staff_Coupon extends Zend_Form
         ));
         
         $categorie = array();
+        $catId = array();
         $cats = $this->_staffModel->getCategorie();
         foreach ($cats as $categoria) {
-        	$categorie[$categoria -> id] = $categoria->nome;       
+        	$categorie[$categoria->id] = $categoria->nome;
+                $catId[$categoria->id] = $categoria->id;
         }
-        $this->addElement('select', 'categoria', array(
+        $this->addElement('select', 'idCategoria', array(
             'label' => 'Categoria',
-            'value' => 'Seleziona',
             'required' => true,
-        	'multiOptions' => array('seleziona', $categorie)));
+            'multiOptions' => $categorie
+            ));
         
         $this->addElement('text', 'inizio_validita', array(
             'label' => 'Data inizio validità',
             'required' => 'true',
             'placeholder' => 'aaaa-mm-gg',
             'filters' => array('StringTrim'),
-            'validators' => array(array('Date'))));
+            'validators' => array('Date')
+            ));
         
         $this->addElement('text', 'scadenza', array(
             'label' => 'Data di scadenza',
             'required' => 'true',
             'placeholder' => 'aaaa-mm-gg',
             'filters' => array('StringTrim'),
-            'validators' => array(array('Date'))));
+            'validators' => array('Date')
+            ));
         
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
-        	'destination' => APPLICATION_PATH . '/../public/images',
+        	'destination' => APPLICATION_PATH . '/../public/images/coupon',
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci categoria'));
+             'label' => 'Inserisci coupon'));
     }
 
 }

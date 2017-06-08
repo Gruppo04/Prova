@@ -45,13 +45,16 @@ class Application_Form_Admin_Azienda extends Zend_Form
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
         
-        $this->addElement('text', 'tipologia', array(
+        $this->addElement('select', 'tipologia', array(
             'label' => 'Tipologia',
+            'value' => '',
             'required' => true,
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true)))
-            ));
+            'multiOptions' => array(
+                'multiOptions' => array(
+                ''          => 'Seleziona',
+                'Prodotti'  => 'Prodotti',
+                'Servizi'   => 'Servizi')
+            )));
 
          $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
@@ -59,19 +62,10 @@ class Application_Form_Admin_Azienda extends Zend_Form
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 204800),
-        			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
+        			array('Extension', false, array('jpg', 'gif', 'png', 'bmp'))
+                    )));
         
         $this->addElement('submit', 'add', array(
              'label' => 'Inserisci azienda'));
     }
-    
-//    public function populate($dati)
-//    {
-//      foreach($dati as $campo => $value)
-//      {
-//        $this->{$campo}->setValue($value);
-//      }
-//      return $this;
-//    }
-
 }

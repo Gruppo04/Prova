@@ -7,9 +7,9 @@ class AdminController extends Zend_Controller_Action {
     protected $_formStaff;
     protected $_formFaq;
     protected $_formAzienda;
-    protected $_aziendaModForm;
+    protected $_formAziendaMod;
     protected $_formCategoria;
-    public $_id;
+    public $_idModifica;
 
     /* FUNZIONI GENERICHE */
     
@@ -20,7 +20,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->staffForm = $this->getStaffForm();
         $this->view->faqForm = $this->getFaqForm();
         $this->view->aziendaForm = $this->getAziendaForm();
-        //$this->view->aziendaModForm = $this->getAziendaModForm(1);
+        $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
     }
 
@@ -46,8 +46,12 @@ class AdminController extends Zend_Controller_Action {
     
     public function formaziendamodAction()
     {
-        $idmodifica = $_POST;
-        return $this->view->aziendaModForm = $this->getAziendaModForm($idmodifica); 
+        $idModifica = $_GET["chosen"];
+        //$idstring = implode("", $this->_idModifica);
+        //$this->_formAziendaMod->setAttrib('id', $idstring);
+        $query = $this->_adminModel->getAziendaById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formAziendaMod->populate($query);        
     }
     
     public function aziendeAction()
@@ -69,6 +73,29 @@ class AdminController extends Zend_Controller_Action {
        	$this->_adminModel->registraAzienda($values);
     }
     
+    public function modificaaziendaAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formaziendamod');
+        }
+        $formAziendaMod=$this->_formAziendaMod;
+        if (!$formAziendaMod->isValid($_POST)) {
+            return $this->render('formaziendamod');
+        }
+        $values = array(
+            'nome'=>$formAziendaMod->getValue('nome'),
+            'descrizione'=>$formAziendaMod->getValue('descrizione'),
+            'ragione_sociale'=>$formAziendaMod->getValue('ragione_sociale'),
+            'localizzazione'=>$formAziendaMod->getValue('localizzazione'),
+            'tipologia'=>$formAziendaMod->getValue('tipologia'),
+            'immagine'=>$formAziendaMod->getValue('immagine'),
+                );
+        $idModifica = $formAziendaMod->getValue('idModifica');
+       	$this->_adminModel->modificaAzienda($values, $idModifica);
+        $modificata=$this->_adminModel->getAziendaById($idModifica);
+        $this->view->assign(array('modificata'=>$modificata));   
+    }
+    
     private function getAziendaForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
@@ -81,19 +108,16 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formAzienda;
     }
     
-    private function getAziendaModForm($id)
+    private function getAziendaModForm()
     { 
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formAzienda = new Application_Form_Admin_AziendaMod();
-        $this->_formAzienda->setAction($urlHelper->url(array(
+        $this->_formAziendaMod = new Application_Form_Admin_AziendaMod();
+        $this->_formAziendaMod->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'modificaazienda'),
                         'default'
                         ));
-        //$id = $_POST;
-        $query = $this->_adminModel->getAziendaById($id)->toArray();
-        $this->_formAzienda->populate($query);
-        return $this->_formAzienda;
+        return $this->_formAziendaMod;
     }
     
     /* FUNZIONI PER LA GESTIONE DELLE CATEGORIE */

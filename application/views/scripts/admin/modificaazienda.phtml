@@ -1,0 +1,44 @@
+<div class="container">
+    <br>
+    <h5>Modifica avvenuta con successo!</h5>
+    <br>
+    <table border>
+            <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
+                <th>Tipologia</th><th>Immagine</th>
+                <?php
+                $modificata = $this->modificata;
+                if($modificata->immagine==null){
+                        $immagine = 'NON DISPONIBILE';
+                    }
+                    else{
+                        $immagine = $modificata->immagine;
+                    }
+                echo '<tr><td>' . $modificata->id . '</td>'
+                        . '<td>' . $modificata->nome . '</td>'
+                        . '<td>' . $modificata->descrizione . '</td>'
+                        . '<td>' . $modificata->ragione_sociale . '</td>'
+                        . '<td>' . $modificata->localizzazione . '</td>'
+                        . '<td>' . $modificata->tipologia . '</td>'
+                        . '<td>' . $immagine . '</td>';
+                ?>
+    </table>
+    <br><br>
+    <ul>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'aziende',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Modifica altre aziende</a>
+        </li>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla pagina di amministrazione</a>
+        </li>
+    </ul>
+</div>
+
+
