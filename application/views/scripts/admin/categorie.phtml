@@ -1,20 +1,30 @@
 <div class="container">
     <br><br>
-    <table border>
-        <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
-        <?php
-            foreach ($this->categorie as $categoria){
-                if($categoria->immagine==null){
-                    $immagine = 'NON DISPONIBILE';
-                }
-                else{
-                    $immagine = $categoria->immagine;
-                }
-            echo '<tr><td><a href="#">' . $categoria->id . '</a></td>'
-                    . '<td>' . $categoria->nome . '</td>'
-                    . '<td>' . $categoria->descrizione . '</td>'
-                    . '<td>' . $immagine . '</td>';
-        }?>
-    </table>
+    <form action="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'formcategoriamod',
+                                    ), 
+                                    'default',true); 
+                        ?>" method="get">
+        <table border>
+            <tr><th>Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
+            <?php
+                foreach ($this->categorie as $categoria){
+                    if($categoria->immagine==null){
+                        $immagine = 'NON DISPONIBILE';
+                    }
+                    else{
+                        $immagine = $categoria->immagine;
+                    }
+                echo '<tr><td><input type="radio" name="chosen" value="' . $categoria->id . '"</td>'
+                        . '<td>' . $categoria->id . '</td>'
+                        . '<td>' . $categoria->nome . '</td>'
+                        . '<td>' . $categoria->descrizione . '</td>'
+                        . '<td>' . $immagine . '</td>';
+            }?>
+        </table>
+        <br>
+        <input type="submit" name="button"  value="Modifica">
+    </form>
 </div>
 

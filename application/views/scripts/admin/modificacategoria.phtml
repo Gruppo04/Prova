@@ -3,8 +3,7 @@
     <h5>Modifica avvenuta con successo!</h5>
     <br>
     <table border>
-            <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
-            <th>Tipologia</th><th>Immagine</th>
+            <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
             <?php
                 $modificata = $this->modificata;
                 if($modificata->immagine==null){
@@ -16,20 +15,17 @@
                 echo '<tr><td>' . $modificata->id . '</td>'
                         . '<td>' . $modificata->nome . '</td>'
                         . '<td>' . $modificata->descrizione . '</td>'
-                        . '<td>' . $modificata->ragione_sociale . '</td>'
-                        . '<td>' . $modificata->localizzazione . '</td>'
-                        . '<td>' . $modificata->tipologia . '</td>'
                         . '<td>' . $immagine . '</td>';
             ?>
-    </table>
+        </table>
     <br><br>
     <ul>
         <li><a href=" <?= $this->url(array(
                                     'controller' => 'admin',
-                                    'action'     => 'aziende',
+                                    'action'     => 'categorie',
                                     ), 
                                     'default',true); 
-                                    ?>">Modifica/cancella altre aziende</a>
+                                    ?>">Modifica/cancella altre categorie</a>
         </li>
         <li><a href=" <?= $this->url(array(
                                     'controller' => 'admin',

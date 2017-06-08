@@ -1,11 +1,11 @@
 <?php
 
-class Application_Form_Admin_Categoria extends Zend_Form
+class Application_Form_Admin_CategoriaMod extends Zend_Form
 {
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('registrazione categoria');
+        $this->setName('modifica categoria');
         $this->setAction('');
         
         $this->addElement('text', 'nome', array(
@@ -34,13 +34,16 @@ class Application_Form_Admin_Categoria extends Zend_Form
         			array('Count', false, 1),
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
-        
+                
         $this->addElement('hidden', 'idModifica',array(
             'required' => true
         ));
         
-        $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci categoria'));
+        $this->addElement('submit', 'modifica', array(
+             'label' => 'Applica modifiche'));
+        
+        $this->addElement('submit', 'cancella', array(
+             'label' => 'Cancella categoria'));
     }
 
 }

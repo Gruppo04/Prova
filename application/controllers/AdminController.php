@@ -9,7 +9,6 @@ class AdminController extends Zend_Controller_Action {
     protected $_formAzienda;
     protected $_formAziendaMod;
     protected $_formCategoria;
-    public $_idModifica;
 
     /* FUNZIONI GENERICHE */
     
@@ -22,6 +21,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->aziendaForm = $this->getAziendaForm();
         $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
+        $this->view->categoriaModForm = $this->getCategoriaModForm();
     }
 
     public function indexAction()
@@ -130,6 +130,14 @@ class AdminController extends Zend_Controller_Action {
     {
     }
     
+    public function formcategoriamodAction()
+    {
+        $idModifica = $_GET["chosen"];
+        $query = $this->_adminModel->getcategoriaById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formCategoriaMod->populate($query);        
+    }
+    
     public function categorieAction()
     {
         $categorie=$this->_adminModel->getCategorie();
@@ -149,6 +157,32 @@ class AdminController extends Zend_Controller_Action {
        	$this->_adminModel->registraCategoria($values);
     }
     
+    public function modificacategoriaAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formcategoriamod');
+        }
+        $formCategoriaMod=$this->_formCategoriaMod;
+        if (!$formCategoriaMod->isValid($_POST)) {
+            return $this->render('formaziendamod');
+        }
+        $values = array(
+            'nome'=>$formCategoriaMod->getValue('nome'),
+            'descrizione'=>$formCategoriaMod->getValue('descrizione'),
+            'immagine'=>$formCategoriaMod->getValue('immagine'),
+                );
+        $idModifica = $formCategoriaMod->getValue('idModifica');
+        $cancella = $formCategoriaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delCategoria($idModifica);
+            return $this->render('cancellacategoria');
+        }
+       	$this->_adminModel->modificaCategoria($values, $idModifica);
+        $modificata=$this->_adminModel->getCategoriaById($idModifica);
+        $this->view->assign(array('modificata'=>$modificata));   
+    }
+    
     private function getCategoriaForm()
     {
         $urlHelper = $this->_helper->getHelper('url');
@@ -159,6 +193,18 @@ class AdminController extends Zend_Controller_Action {
                         'default'
                         ));
         return $this->_formCategoria;
+    }
+    
+    private function getCategoriaModForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formCategoriaMod = new Application_Form_Admin_CategoriaMod();
+        $this->_formCategoriaMod->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificacategoria'),
+                        'default'
+                        ));
+        return $this->_formCategoriaMod;
     }
     
     /* FUNZIONI PER LA GESTIONE DEGLI UTENTI REGISTRATI */

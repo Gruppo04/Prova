@@ -26,7 +26,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'filters' => array('StringTrim'),
             'required' => true,
             'autofocus'  => true,
-            'placeholder' => 'Inserisci una descrizione dell\'azienda',
+            'placeholder' => 'Inserisci una descrizione della categoria',
             'validators' => array(
                 array('StringLength',true, array(1,1000)))
         ));
