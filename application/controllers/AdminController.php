@@ -47,8 +47,6 @@ class AdminController extends Zend_Controller_Action {
     public function formaziendamodAction()
     {
         $idModifica = $_GET["chosen"];
-        //$idstring = implode("", $this->_idModifica);
-        //$this->_formAziendaMod->setAttrib('id', $idstring);
         $query = $this->_adminModel->getAziendaById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formAziendaMod->populate($query);        
@@ -91,6 +89,12 @@ class AdminController extends Zend_Controller_Action {
             'immagine'=>$formAziendaMod->getValue('immagine'),
                 );
         $idModifica = $formAziendaMod->getValue('idModifica');
+        $cancella = $formAziendaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delAzienda($idModifica);
+            return $this->render('cancellaazienda');
+        }
        	$this->_adminModel->modificaAzienda($values, $idModifica);
         $modificata=$this->_adminModel->getAziendaById($idModifica);
         $this->view->assign(array('modificata'=>$modificata));   

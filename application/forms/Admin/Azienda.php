@@ -56,9 +56,9 @@ class Application_Form_Admin_Azienda extends Zend_Form
                 'Servizi'   => 'Servizi')
             )));
 
-         $this->addElement('file', 'immagine', array(
+        $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
-        	'destination' => APPLICATION_PATH . '/../public/images',
+        	'destination' => APPLICATION_PATH . '/../public/images/aziende',
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 204800),

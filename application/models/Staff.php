@@ -6,6 +6,11 @@ class Application_Model_Staff extends App_Model_Abstract
 
     }
     
+    public function getAziende()
+    {
+    	return $this->getResource('Aziende')->getAziende();
+    }
+    
     public function getCategorie()
     {
     	return $this->getResource('Categorie')->getCategorie();

@@ -31,16 +31,25 @@ class Application_Form_Staff_Coupon extends Zend_Form
         ));
         
         $categorie = array();
-        $catId = array();
         $cats = $this->_staffModel->getCategorie();
         foreach ($cats as $categoria) {
         	$categorie[$categoria->id] = $categoria->nome;
-                $catId[$categoria->id] = $categoria->id;
         }
         $this->addElement('select', 'idCategoria', array(
             'label' => 'Categoria',
             'required' => true,
             'multiOptions' => $categorie
+            ));
+        
+        $aziende = array();
+        $az = $this->_staffModel->getAziende();
+        foreach ($az as $azienda) {
+        	$aziende[$azienda->id] = $azienda->nome;
+        }
+        $this->addElement('select', 'idAzienda', array(
+            'label' => 'Azienda emittente',
+            'required' => true,
+            'multiOptions' => $aziende
             ));
         
         $this->addElement('text', 'inizio_validita', array(
@@ -58,6 +67,14 @@ class Application_Form_Staff_Coupon extends Zend_Form
             'filters' => array('StringTrim'),
             'validators' => array('Date')
             ));
+        
+        $this->addElement('text', 'luogo_di_fruizione', array(
+            'label' => 'Luogo di fruizione',
+            'required' => 'true',
+            'filters' => array('StringTrim'),
+            'validators' => array(
+                array('Alpha', true, array('allowWhiteSpace'=>true))
+                )));
         
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',

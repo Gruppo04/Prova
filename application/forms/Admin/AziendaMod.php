@@ -59,24 +59,17 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
 
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
-        	'destination' => APPLICATION_PATH . '/../public/images',
+        	'destination' => APPLICATION_PATH . '/../public/images/aziende',
         	'validators' => array( 
         			array('Count', false, 1),
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp'))
                     )));
         
-        $this->addElement('submit', 'modifiy', array(
-             'label' => 'Applica Modifiche'));
+        $this->addElement('submit', 'modifica', array(
+             'label' => 'Applica modifiche'));
+        
+        $this->addElement('submit', 'cancella', array(
+             'label' => 'Cancella azienda'));
     }
-    
-//    public function populate($dati)
-//    {
-//      foreach($dati as $campo => $value)
-//      {
-//        $this->{$campo}->setValue($value);
-//      }
-//      return $this;
-//    }
-
 }
