@@ -9,6 +9,8 @@ class AdminController extends Zend_Controller_Action {
     protected $_formAzienda;
     protected $_formAziendaMod;
     protected $_formCategoria;
+    protected $_formCategoriaMod;
+    protected $_formUserMod;
 
     /* FUNZIONI GENERICHE */
     
@@ -22,6 +24,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
         $this->view->categoriaModForm = $this->getCategoriaModForm();
+        $this->view->userModForm = $this->getUserModForm();
     }
 
     public function indexAction()
@@ -215,10 +218,72 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('users' => $users));
     }
     
+    private function getUserModForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formUserMod = new Application_Form_Admin_UserMod();
+        $this->_formUserMod->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificauser'),
+                        'default'
+                        ));
+        return $this->_formUserMod;
+    }
+    
+    public function formusermodAction()
+    {
+        $idModifica = $_GET["chosen"];
+        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
+        if($query['telefono']=='0'){
+            $query['telefono']='';
+        }
+        $query['idModifica'] = $idModifica;
+        $this->_formUserMod->populate($query);       
+    }
+    
+    public function modificauserAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formusermod');
+        }
+        $formUserMod=$this->_formUserMod;
+        if (!$formUserMod->isValid($_POST)) {
+            return $this->render('formusermod');
+        }
+        $values = array(
+            'nome'=>$formUserMod->getValue('nome'),
+            'cognome'=>$formUserMod->getValue('cognome'),
+            'genere'=>$formUserMod->getValue('genere'),
+            'data_di_nascita'=>$formUserMod->getValue('data_di_nascita'),
+            'provincia'=>$formUserMod->getValue('provincia'),
+            'citta'=>$formUserMod->getValue('citta'),
+            'email'=>$formUserMod->getValue('email'),
+            'telefono'=>$formUserMod->getValue('telefono'),
+            'username'=>$formUserMod->getValue('username'),
+            'password'=>$formUserMod->getValue('password')
+                );
+        $idModifica = $formUserMod->getValue('idModifica');
+        $cancella = $formUserMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellauser');
+        }
+       	$this->_adminModel->modificaUtente($values, $idModifica);
+        $modificato=$this->_adminModel->getUtenteById($idModifica);
+        $this->view->assign(array('modificato'=>$modificato));   
+    }
+    
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
     
     public function formstaffAction()
     {
+    }
+        
+    public function staffAction()
+    {
+        $staff=$this->_adminModel->getStaff();
+        $this->view->assign(array('staff' => $staff));
     }
     
     private function getStaffForm()
@@ -253,13 +318,7 @@ class AdminController extends Zend_Controller_Action {
         $values['livello']='staff';
        	$this->_adminModel->registraStaff($values);
     }
-    
-    public function staffAction()
-    {
-        $staff=$this->_adminModel->getStaff();
-        $this->view->assign(array('staff' => $staff));
-    }
-    
+
     /* FUNZIONI PER LA GESTIONE DELLE PROMOZIONI */
     
     /* FUNZIONI PER LA GESTIONE DELLE FAQ */

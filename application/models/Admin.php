@@ -6,9 +6,21 @@ class Application_Model_Admin extends App_Model_Abstract
 
     }
     
-    public function getUsers()
+    /* FUNZIONI GENERICHE */
+    
+    public function getUtenteById($id)
     {
-    	return $this->getResource('Utenti')->getUsers();
+    	return $this->getResource('Utenti')->getUtenteById($id);
+    }
+    
+    public function modificaUtente($info, $id)
+    {
+    	return $this->getResource('Utenti')->modificaUtente($info, $id);
+    }
+    
+    public function delUtente($id)
+    {
+    	return $this->getResource('Utenti')->delUtente($id);
     }
     
     /* FUNZIONI PER LA GESTIONE DELLE AZIENDE */
@@ -64,6 +76,15 @@ class Application_Model_Admin extends App_Model_Abstract
     {
     	return $this->getResource('Categorie')->delCategoria($id);
     }
+    
+    /* FUNZIONI PER LA GESTIONE DEGLI UTENTI REGISTRATI */
+    
+    public function getUsers()
+    {
+    	return $this->getResource('Utenti')->getUsers();
+    }
+    
+    /* FUNZIONI PER LA GESTIONE DELLO STAFF */
     
     public function registraStaff($info)
     {

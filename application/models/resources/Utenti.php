@@ -15,6 +15,12 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         return $this->insert($info);
     }
     
+    public function getUsers()
+    {
+        $select = $this->select()->where('livello = ?', 'user')->order('id');
+        return $this->fetchAll($select);
+    }
+    
     public function registraStaff($info)
     {
         return $this->insert($info);
@@ -26,10 +32,22 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);
     }
     
-    public function getUsers()
+    public function getUtenteById($id)
     {
-        $select = $this->select()->where('livello = ?', 'user');
-        return $this->fetchAll($select);
+        $select = $this->select()->where('id = ?', $id);
+        return $this->fetchRow($select);
+    }
+    
+    public function delUtente($id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->delete($where);
+    }
+    
+    public function modificaUtente($info, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($info, $where);
     }
     
     public function getStaff()
