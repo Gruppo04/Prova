@@ -1,5 +1,12 @@
 <div class="container">
-    <h3>Modifica domanda frequente</h3>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'faq',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< FAQ</a><br>
+    <h3><b>Modifica domanda frequente</b></h3>
     <?= $this->faqModForm; ?>
     <br>
 </div>

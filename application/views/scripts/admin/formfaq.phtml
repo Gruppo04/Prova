@@ -1,6 +1,13 @@
 <div class="container">
-    <h3>Aggiungi domanda frequente</h3>
-    <?php echo $this->faqForm; ?>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a><br>
+    <h3><b>Aggiungi domanda frequente</b></h3>
+    <?= $this->faqForm; ?>
     <br>
 </div>
 

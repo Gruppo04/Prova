@@ -66,6 +66,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
                     )));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci azienda'));
+            'label' => 'Inserisci azienda',
+            'class' => 'btn btn-primary'));
     }
 }

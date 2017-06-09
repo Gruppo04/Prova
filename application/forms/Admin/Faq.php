@@ -28,7 +28,8 @@ class Application_Form_Admin_Faq extends Zend_Form
         ));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci FAQ'));
+            'label' => 'Inserisci FAQ',
+            'class' => 'btn btn-primary'));
     }
 
 }

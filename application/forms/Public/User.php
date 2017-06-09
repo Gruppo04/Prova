@@ -89,7 +89,8 @@ class Application_Form_Public_User extends Zend_Form
                     )));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Registrati'));
+            'label' => 'Registrati',
+            'class' => 'btn btn-primary'));
     }
 
 }

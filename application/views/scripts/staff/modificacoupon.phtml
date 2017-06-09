@@ -6,19 +6,19 @@
             <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
             <th>Tipologia</th><th>Immagine</th>
             <?php
-                $modificata = $this->modificata;
-                if($modificata->immagine==null){
+                $modificato = $this->modificato;
+                if($modificato->immagine==null){
                         $immagine = 'NON DISPONIBILE';
                     }
                     else{
-                        $immagine = $modificata->immagine;
+                        $immagine = $modificato->immagine;
                     }
-                echo '<tr><td>' . $modificata->id . '</td>'
-                        . '<td>' . $modificata->nome . '</td>'
-                        . '<td>' . $modificata->descrizione . '</td>'
-                        . '<td>' . $modificata->ragione_sociale . '</td>'
-                        . '<td>' . $modificata->localizzazione . '</td>'
-                        . '<td>' . $modificata->tipologia . '</td>'
+                echo '<tr><td>' . $modificato->id . '</td>'
+                        . '<td>' . $modificato->nome . '</td>'
+                        . '<td>' . $modificato->descrizione . '</td>'
+                        . '<td>' . $modificato->ragione_sociale . '</td>'
+                        . '<td>' . $modificato->localizzazione . '</td>'
+                        . '<td>' . $modificato->tipologia . '</td>'
                         . '<td>' . $immagine . '</td>';
             ?>
     </table>
@@ -28,13 +28,13 @@
                                     'action'     => 'aziende',
                                     ), 
                                     'default',true); 
-                                    ?>">Modifica/cancella altre aziende</a>
+                                    ?>">Modifica/cancella altre promozioni</a>
     <a class="btn btn-primary" href=" <?= $this->url(array(
-                                    'controller' => 'admin',
+                                    'controller' => 'staff',
                                     'action'     => 'index',
                                     ), 
                                     'default',true); 
-                                    ?>">Torna alla pagina di amministrazione</a>
+                                    ?>">Torna alla pagina degli strumenti</a>
 </div>
 
 

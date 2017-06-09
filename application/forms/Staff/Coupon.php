@@ -87,10 +87,8 @@ class Application_Form_Staff_Coupon extends Zend_Form
         ));
         
         $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
-        
-        $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella promozione'));
+            'label' => 'Aggiungi promozione',
+            'class' => 'btn btn-primary'));
     }
 
 }

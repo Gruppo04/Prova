@@ -86,10 +86,12 @@ class Application_Form_Admin_UserMod extends Zend_Form
         ));
         
         $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
+            'label' => 'Applica modifiche',
+            'class' => 'btn btn-primary'));
         
         $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella utente'));
+            'label' => 'Cancella utente',
+            'class' => 'btn btn-primary'));
     }
 
 }

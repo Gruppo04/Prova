@@ -1,8 +1,8 @@
 <div class="container">
     <br>
-    <h5>Modifica avvenuta con successo!</h5>
+    <h3><b>Modifica avvenuta con successo!</b></h3>
     <br>
-    <table border>
+    <table class="table table-condensed">
         <tr><th>Seleziona</th><th>ID</th><th>Domanda</th><th>Risposta</th>
         <?php
             $modificata = $this->modificata;
@@ -12,23 +12,19 @@
                     . '<td>' . $modificata->risposta . '</td>';
         ?>
     </table>
-    <br><br>
-    <ul>
-        <li><a href=" <?= $this->url(array(
+    <br>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'faq',
                                     ), 
                                     'default',true); 
                                     ?>">Modifica/cancella altre FAQ</a>
-        </li>
-        <li><a href=" <?= $this->url(array(
+    <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'index',
                                     ), 
                                     'default',true); 
                                     ?>">Torna alla pagina di amministrazione</a>
-        </li>
-    </ul>
 </div>
 
 

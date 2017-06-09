@@ -1,23 +1,19 @@
 <div class="container">
     <br>
-    <h5>Registrazione domanda frequente avvenuta con successo!</h5>
+    <h3><b>Registrazione domanda frequente avvenuta con successo!</b></h3>
     <br>
-    <ul>
-        <li><a href=" <?= $this->url(array(
+    <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'formfaq',
                                     ), 
                                     'default',true); 
                                     ?>">Aggiungi altre FAQ</a>
-        </li>
-        <li><a href=" <?= $this->url(array(
+    <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'index',
                                     ), 
                                     'default',true); 
                                     ?>">Torna alla pagina di amministrazione</a>
-        </li>
-    </ul>
 </div>
 
 

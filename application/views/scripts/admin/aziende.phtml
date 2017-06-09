@@ -1,13 +1,19 @@
 <div class="container">
     <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a><br><br>
     <form action="<?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'formaziendamod',
                                     ), 
                                     'default',true); 
                         ?>" method="get">
-        <table border>
-            <tr><th>Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
+        <table class="table table-condensed">
+            <tr><th style="text-align:center;">Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
                 <th>Tipologia</th><th>Immagine</th>
             <?php
                 foreach ($this->aziende as $azienda){
@@ -17,7 +23,7 @@
                     else{
                         $immagine = $azienda->immagine;
                     }
-                echo '<tr><td><input type="radio" name="chosen" value="' . $azienda->id . '"></td>'
+                echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $azienda->id . '"></td>'
                         . '<td>' . $azienda->id . '</td>'
                         . '<td>' . $azienda->nome . '</td>'
                         . '<td>' . $azienda->descrizione . '</td>'
@@ -27,7 +33,6 @@
                         . '<td>' . $immagine . '</td>';
             }?>
         </table>
-        <br>
-        <input type="submit" name="button"  value="Modifica">
+        <input class="btn btn-primary" type="submit" name="button"  value="Modifica/Cancella">
     </form>
 </div>

@@ -52,7 +52,8 @@ class Application_Form_Admin_Staff extends Zend_Form
                     )));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci membro staff'));
+            'label' => 'Inserisci membro staff',
+            'class' => 'btn btn-primary'));
     }
 
 }

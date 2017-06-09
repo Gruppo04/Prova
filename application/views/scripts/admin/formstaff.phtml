@@ -1,6 +1,13 @@
 <div class="container">
-    <h3>Aggiungi membro staff</h3>
-    <?php echo $this->staffForm; ?>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a><br>
+    <h3><b>Aggiungi membro staff</b></h3>
+    <?= $this->staffForm; ?>
     <br>
 </div>
 

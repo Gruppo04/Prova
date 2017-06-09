@@ -40,7 +40,8 @@ class Application_Form_Admin_Categoria extends Zend_Form
         ));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Inserisci categoria'));
+            'label' => 'Inserisci categoria',
+            'class' => 'btn btn-primary'));
     }
 
 }

@@ -33,7 +33,8 @@ class Application_Form_User_Password extends Zend_Form
                     )));
         
         $this->addElement('submit', 'add', array(
-             'label' => 'Cambia password'));
+            'label' => 'Cambia password',
+            'class' => 'btn btn-primary'));
     }
 
 }

@@ -1,6 +1,13 @@
 <div class="container">
-    <h3>Modifica membro staff</h3>
-    <?php echo $this->staffModForm; ?>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'staff',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Staff</a><br>
+    <h3><b>Modifica membro staff</b></h3>
+    <?= $this->staffModForm; ?>
     <br>
 </div>
 

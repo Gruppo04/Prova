@@ -12,27 +12,19 @@ class Application_Form_Public_Auth_Login extends Zend_Form
             'filters'    => array('StringTrim', 'StringToLower'),
             'required'   => true,
             'autofocus'  => true,
-            'label'      => 'Username',
-            //'decorators' => $this->elementDecorators,
+            'label'      => 'Username'
             ));
         
         $this->addElement('password', 'password', array(
             'filters'    => array('StringTrim'),
             'required'   => true,
-            'label'      => 'Password',
-            //'decorators' => $this->elementDecorators,
+            'label'      => 'Password'
             ));
 
         $this->addElement('submit', 'login', array(
             'label'    => 'Login',
-            //'decorators' => $this->buttonDecorators,
+            'class' => 'btn btn-primary'
         ));
 
-//        $this->setDecorators(array(
-//            'FormElements',
-//            array('HtmlTag', array('tag' => 'table', 'class' => 'zend_form')),
-//        		array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
-//            'Form'
-//        ));
     }
 }

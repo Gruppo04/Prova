@@ -1,5 +1,12 @@
 <div class="container">
-    <h3>Modifica azienda</h3>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'aziende',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Aziende</a><br>
+    <h3><b>Modifica azienda</b></h3>
     <?= $this->aziendaModForm; ?>
     <br>
 </div>

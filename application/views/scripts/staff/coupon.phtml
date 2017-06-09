@@ -1,13 +1,19 @@
 <div class="container">
     <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'strumenti',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Strumenti Staff</a><br><br>
     <form action="<?= $this->url(array(
                                     'controller' => 'staff',
                                     'action'     => 'formcouponmod',
                                     ), 
                                     'default',true); 
                         ?>" method="get">
-        <table border>
-            <tr><th>Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validit&agrav&agrave;</th>
+        <table class="table table-condensed">
+            <tr><th style="text-align:center;">Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validit&agrav&agrave;</th>
                 <th>Scadenza</th><th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th>
                 <th>Tot. emissioni</th><th>Immagine</th>
             <?php
@@ -18,7 +24,7 @@
                     else{
                         $immagine = $coupon->immagine;
                     }
-                echo '<tr><td><input type="radio" name="chosen" value="' . $coupon->id . '"</td>'
+                echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $coupon->id . '"</td>'
                         . '<td>' . $coupon->id . '</td>'
                         . '<td>' . $coupon->nome . '</td>'
                         . '<td>' . $coupon->descrizione . '</td>'
@@ -32,6 +38,6 @@
             }?>
         </table>
         <br>
-        <input type="submit" name="button"  value="Modifica">
+        <input class="btn btn-primary" type="submit" name="button"  value="Modifica/Cancella">
     </form>
 </div>

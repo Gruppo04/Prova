@@ -67,9 +67,11 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
                     )));
         
         $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
+            'label' => 'Applica modifiche',
+            'class' => 'btn btn-primary'));
         
         $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella azienda'));
+            'label' => 'Cancella azienda',
+            'class' => 'btn btn-primary'));
     }
 }

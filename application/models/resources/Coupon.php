@@ -16,10 +16,27 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
         return $this ->fetchAll($select);
     }
     
+    public function getCouponById($id)
+    {
+        $select = $this->select()->where('id = ?', $id);
+        return $this->fetchRow($select);        
+    }
+    
     public function registraCoupon($info)
     {
         return $this ->insert($info);
     }
     
+    public function modificaCoupon($info, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($info, $where);
+    }
+    
+    public function delCoupon($id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->delete($where);
+    }
     
 }

@@ -49,10 +49,12 @@ class Application_Form_Admin_StaffMod extends Zend_Form
         ));
         
         $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
+            'label' => 'Applica modifiche',
+            'class' => 'btn btn-primary'));
         
         $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella membro staff'));
+            'label' => 'Cancella membro staff',
+            'class' => 'btn btn-primary'));
     }
 
 }

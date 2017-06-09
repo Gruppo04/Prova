@@ -1,5 +1,12 @@
 <div class="container">
-    <h3>Modifica categoria</h3>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'categorie',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Categorie</a><br>
+    <h3><b>Modifica categoria</b></h3>
     <?= $this->categoriaModForm; ?>
     <br>
 </div>

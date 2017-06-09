@@ -5,7 +5,7 @@ class Application_Form_Admin_FaqMod extends Zend_Form
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('registrazione faq');
+        $this->setName('modifica faq');
         $this->setAction('');
         
         $this->addElement('textarea', 'domanda', array(
@@ -32,10 +32,12 @@ class Application_Form_Admin_FaqMod extends Zend_Form
         ));
         
         $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
+            'label' => 'Applica modifiche',
+            'class' => 'btn btn-primary'));
         
         $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella FAQ'));
+            'label' => 'Cancella FAQ',
+            'class' => 'btn btn-primary'));
     }
 
 }

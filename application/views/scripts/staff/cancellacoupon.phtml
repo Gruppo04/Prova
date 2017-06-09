@@ -1,14 +1,14 @@
 <div class="container">
     <br>
-    <h3><b>Registrazione promozione avvenuta con successo!</b></h3>
+    <h3><b>Cancellazione promozione avvenuta con successo!</b></h3>
     <br>
-    <a class="btn btn-primary" href=" <?= $this->url(array(
+    <a href=" <?= $this->url(array(
                                     'controller' => 'staff',
-                                    'action'     => 'formcoupon',
+                                    'action'     => 'coupon',
                                     ), 
                                     'default',true); 
-                                    ?>">Aggiungi altre promozioni</a>
-    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    ?>">Modifica/cancella altre promozioni</a>
+    <a href=" <?= $this->url(array(
                                     'controller' => 'staff',
                                     'action'     => 'index',
                                     ), 

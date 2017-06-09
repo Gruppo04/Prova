@@ -1,5 +1,12 @@
 <div class="container">
-    <h3>Aggiungi azienda</h3>
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a><br>
+    <h3><b>Aggiungi azienda</b></h3>
     <?= $this->aziendaForm; ?>
     <br>
 </div>
