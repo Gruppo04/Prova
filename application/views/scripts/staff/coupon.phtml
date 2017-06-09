@@ -1,0 +1,37 @@
+<div class="container">
+    <br><br>
+    <form action="<?= $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'formcouponmod',
+                                    ), 
+                                    'default',true); 
+                        ?>" method="get">
+        <table border>
+            <tr><th>Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validit&agrav&agrave;</th>
+                <th>Scadenza</th><th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th>
+                <th>Tot. emissioni</th><th>Immagine</th>
+            <?php
+                foreach ($this->coupon as $coupon){
+                    if($coupon->immagine==null){
+                        $immagine = 'NON DISPONIBILE';
+                    }
+                    else{
+                        $immagine = $coupon->immagine;
+                    }
+                echo '<tr><td><input type="radio" name="chosen" value="' . $coupon->id . '"</td>'
+                        . '<td>' . $coupon->id . '</td>'
+                        . '<td>' . $coupon->nome . '</td>'
+                        . '<td>' . $coupon->descrizione . '</td>'
+                        . '<td>' . $coupon->inizio_validita . '</td>'
+                        . '<td>' . $coupon->scadenza . '</td>'
+                        . '<td>' . $coupon->luogo_di_fruizione . '</td>'
+                        . '<td>' . $coupon->idCategoria . '</td>'
+                        . '<td>' . $coupon->idAzienda . '</td>'
+                        . '<td>' . $coupon->emissioni . '</td>'
+                        . '<td>' . $immagine . '</td>';
+            }?>
+        </table>
+        <br>
+        <input type="submit" name="button"  value="Modifica">
+    </form>
+</div>

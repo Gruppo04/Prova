@@ -5,7 +5,9 @@ class AdminController extends Zend_Controller_Action {
     protected $_adminModel;
     protected $_authService;
     protected $_formStaff;
+    protected $_formStaffMod;
     protected $_formFaq;
+    protected $_formFaqMod;
     protected $_formAzienda;
     protected $_formAziendaMod;
     protected $_formCategoria;
@@ -19,7 +21,9 @@ class AdminController extends Zend_Controller_Action {
         $this->_adminModel = new Application_Model_Admin();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
+        $this->view->staffModForm = $this->getStaffModForm();
         $this->view->faqForm = $this->getFaqForm();
+        $this->view->faqModForm = $this->getFaqModForm();
         $this->view->aziendaForm = $this->getAziendaForm();
         $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
@@ -280,6 +284,14 @@ class AdminController extends Zend_Controller_Action {
     {
     }
         
+    public function formstaffmodAction()
+    {
+        $idModifica = $_GET["chosen"];
+        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formStaffMod->populate($query);       
+    }
+    
     public function staffAction()
     {
         $staff=$this->_adminModel->getStaff();
@@ -298,6 +310,18 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formStaff;
     }
     
+    private function getStaffModForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formStaffMod = new Application_Form_Admin_StaffMod();
+        $this->_formStaffMod->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificastaff'),
+                        'default'
+                        ));
+        return $this->_formStaffMod;
+    }
+
     public function registrastaffAction()
     {
         if (!$this->getRequest()->isPost()) {
@@ -318,13 +342,54 @@ class AdminController extends Zend_Controller_Action {
         $values['livello']='staff';
        	$this->_adminModel->registraStaff($values);
     }
-
+    
+    public function modificastaffAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','formstaffmod');
+        }
+        $formStaffMod=$this->_formStaffMod;
+        if (!$formStaffMod->isValid($_POST)) {
+            return $this->render('formstaffmod');
+        }
+        $values = array(
+            'nome'=>$formStaffMod->getValue('nome'),
+            'cognome'=>$formStaffMod->getValue('cognome'),
+            'email'=>$formStaffMod->getValue('email'),
+            'username'=>$formStaffMod->getValue('username'),
+            'password'=>$formStaffMod->getValue('password')
+                );
+        $idModifica = $formStaffMod->getValue('idModifica');
+        $cancella = $formStaffMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellastaff');
+        }
+       	$this->_adminModel->modificaUtente($values, $idModifica);
+        $modificato=$this->_adminModel->getUtenteById($idModifica);
+        $this->view->assign(array('modificato'=>$modificato));   
+    }
     /* FUNZIONI PER LA GESTIONE DELLE PROMOZIONI */
     
-    /* FUNZIONI PER LA GESTIONE DELLE FAQ */
+    /* FUNZIONI PER LA GESTIONE DELLE FAQ */    
+        
+    public function faqAction()
+    {
+        $faq=$this->_adminModel->getFaq();
+        $this->view->assign(array('faq' => $faq));
+    }
     
     public function formfaqAction()
     {
+    }
+    
+    public function formfaqmodAction()
+    {
+        $idModifica = $_GET["chosen"];
+        $query = $this->_adminModel->getFaqById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formFaqMod->populate($query);
     }
     
     private function getFaqForm()
@@ -339,6 +404,18 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formFaq;
     }
     
+    public function getFaqModForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formFaqMod = new Application_Form_Admin_FaqMod();
+        $this->_formFaqMod->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificafaq'),
+                        'default'
+                        ));
+        return $this->_formFaqMod;
+    }
+    
     public function registrafaqAction()
     {
         if (!$this->getRequest()->isPost()) {
@@ -351,11 +428,29 @@ class AdminController extends Zend_Controller_Action {
         $values = $formFaq->getValues();
        	$this->_adminModel->registraFaq($values);
     }
-    
-    public function faqAction()
-    {
-        $faq=$this->_adminModel->getFaq();
-        $this->view->assign(array('faq' => $faq));
-    }
 
+    public function modificafaqAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('admin','forfaqmod');
+        }
+        $formFaqMod=$this->_formFaqMod;
+        if (!$formFaqMod->isValid($_POST)) {
+            return $this->render('forfaqmod');
+        }
+        $values = array(
+            'domanda'=>$formFaqMod->getValue('domanda'),
+            'risposta'=>$formFaqMod->getValue('risposta')
+                );
+        $idModifica = $formFaqMod->getValue('idModifica');
+        $cancella = $formFaqMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delFaq($idModifica);
+            return $this->render('cancellafaq');
+        }
+       	$this->_adminModel->modificaFaq($values, $idModifica);
+        $modificata=$this->_adminModel->getFaqById($idModifica);
+        $this->view->assign(array('modificata'=>$modificata));
+    }
 }

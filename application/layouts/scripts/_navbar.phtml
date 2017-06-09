@@ -73,7 +73,11 @@
                         switch ($this->authInfo('livello')){
                             case 'user':?>
                             <li>
-                                <a href="#">Gestione Profilo</a>
+                                <a href="<?= $this->url(array(
+                                            'controller' => 'user',
+                                            'action'     => 'profilo'), 
+                                            'default',true); 
+                                            ?>">Gestione Profilo</a>
                             </li>
                             <li>
                                 <a href="<?= $this->url(array(

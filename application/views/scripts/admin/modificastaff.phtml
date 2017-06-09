@@ -1,0 +1,36 @@
+<div class="container">
+    <br>
+    <h5>Modifica avvenuta con successo!</h5>
+    <br>
+    <table border>
+            <tr><th>ID</th><th>Nome</th><th>Cognome</th><th>email</th><th>Username</th><th>Password</th>
+            <?php
+                $modificato = $this->modificato;
+                echo '<tr><td>' . $modificato->id . '</td>'
+                    . '<td>' . $modificato->nome . '</td>'
+                    . '<td>' . $modificato->cognome . '</td>'
+                    . '<td>' . $modificato->email . '</td>'
+                    . '<td>' . $modificato->username . '</td>'
+                    . '<td>' . $modificato->password . '</td>';
+            ?>
+    </table>
+    <br><br>
+    <ul>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'staff',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Modifica/cancella altri membri staff</a>
+        </li>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla pagina di amministrazione</a>
+        </li>
+    </ul>
+</div>
+
+

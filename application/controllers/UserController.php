@@ -5,11 +5,13 @@ class UserController extends Zend_Controller_Action
     protected $_authService;
     protected $_userModel;
     protected $_formPassword;
+    protected $_formDati;
     
     public function init()
     {
 	$this->_helper->layout->setLayout('main');
 	$this->_authService = new Application_Service_Auth();
+        $this->view->datiForm = $this->getDatiForm();
         $this->view->passwordForm = $this->getPasswordForm();
     }
 
@@ -26,6 +28,28 @@ class UserController extends Zend_Controller_Action
     
     public function profiloAction()
     {
+    }
+    
+    private function getDatiForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formDati = new Application_Form_Admin_UserMod();
+        $this->_formDati->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificadati'),
+                        'default'
+                        ));
+        return $this->_formDati;
+    }
+    
+    public function formdatiAction()
+    {
+        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
+        if($query['telefono']=='0'){
+            $query['telefono']='';
+        }
+        $query['idModifica'] = $idModifica;
+        $this->_formUserMod->populate($query);       
     }
     
     public function formpasswordAction()

@@ -13,8 +13,13 @@
                                     'action'     => 'formcoupon',
                                     ), 
                                     'default',true); 
-            ?>">Inserisci coupon</a></li>
-            <li><a href="#">Modifica/cancella coupon</a></li>
+                        ?>">Inserisci coupon</a></li>
+            <li><a href="<?= $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'coupon',
+                                    ), 
+                                    'default',true); 
+                        ?>">Modifica/cancella coupon</a></li>
         </fieldset>
     </ul>
 </div>

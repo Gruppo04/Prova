@@ -5,6 +5,7 @@ class StaffController extends Zend_Controller_Action
     protected $_authService;
     protected $_staffModel;
     protected $_formCoupon;
+    protected $_formCouponMod;
 
     public function init()
     {
@@ -12,6 +13,7 @@ class StaffController extends Zend_Controller_Action
 	$this->_authService = new Application_Service_Auth();
         $this->_staffModel = new Application_Model_Staff();
         $this->view->couponForm = $this->getCouponForm();
+        //$this->view->couponModForm = $this->getCouponModForm();
     }
 
     public function indexAction()
@@ -33,11 +35,11 @@ class StaffController extends Zend_Controller_Action
     {
     }
     
-//    public function couponAction()
-//    {
-//        $coupon=$this->_staffModel->getCoupon();
-//        $this->view->assign(array('coupon' => $coupon));
-//    }
+    public function couponAction()
+    {
+        $coupon=$this->_staffModel->getCoupon();
+        $this->view->assign(array('coupon' => $coupon));
+    }
     
     public function registracouponAction()
     {

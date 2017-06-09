@@ -1,0 +1,23 @@
+<div class="container">
+    <br>
+    <h5>Cancellazione FAQ avvenuta con successo!</h5>
+    <br>
+    <ul>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'faq',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Modifica/cancella altre FAQ</a>
+        </li>
+        <li><a href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true);
+                                    ?>">Torna alla pagina di amministrazione</a>
+        </li>
+    </ul>
+</div>
+
+

@@ -96,14 +96,30 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Utenti')->getStaff();
     }
     
-    public function registraFaq($info)
-    {
-    	return $this->getResource('Faq')->registraFaq($info);
-    }
+    /* FUNZIONI PER LA GESTIONE DELLE FAQ */
     
     public function getFaq()
     {
     	return $this->getResource('Faq')->getFaq();
     }
 
+    public function getFaqById($id)
+    {
+    	return $this->getResource('Faq')->getFaqById($id);
+    }
+    
+    public function registraFaq($info)
+    {
+    	return $this->getResource('Faq')->registraFaq($info);
+    }
+    
+    public function modificaFaq($info, $id)
+    {
+    	return $this->getResource('Faq')->modificaFaq($info, $id);
+    }
+    
+    public function delFaq($id)
+    {
+    	return $this->getResource('Faq')->delFaq($id);
+    }
 }

@@ -1,13 +1,13 @@
 <?php
 
-class Application_Form_Staff_Coupon extends Zend_Form
+class Application_Form_Staff_CouponMod extends Zend_Form
 {
     protected $_staffModel;
     
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('modifica coupon');
+        $this->setName('registrazione coupon');
         $this->setAction('');
         $this->_staffModel = new Application_Model_Staff();
         
@@ -82,15 +82,8 @@ class Application_Form_Staff_Coupon extends Zend_Form
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
-        $this->addElement('hidden', 'idModifica',array(
-            'required' => true
-        ));
-        
-        $this->addElement('submit', 'modifica', array(
-             'label' => 'Applica modifiche'));
-        
-        $this->addElement('submit', 'cancella', array(
-             'label' => 'Cancella promozione'));
+        $this->addElement('submit', 'add', array(
+             'label' => 'Inserisci coupon'));
     }
 
 }
