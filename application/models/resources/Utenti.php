@@ -26,7 +26,7 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         return $this->insert($info);
     }
     
-    public function getUtenteByNome($username)
+    public function getUtenteByUsername($username)
     {
         $select = $this->select()->where('username = ?', $username);
         return $this->fetchRow($select);

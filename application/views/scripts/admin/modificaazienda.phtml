@@ -3,7 +3,7 @@
     <h3><b>Modifica avvenuta con successo!</b></h3>
     <br>
     <table class="table table-condensed">
-            <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
+            <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
             <th>Tipologia</th><th>Immagine</th>
             <?php
                 $modificata = $this->modificata;
@@ -13,7 +13,7 @@
                     else{
                         $immagine = $modificata->immagine;
                     }
-                echo '<tr><td>' . $modificata->id . '</td>'
+                echo '<tr><td style="text-align:center;">' . $modificata->id . '</td>'
                         . '<td>' . $modificata->nome . '</td>'
                         . '<td>' . $modificata->descrizione . '</td>'
                         . '<td>' . $modificata->ragione_sociale . '</td>'

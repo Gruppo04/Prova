@@ -13,6 +13,11 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Utenti')->getUtenteById($id);
     }
     
+     public function getUtenteByUsername($username)
+    {
+    	return $this->getResource('Utenti')->getUtenteByUsername($username);
+    }
+    
     public function modificaUtente($info, $id)
     {
     	return $this->getResource('Utenti')->modificaUtente($info, $id);
@@ -33,6 +38,11 @@ class Application_Model_Admin extends App_Model_Abstract
     public function getAziendaById($id)
     {
     	return $this->getResource('Aziende')->getAziendaById($id);
+    }
+    
+    public function getAziendaByNome($nome)
+    {
+    	return $this->getResource('Aziende')->getAziendaByNome($nome);
     }
     
     public function registraAzienda($info)
@@ -60,6 +70,11 @@ class Application_Model_Admin extends App_Model_Abstract
     public function getCategoriaById($id)
     {
     	return $this->getResource('Categorie')->getCategoriaById($id);
+    }
+    
+    public function getCategoriaByNome($nome)
+    {
+    	return $this->getResource('Categorie')->getCategoriaByNome($nome);
     }
     
     public function registraCategoria($info)

@@ -1,12 +1,15 @@
 <?php
 
-class Application_Form_Admin_UserMod extends Zend_Form
+class Application_Form_User_Dati extends Zend_Form
 {
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('modifica utente');
+        $this->setName('modifica profilo');
         $this->setAction('');
+        
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
@@ -16,6 +19,7 @@ class Application_Form_Admin_UserMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
@@ -24,6 +28,7 @@ class Application_Form_Admin_UserMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
@@ -69,28 +74,12 @@ class Application_Form_Admin_UserMod extends Zend_Form
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
         
-        $this->addElement('text', 'username', array(
-            'label' => '(!)Nome utente',
-            'required' => 'true',
-            'filters' => array('StringTrim')));
-        
-        $this->addElement('text', 'password', array(
-            'label' => '(!)Password',
-            'required' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array(array(
-                'StringLength', true, array(6,25)))));
-        
         $this->addElement('hidden', 'idModifica',array(
             'required' => true
         ));
         
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',
-            'class' => 'btn btn-primary'));
-        
-        $this->addElement('submit', 'cancella', array(
-            'label' => 'Cancella utente',
             'class' => 'btn btn-primary'));
     }
 

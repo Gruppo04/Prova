@@ -4,6 +4,7 @@ class StaffController extends Zend_Controller_Action
 {	
     protected $_authService;
     protected $_staffModel;
+    protected $_adminModel;
     protected $_formCoupon;
     protected $_formCouponMod;
 
@@ -12,6 +13,7 @@ class StaffController extends Zend_Controller_Action
         $this->_helper->layout->setLayout('main');
 	$this->_authService = new Application_Service_Auth();
         $this->_staffModel = new Application_Model_Staff();
+        $this->_adminModel = new Application_Model_Admin();
         $this->view->couponForm = $this->getCouponForm();
         $this->view->couponModForm = $this->getCouponModForm();
     }
@@ -38,6 +40,10 @@ class StaffController extends Zend_Controller_Action
     public function formcouponmodAction()
     {
         $idModifica = $_GET["chosen"];
+        if(!$idModifica)
+        {
+            $this->_helper->redirector('coupon', 'staff');
+        }
         $query = $this->_staffModel->getCouponById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formCouponMod->populate($query);
@@ -45,14 +51,22 @@ class StaffController extends Zend_Controller_Action
     
     public function couponAction()
     {
-        $coupon=$this->_staffModel->getCoupon();
+        $coupon = $this->_staffModel->getCoupon()->toArray();
+        $size = count($coupon);
+        for ($i=0; $i<$size; $i++)
+        {
+            $azienda = $this->_adminModel->getAziendaById($coupon[$i]['idAzienda']);
+            $categoria = $this->_adminModel->getCategoriaById($coupon[$i]['idCategoria']);
+            $coupon[$i]['azienda'] = $azienda->nome;
+            $coupon[$i]['categoria'] = $categoria->nome;
+        }
         $this->view->assign(array('coupon' => $coupon));
     }
     
     public function registracouponAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('staff','formcoupon');
+            $this->_helper->redirector('formcoupon','staff');
         }
 	$formCoupon=$this->_formCoupon;
         if (!$formCoupon->isValid($_POST)) {
@@ -65,7 +79,7 @@ class StaffController extends Zend_Controller_Action
     public function modificacouponAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('staff','formcouponmod');
+            $this->_helper->redirector('formcouponmod','staff');
         }
         $formCouponMod=$this->_formCouponMod;
         if (!$formCouponMod->isValid($_POST)) {

@@ -8,6 +8,20 @@ class Application_Form_Public_User extends Zend_Form
         $this->setName('registrazione');
         $this->setAction('');
         
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
+        
+        /* validatori per controllare se lo username e l'email sono già usati
+         * da qualcun'altro
+         */
+        $esiste = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'adapter'=> Zend_Db_Table_Abstract::getDefaultAdapter(),
+                    'table' => 'utenti',
+                    'field' => 'username'
+                    ));
+        $esiste->setMessage('Username già esistente');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
@@ -16,6 +30,7 @@ class Application_Form_Public_User extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
@@ -24,6 +39,7 @@ class Application_Form_Public_User extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('cognome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
@@ -53,6 +69,7 @@ class Application_Form_Public_User extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('citta')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'telefono', array(
             'label' => 'Numero di telefono',
@@ -73,6 +90,7 @@ class Application_Form_Public_User extends Zend_Form
             'label' => 'Scegli un nome utente',
             'required' => 'true',
             'filters' => array('StringTrim')));
+        $this->getElement('username')->addValidator($esiste);
         
         $this->addElement('password', 'password', array(
             'label' => 'Scegli una password',

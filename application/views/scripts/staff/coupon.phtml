@@ -17,23 +17,23 @@
                 <th>Scadenza</th><th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th>
                 <th>Tot. emissioni</th><th>Immagine</th>
             <?php
-                foreach ($this->coupon as $coupon){
-                    if($coupon->immagine==null){
+                foreach ($this->coupon as $promozione){
+                    if($promozione['immagine']==null){
                         $immagine = 'NON DISPONIBILE';
                     }
                     else{
-                        $immagine = $coupon->immagine;
+                        $immagine = $promozione['immagine'];
                     }
-                echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $coupon->id . '"</td>'
-                        . '<td>' . $coupon->id . '</td>'
-                        . '<td>' . $coupon->nome . '</td>'
-                        . '<td>' . $coupon->descrizione . '</td>'
-                        . '<td>' . $coupon->inizio_validita . '</td>'
-                        . '<td>' . $coupon->scadenza . '</td>'
-                        . '<td>' . $coupon->luogo_di_fruizione . '</td>'
-                        . '<td>' . $coupon->idCategoria . '</td>'
-                        . '<td>' . $coupon->idAzienda . '</td>'
-                        . '<td>' . $coupon->emissioni . '</td>'
+                echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $promozione['id'] . '"</td>'
+                        . '<td>' . $promozione['id'] . '</td>'
+                        . '<td>' . $promozione['nome'] . '</td>'
+                        . '<td>' . $promozione['descrizione'] . '</td>'
+                        . '<td>' . $promozione['inizio_validita'] . '</td>'
+                        . '<td>' . $promozione['scadenza'] . '</td>'
+                        . '<td>' . $promozione['luogo_di_fruizione'] . '</td>'
+                        . '<td>' . $promozione['categoria'] . '</td>'
+                        . '<td>' . $promozione['azienda'] . '</td>'
+                        . '<td>' . $promozione['emissioni'] . '</td>'
                         . '<td>' . $immagine . '</td>';
             }?>
         </table>

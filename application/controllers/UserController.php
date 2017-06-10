@@ -33,7 +33,7 @@ class UserController extends Zend_Controller_Action
     private function getDatiForm()
     { 
         $urlHelper = $this->_helper->getHelper('url');
-        $this->_formDati = new Application_Form_Admin_UserMod();
+        $this->_formDati = new Application_Form_User_Dati();
         $this->_formDati->setAction($urlHelper->url(array(
                         'controller' => 'admin',
                         'action' => 'modificadati'),
@@ -49,17 +49,33 @@ class UserController extends Zend_Controller_Action
             $query['telefono']='';
         }
         $query['idModifica'] = $idModifica;
-        $this->_formUserMod->populate($query);       
+        $this->_formDati->populate($query);       
     }
     
     public function formpasswordAction()
     {
     }
     
+    public function modificadatiAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('formdati','user');
+        }
+        $formDati=$this->_formDati;
+        if (!$formDati->isValid($_POST)) {
+            return $this->render('formdati');
+        }
+        $values = $formAziendaMod->getValues();
+        $username = $formAziendaMod->getValues();
+       	$this->_adminModel->modificaAzienda($values, $idModifica);
+        $modificata=$this->_adminModel->getAziendaById($idModifica);
+        $this->view->assign(array('modificata'=>$modificata));
+    }
+    
     public function passwordAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('user','formpassword');
+            $this->_helper->redirector('formpassword','user');
         }
 	$formPassword=$this->_formPassword;
         if (!$formPassword->isValid($_POST)) {

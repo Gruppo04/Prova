@@ -73,9 +73,7 @@ class PublicController extends Zend_Controller_Action
             'username'=>$formReg->getValue('username'),
             'password'=>$formReg->getValue('password'),
                 );
-//        if($this->_guestModel->getUtenteByNome($values['username'])!=0) {
-//            return $this->formReg->addError('This username already exists');
-//        }
+        
         $values['data_registrazione']=date("Y-m-d H:i:s");
         $values['livello']='user';
        	$this->_guestModel->registraUser($values);

@@ -9,6 +9,9 @@ class Application_Form_Admin_StaffMod extends Zend_Form
         $this->setName('modifica staff');
         $this->setAction('');
         
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
@@ -17,6 +20,7 @@ class Application_Form_Admin_StaffMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
@@ -25,6 +29,7 @@ class Application_Form_Admin_StaffMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('cognome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',

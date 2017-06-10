@@ -3,10 +3,10 @@
     <h3><b>Modifica avvenuta con successo!</b></h3>
     <br>
     <table class="table table-condensed">
-        <tr><th>Seleziona</th><th>ID</th><th>Domanda</th><th>Risposta</th>
+        <tr><th style="text-align:center;">ID</th><th>Domanda</th><th>Risposta</th>
         <?php
             $modificata = $this->modificata;
-            echo '<tr><td><input type="radio" name="chosen" value="' . $modificata->id . '"></td>'
+            echo '<tr><td style="text-align:center;">' . $modificata->id . '"></td>'
                     . '<td>' . $modificata->id . '</td>'
                     . '<td>' . $modificata->domanda . '</td>'
                     . '<td>' . $modificata->risposta . '</td>';

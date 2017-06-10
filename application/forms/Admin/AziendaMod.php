@@ -1,15 +1,15 @@
 <?php
 
 class Application_Form_Admin_AziendaMod extends Zend_Form
-{
-    //protected $_ucFilter;
-    
+{    
     public function init() {
         
-        //$this->_ucFilter = new Filter_Uc;
         $this->setMethod('post');
         $this->setName('modifica azienda');
         $this->setAction('');
+        
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
@@ -19,6 +19,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
@@ -57,7 +58,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'required' => true
         ));
 
-        $this->addElement('file', 'immagine', array(
+        $this->addElement('file', 'nuovaimmagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/images/aziende',
         	'validators' => array( 
@@ -65,6 +66,8 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp'))
                     )));
+        
+        $this->addElement('hidden', 'immagine');
         
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',

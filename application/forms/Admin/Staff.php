@@ -9,6 +9,18 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->setName('registrazione staff');
         $this->setAction('');
         
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
+        
+        // Validatore per controllare se il nome staff esiste già
+        $esiste = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'adapter'=> Zend_Db_Table_Abstract::getDefaultAdapter(),
+                    'table' => 'utenti',
+                    'field' => 'nome'
+                    ));
+        $esiste->setMessage('Username già esistente');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
@@ -17,6 +29,7 @@ class Application_Form_Admin_Staff extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
@@ -25,6 +38,7 @@ class Application_Form_Admin_Staff extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
             ));
+        $this->getElement('cognome')->addFilter(new Filter_Uc);
         
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
@@ -36,6 +50,7 @@ class Application_Form_Admin_Staff extends Zend_Form
             'label' => 'Scegli un nome utente',
             'required' => 'true',
             'filters' => array('StringTrim')));
+        $this->getElement('username')->addValidator($esiste);
         
         $this->addElement('password', 'password', array(
             'label' => 'Scegli una password',

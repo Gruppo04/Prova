@@ -22,6 +22,12 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);        
     }
     
+    public function getAziendaByNome($nome)
+    {
+        $select = $this->select()->where('nome = ?', $nome);
+        return $this->fetchRow($select);       
+    }
+    
     public function delAzienda($id)
     {
         $where = $this->getAdapter()->quoteInto('id = ?', $id);

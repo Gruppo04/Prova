@@ -8,6 +8,18 @@ class Application_Form_Admin_Categoria extends Zend_Form
         $this->setName('registrazione categoria');
         $this->setAction('');
         
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
+        
+        // Validatore per controllare se il nome categoria esiste già
+        $esiste = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'adapter'=> Zend_Db_Table_Abstract::getDefaultAdapter(),
+                    'table' => 'categorie',
+                    'field' => 'nome'
+                    ));
+        $esiste->setMessage('Categoria già esistente');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
@@ -16,6 +28,8 @@ class Application_Form_Admin_Categoria extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true))
             )));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
+        $this->getElement('nome')->addValidator($esiste);
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
@@ -34,10 +48,6 @@ class Application_Form_Admin_Categoria extends Zend_Form
         			array('Count', false, 1),
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
-        
-        $this->addElement('hidden', 'idModifica',array(
-            'required' => true
-        ));
         
         $this->addElement('submit', 'add', array(
             'label' => 'Inserisci categoria',

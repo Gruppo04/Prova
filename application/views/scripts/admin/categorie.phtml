@@ -13,7 +13,8 @@
                                     'default',true); 
                         ?>" method="get">
         <table class="table table-condensed">
-            <tr><th style="text-align:center;">Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
+            <tr><th style="text-align:center;">Seleziona</th><th style="text-align:center;">ID</th><th>Nome</th>
+                <th>Descrizione</th><th>Immagine</th>
             <?php
                 foreach ($this->categorie as $categoria){
                     if($categoria->immagine==null){
@@ -23,7 +24,7 @@
                         $immagine = $categoria->immagine;
                     }
                 echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $categoria->id . '"></td>'
-                        . '<td>' . $categoria->id . '</td>'
+                        . '<td style="text-align:center;">' . $categoria->id . '</td>'
                         . '<td>' . $categoria->nome . '</td>'
                         . '<td>' . $categoria->descrizione . '</td>'
                         . '<td>' . $immagine . '</td>';

@@ -8,6 +8,9 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         $this->setName('modifica categoria');
         $this->setAction('');
         
+        // La seguente istruzione permette di usare i filtri custom
+        $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
+
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
@@ -16,6 +19,7 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true))
             )));
+        $this->getElement('nome')->addFilter(new Filter_Uc);
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
@@ -27,7 +31,7 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
         
-        $this->addElement('file', 'immagine', array(
+        $this->addElement('file', 'nuovaimmagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/images/categorie',
         	'validators' => array( 
@@ -38,6 +42,8 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         $this->addElement('hidden', 'idModifica',array(
             'required' => true
         ));
+        
+        $this->addElement('hidden', 'immagine');
         
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',

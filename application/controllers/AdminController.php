@@ -12,7 +12,6 @@ class AdminController extends Zend_Controller_Action {
     protected $_formAziendaMod;
     protected $_formCategoria;
     protected $_formCategoriaMod;
-    protected $_formUserMod;
 
     /* FUNZIONI GENERICHE */
     
@@ -28,12 +27,11 @@ class AdminController extends Zend_Controller_Action {
         $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
         $this->view->categoriaModForm = $this->getCategoriaModForm();
-        $this->view->userModForm = $this->getUserModForm();
     }
 
     public function indexAction()
     {
-        return $this->_helper->redirector('amministrazione','admin');
+        return $this->_helper->redirector('amministrazione', 'admin');
     }
     
     public function logoutAction() {
@@ -54,6 +52,10 @@ class AdminController extends Zend_Controller_Action {
     public function formaziendamodAction()
     {
         $idModifica = $_GET["chosen"];
+        if(!$idModifica)
+        {
+            $this->_helper->redirector('aziende', 'admin');
+        }
         $query = $this->_adminModel->getAziendaById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formAziendaMod->populate($query);        
@@ -68,7 +70,7 @@ class AdminController extends Zend_Controller_Action {
     public function registraaziendaAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formazienda');
+            $this->_helper->redirector('formazienda','admin');
         }
 	$formAzienda=$this->_formAzienda;
         if (!$formAzienda->isValid($_POST)) {
@@ -76,12 +78,14 @@ class AdminController extends Zend_Controller_Action {
         }
         $values = $formAzienda->getValues();
        	$this->_adminModel->registraAzienda($values);
+        $aggiunta=$this->_adminModel->getAziendaByNome($formAzienda->getValue('nome'));
+        $this->view->assign(array('aggiunta'=>$aggiunta));
     }
     
     public function modificaaziendaAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formaziendamod');
+            $this->_helper->redirector('formaziendamod','admin');
         }
         $formAziendaMod=$this->_formAziendaMod;
         if (!$formAziendaMod->isValid($_POST)) {
@@ -92,9 +96,16 @@ class AdminController extends Zend_Controller_Action {
             'descrizione'=>$formAziendaMod->getValue('descrizione'),
             'ragione_sociale'=>$formAziendaMod->getValue('ragione_sociale'),
             'localizzazione'=>$formAziendaMod->getValue('localizzazione'),
-            'tipologia'=>$formAziendaMod->getValue('tipologia'),
-            'immagine'=>$formAziendaMod->getValue('immagine'),
+            'tipologia'=>$formAziendaMod->getValue('tipologia')
                 );
+        $immagine = $formAziendaMod->getValue('nuovaimmagine');
+        /* Se durante la modifica non è stata aggiunta un'immagine significa che si
+        * deve mantenere quella precedente */
+        if($immagine){
+            $values['immagine'] = $immagine;
+        }else{
+            $values['immagine'] = $formAziendaMod->getValue('immagine');
+        }
         $idModifica = $formAziendaMod->getValue('idModifica');
         $cancella = $formAziendaMod->getValue('cancella');
         if($cancella)
@@ -140,6 +151,10 @@ class AdminController extends Zend_Controller_Action {
     public function formcategoriamodAction()
     {
         $idModifica = $_GET["chosen"];
+        if(!$idModifica)
+        {
+            $this->_helper->redirector('categorie', 'admin');
+        }
         $query = $this->_adminModel->getcategoriaById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formCategoriaMod->populate($query);        
@@ -154,7 +169,7 @@ class AdminController extends Zend_Controller_Action {
     public function registracategoriaAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formcategoria');
+            $this->_helper->redirector('formcategoria','admin');
         }
 	$formCategoria=$this->_formCategoria;
         if (!$formCategoria->isValid($_POST)) {
@@ -162,22 +177,31 @@ class AdminController extends Zend_Controller_Action {
         }
         $values = $formCategoria->getValues();
        	$this->_adminModel->registraCategoria($values);
+        $aggiunta=$this->_adminModel->getCategoriaByNome($formCategoria->getValue('nome'));
+        $this->view->assign(array('aggiunta'=>$aggiunta));
     }
     
     public function modificacategoriaAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formcategoriamod');
+            $this->_helper->redirector('formcategoriamod','admin');
         }
         $formCategoriaMod=$this->_formCategoriaMod;
         if (!$formCategoriaMod->isValid($_POST)) {
-            return $this->render('formaziendamod');
+            return $this->render('formcategoriamod');
         }
         $values = array(
             'nome'=>$formCategoriaMod->getValue('nome'),
-            'descrizione'=>$formCategoriaMod->getValue('descrizione'),
-            'immagine'=>$formCategoriaMod->getValue('immagine'),
+            'descrizione'=>$formCategoriaMod->getValue('descrizione')
                 );
+        $immagine = $formCategoriaMod->getValue('nuovaimmagine');
+        /* Se durante la modifica non è stata aggiunta un'immagine significa che si
+        * deve mantenere quella precedente */
+        if($immagine){
+            $values['immagine'] = $immagine;
+        }else{
+            $values['immagine'] = $formCategoriaMod->getValue('immagine');
+        }
         $idModifica = $formCategoriaMod->getValue('idModifica');
         $cancella = $formCategoriaMod->getValue('cancella');
         if($cancella)
@@ -222,60 +246,14 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('users' => $users));
     }
     
-    private function getUserModForm()
-    { 
-        $urlHelper = $this->_helper->getHelper('url');
-        $this->_formUserMod = new Application_Form_Admin_UserMod();
-        $this->_formUserMod->setAction($urlHelper->url(array(
-                        'controller' => 'admin',
-                        'action' => 'modificauser'),
-                        'default'
-                        ));
-        return $this->_formUserMod;
-    }
-    
-    public function formusermodAction()
+    public function cancellauserAction()
     {
         $idModifica = $_GET["chosen"];
-        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
-        if($query['telefono']=='0'){
-            $query['telefono']='';
-        }
-        $query['idModifica'] = $idModifica;
-        $this->_formUserMod->populate($query);       
-    }
-    
-    public function modificauserAction()
-    {
-        if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formusermod');
-        }
-        $formUserMod=$this->_formUserMod;
-        if (!$formUserMod->isValid($_POST)) {
-            return $this->render('formusermod');
-        }
-        $values = array(
-            'nome'=>$formUserMod->getValue('nome'),
-            'cognome'=>$formUserMod->getValue('cognome'),
-            'genere'=>$formUserMod->getValue('genere'),
-            'data_di_nascita'=>$formUserMod->getValue('data_di_nascita'),
-            'provincia'=>$formUserMod->getValue('provincia'),
-            'citta'=>$formUserMod->getValue('citta'),
-            'email'=>$formUserMod->getValue('email'),
-            'telefono'=>$formUserMod->getValue('telefono'),
-            'username'=>$formUserMod->getValue('username'),
-            'password'=>$formUserMod->getValue('password')
-                );
-        $idModifica = $formUserMod->getValue('idModifica');
-        $cancella = $formUserMod->getValue('cancella');
-        if($cancella)
+        if(!$idModifica)
         {
-            $this->_adminModel->delUtente($idModifica);
-            return $this->render('cancellauser');
+            $this->_helper->redirector('users', 'admin');
         }
-       	$this->_adminModel->modificaUtente($values, $idModifica);
-        $modificato=$this->_adminModel->getUtenteById($idModifica);
-        $this->view->assign(array('modificato'=>$modificato));   
+        $this->_adminModel->delUtente($idModifica);  
     }
     
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
@@ -287,6 +265,10 @@ class AdminController extends Zend_Controller_Action {
     public function formstaffmodAction()
     {
         $idModifica = $_GET["chosen"];
+        if(!$idModifica)
+        {
+            $this->_helper->redirector('staff', 'admin');
+        }
         $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formStaffMod->populate($query);       
@@ -325,7 +307,7 @@ class AdminController extends Zend_Controller_Action {
     public function registrastaffAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formstaff');
+            $this->_helper->redirector('formstaff', 'admin');
         }
 	$formStaff=$this->_formStaff;
         if (!$formStaff->isValid($_POST)) {
@@ -341,12 +323,14 @@ class AdminController extends Zend_Controller_Action {
         $values['data_registrazione']=date("Y-m-d H:i:s");
         $values['livello']='staff';
        	$this->_adminModel->registraStaff($values);
+        $aggiunto=$this->_adminModel->getUtenteByUsername($formStaff->getValue('username'));
+        $this->view->assign(array('aggiunto'=>$aggiunto));
     }
     
     public function modificastaffAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formstaffmod');
+            $this->_helper->redirector('formstaffmod', 'admin');
         }
         $formStaffMod=$this->_formStaffMod;
         if (!$formStaffMod->isValid($_POST)) {
@@ -387,6 +371,10 @@ class AdminController extends Zend_Controller_Action {
     public function formfaqmodAction()
     {
         $idModifica = $_GET["chosen"];
+        if(!$idModifica)
+        {
+            $this->_helper->redirector('faq', 'admin');
+        }
         $query = $this->_adminModel->getFaqById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formFaqMod->populate($query);
@@ -419,7 +407,7 @@ class AdminController extends Zend_Controller_Action {
     public function registrafaqAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','formfaq');
+            $this->_helper->redirector('formfaq', 'admin');
         }
 	$formFaq=$this->_formFaq;
         if (!$formFaq->isValid($_POST)) {
@@ -432,7 +420,7 @@ class AdminController extends Zend_Controller_Action {
     public function modificafaqAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('admin','forfaqmod');
+            $this->_helper->redirector('forfaqmod', 'admin');
         }
         $formFaqMod=$this->_formFaqMod;
         if (!$formFaqMod->isValid($_POST)) {

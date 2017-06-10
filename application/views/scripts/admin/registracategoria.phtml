@@ -2,6 +2,23 @@
     <br>
     <h3><b>Registrazione categoria avvenuta con successo!</b></h3>
     <br>
+    <table class="table table-condensed">
+            <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Descrizione</th><th>Immagine</th>
+            <?php
+                $aggiunta = $this->aggiunta;
+                if($aggiunta->immagine==null){
+                        $immagine = 'NON DISPONIBILE';
+                    }
+                    else{
+                        $immagine = $aggiunta->immagine;
+                    }
+                echo '<tr><td style="text-align:center;">' . $aggiunta->id . '</td>'
+                        . '<td>' . $aggiunta->nome . '</td>'
+                        . '<td>' . $aggiunta->descrizione . '</td>'
+                        . '<td>' . $immagine . '</td>';
+            ?>
+    </table>
+    <br>
     <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'formcategoria',

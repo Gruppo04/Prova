@@ -13,8 +13,8 @@
                                     'default',true); 
                         ?>" method="get">
         <table class="table table-condensed">
-            <tr><th style="text-align:center;">Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
-                <th>Tipologia</th><th>Immagine</th>
+            <tr><th style="text-align:center;">Seleziona</th><th style="text-align:center;">ID</th><th>Nome</th>
+                <th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th><th>Tipologia</th><th>Immagine</th>
             <?php
                 foreach ($this->aziende as $azienda){
                     if($azienda->immagine==null){
@@ -24,7 +24,7 @@
                         $immagine = $azienda->immagine;
                     }
                 echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $azienda->id . '"></td>'
-                        . '<td>' . $azienda->id . '</td>'
+                        . '<td style="text-align:center;">' . $azienda->id . '</td>'
                         . '<td>' . $azienda->nome . '</td>'
                         . '<td>' . $azienda->descrizione . '</td>'
                         . '<td>' . $azienda->ragione_sociale . '</td>'

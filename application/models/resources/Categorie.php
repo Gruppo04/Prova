@@ -22,6 +22,12 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
         return $this->fetchRow($select);        
     }
     
+    public function getCategoriaByNome($nome)
+    {
+        $select = $this->select()->where('nome = ?', $nome);
+        return $this->fetchRow($select);        
+    }
+    
     public function registraCategoria($info)
     {
         return $this ->insert($info);
