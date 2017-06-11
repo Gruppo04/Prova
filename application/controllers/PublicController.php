@@ -18,6 +18,15 @@ class PublicController extends Zend_Controller_Action
     
     public function indexAction()
     {
+        $categorie= $this->_guestModel->getCategorieByTot_Emissioni();
+        $aziende= $this->_guestModel->getAziendeByCoupon_Emessi();
+        $coupon=$this->_guestModel->getCouponByInizioV();
+        $coup=$this->_guestModel->getCouponByEmissioni();
+        $this->view->assign(array(
+                                'coupon' => $coupon,
+                                'coup'=> $coup,
+                                'aziende'=> $aziende,
+                                'categorie'=>$categorie));
     }
     
     public function aziendeAction()
@@ -26,10 +35,23 @@ class PublicController extends Zend_Controller_Action
         $this->view->assign(array('aziende' => $az));
     }
     
+    public function aziendaAction()
+    {
+        $id = $this->getParam('selAzienda');
+        $azienda=$this->_guestModel->getAziendaById($id);
+        $this->view->assign(array('azienda' => $azienda));
+    }
+    
     public function categorieAction()
     {
         $cat=$this->_guestModel->getCategorie();
         $this->view->assign(array('categorie' => $cat));
+    }
+    public function categoriaAction()
+    {
+        $id = $this->getParam('selCat');
+        $categoria=$this->_guestModel->getCategoriaById($id);
+        $this->view->assign(array('categoria' => $categoria));
     }
     
     public function faqAction() 

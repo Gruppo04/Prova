@@ -15,7 +15,13 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
         $select = $this->select();
         return $this ->fetchAll($select);
     }
-        
+    
+    public function getCategorieByTot_Emissioni()
+    {
+        $select = $this->select()->order('tot_emissioni DESC');
+        return $this ->fetchAll($select);        
+    }
+    
     public function getCategoriaById($id)
     {
         $select = $this->select()->where('id = ?', $id);

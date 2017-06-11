@@ -1,0 +1,22 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Pagina dell'Azienda</h1>
+    <p>Breve descrizione dell'azienda
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+    <div class="row">
+        <?php $azienda=$this->azienda  ?>
+            <div class="col-md-12">
+                <?php echo '<h2>' . $azienda->nome . '</h2>';
+                echo $this->generalImg($azienda->immagine,'aziende/' ,array('class' => 'imagefrm'));
+                echo '<p>' . $azienda->descrizione . '</p>'; ?>
+                <p><a class="btn btn-default" href='this' role="button">Mostra i coupon dell'azienda &raquo;</a></p> 
+            </div>
+	</div>
+  <hr>
+</div>

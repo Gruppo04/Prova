@@ -1,12 +1,18 @@
 <div class="container">
     <br>
-    <h5>Registrazione avvenuta con successo!</h5>
+    <h3><b>Registrazione avvenuta con successo!</b></h3>
     <br>
-    <a href=" <?= $this->url(array(
+    <a class="btn btn-primary" href=" <?= $this->url(array(
                                     'controller' => 'public',
                                     'action'     => 'index',
                                     ), 
                                     'default',true); 
                                     ?>">Torna alla homepage</a>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'login',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Vai alla pagina di login</a>
 </div>
 

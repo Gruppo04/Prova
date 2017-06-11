@@ -16,6 +16,12 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
         return $this ->fetchAll($select);        
     }
     
+    public function getAziendeByCoupon_Emessi()
+    {
+        $select = $this->select()->order('coupon_emessi DESC');
+        return $this ->fetchAll($select);        
+    }
+    
     public function getAziendaById($id)
     {
         $select = $this->select()->where('id = ?', $id);

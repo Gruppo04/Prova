@@ -10,17 +10,17 @@ class Application_Service_Auth
         $this->_guestModel = new Application_Model_Guest();
     }
     
-    public function authenticate($credenziali)
+    public function authenticate($credentials)
     {
-        $adapter = $this->getAuthAdapter($credenziali);
+        $adapter = $this->getAuthAdapter($credentials);
         $auth    = $this->getAuth();
         $result  = $auth->authenticate($adapter);
 
         if (!$result->isValid()) {
             return false;
         }
-        $utente = $this->_guestModel->getUtenteByUsername($credenziali['username']);
-        $auth->getStorage()->write($utente);
+        $user = $this->_guestModel->getUtenteByUsername($credentials['username']);
+        $auth->getStorage()->write($user);
         return true;
     }
     

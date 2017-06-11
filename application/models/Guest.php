@@ -11,9 +11,44 @@ class Application_Model_Guest extends App_Model_Abstract
         return $this->getResource('Categorie')->getCategorie();
     }
     
+    public function getCategoriaById($id)
+    {
+        return $this->getResource('Categorie')->getCategoriaById($id);
+    }
+    
+    public function getCategorieByTot_Emissioni()
+    {
+        return $this->getResource('Categorie')->getCategorieByTot_Emissioni();
+    }
+    
     public function getAziende()
     {
         return $this->getResource('Aziende')->getAziende();
+    }
+    
+    public function getAziendaById($id)
+    {
+        return $this->getResource('Aziende')->getAziendaById($id);
+    }
+    
+    public function getAziendeByCoupon_Emessi()
+    {
+        return $this->getResource('Aziende')->getAziendeByCoupon_Emessi();
+    }
+    
+    public function getCoupon()
+    {
+        return $this->getResource('Coupon')->getCoupon();
+    }
+    
+    public function getCouponByInizioV()
+    {
+        return $this->getResource('Coupon')->getCouponByInizioV();    
+    }
+    
+     public function getCouponByEmissioni()
+    {
+        return $this->getResource('Coupon')->getCouponByEmissioni();    
     }
     
     public function getFaq()
