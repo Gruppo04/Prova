@@ -56,6 +56,16 @@ class Application_Model_Guest extends App_Model_Abstract
         return $this->getResource('Coupon')->getCouponById($id);
     }
     
+    public function getCouponByAzienda($id) 
+    {
+        return $this->getResource('Coupon')->getCouponByAzienda($id);
+    }
+    
+    public function getCouponByCategoria($id) 
+    {
+        return $this->getResource('Coupon')->getCouponByCategoria($id);
+    }
+    
     public function getFaq()
     {
         return $this->getResource('Faq')->getFaq();

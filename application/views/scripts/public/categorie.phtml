@@ -1,6 +1,6 @@
 
  <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    <div class="jumbo2">
       <div class="container">
         <h1>Pagina delle Categorie</h1>
         <p>Bla bla bla bla bla bla...
@@ -15,8 +15,13 @@
                 <div class="col-md-4">
                     <?php echo '<h2>' . $categoria->nome . '</h2>';
                     echo $this->generalImg($categoria->immagine, 'categorie/' ,array('class' => 'imagefrm'));
-                    echo '<p>' . $categoria->descrizione . '</p>'; ?>
-                    <p><a class="btn btn-default" href="categorie.html" role="button">Vedi i dettagli &raquo;</a></p> 
+                    echo '<p>' . $categoria->descrizione . '</p>';
+                    echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'categoria',
+                                        'selCat' => $categoria->id), 
+                                        'default',true).'>
+                                         Vedi i dettagli &raquo;</a></p>'; ?>
                 </div>
             <?php endforeach ?>
           <p>Qualche frase di scena con i brand all'ultima moda</p>

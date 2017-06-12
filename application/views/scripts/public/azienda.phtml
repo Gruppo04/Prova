@@ -1,22 +1,26 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <h1>Pagina dell'Azienda</h1>
-    <p>Breve descrizione dell'azienda
-    </p>
-  </div>
+<div class="jumbo">
+    <div class="col-lg-12">
+    <?php $azienda=$this->azienda;
+          echo '<p class="col-md-5">'.$this->generalImg($azienda->immagine,'aziende/' ,array('class' => 'img-circle')).'</p>';
+          echo '<p class="col-md-7"> '
+                .'<h2>' . $azienda->nome . '</h2>'.
+                 '<p>' . $azienda->descrizione . '</p>'.'</p>';?>   
+    </div>
 </div>
 
 <div class="container">
   <!-- Example row of columns -->
     <div class="row">
-        <?php $azienda=$this->azienda  ?>
-            <div class="col-md-12">
-                <?php echo '<h2>' . $azienda->nome . '</h2>';
-                echo $this->generalImg($azienda->immagine,'aziende/' ,array('class' => 'imagefrm'));
-                echo '<p>' . $azienda->descrizione . '</p>'; ?>
-                <p><a class="btn btn-default" href='this' role="button">Mostra i coupon dell'azienda &raquo;</a></p> 
-            </div>
-	</div>
+    <h3>Ecco tutti i coupon della azienda </h3>
+            
+                
+                 <?php foreach ($this->coupon as $coupon) {
+                    echo'<div class="col-md-4 style="padding-top:20px;">';
+                    echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                    echo '<h4>' .$coupon ->descrizione .' </h4>';
+                     echo'</div>';}?>
+            
+  </div>
   <hr>
 </div>

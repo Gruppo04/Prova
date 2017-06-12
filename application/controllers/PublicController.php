@@ -39,19 +39,23 @@ class PublicController extends Zend_Controller_Action
     {
         $id = $this->getParam('selAzienda');
         $azienda=$this->_guestModel->getAziendaById($id);
-        $this->view->assign(array('azienda' => $azienda));
+        $coupon= $this->_guestModel->getCouponByAzienda($id);
+        $this->view->assign(array('azienda' => $azienda,
+                                  'coupon' => $coupon));
     }
     
     public function categorieAction()
     {
-        $cat=$this->_guestModel->getCategorie();
-        $this->view->assign(array('categorie' => $cat));
+        $categorie=$this->_guestModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie)); 
     }
     public function categoriaAction()
     {
-        $id = $this->getParam('selCat');
+        $id = $this->getParam('selCategoria');
         $categoria=$this->_guestModel->getCategoriaById($id);
-        $this->view->assign(array('categoria' => $categoria));
+        $coupon= $this->_guestModel->getCouponByCategoria($id);
+        $this->view->assign(array('categoria' => $categoria,
+                                  'coupon'=>$coupon));
     }
     
     public function faqAction() 
@@ -147,9 +151,10 @@ class PublicController extends Zend_Controller_Action
     { 
         $textbox = $_POST['testo']; //textbox
         $filtro = $_POST['filtro']; //filtro di ricerca:categoria/coupon/entrambe
-        //$query = "SELECT * from coupon where categorie.nome like $value1 OR categorie.descrizione like $value1";
-        //print_r($_POST);
-
+        if($textbox=='')
+        {
+            return;
+        }
         switch($filtro)
         {                 
             case 'categoria':

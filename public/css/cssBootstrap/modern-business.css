@@ -8,6 +8,7 @@
 
 html,
 body {
+    padding-top: 20px;
     height: 100%;
 }
 
@@ -22,11 +23,35 @@ body {
 .imagefrm {
     width:300px; 
     height:150px;
+    padding-top:20px;
 }
 
 .miaclasse{
     width:1280px;
     height:400px !important;
+}
+
+.img-circle{
+    
+   
+    height:60%;
+    width:70%;
+    margin-left: 90px;
+
+}
+
+div.jumbo{
+    padding:30px 80px 200px 80px;
+    background-color: #87b8dd;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+}
+
+div.jumbo2{
+
+    background-color: #9ebbd1;
+    color: #fff;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
 }
 
 /* Home Page Carousel */

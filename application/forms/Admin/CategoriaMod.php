@@ -51,7 +51,8 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella categoria',
-            'class' => 'btn btn-primary'));
+            'class' => 'btn btn-primary',
+            'style' => 'position: relative; left: 150px; bottom: 54px'));
     }
 
 }

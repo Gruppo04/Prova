@@ -1,13 +1,23 @@
 <div class="container">
-    <br><br>
-    <a class="btn btn-primary" href="<?= $this->url(array(
-                                    'controller' => 'staff',
-                                    'action'     => 'strumenti',
-                                    ), 
-                                    'default',true); 
-                                    ?>">< Strumenti</a><br>
-    <h3><b>Aggiungi promozione</b></h3>
-    <?= $this->couponForm; ?>
     <br>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><b>Aggiungi promozione</b></h3>
+            </div>
+            <div class="panel-body">
+                <div role="form">
+                    <?= $this->couponForm; ?>
+                    <a class="btn btn-primary" style="position: relative; left: 175px; bottom: 54px"
+                       href="<?= $this->url(array(
+                                                    'controller' => 'staff',
+                                                    'action'     => 'strumenti',
+                                                    ), 
+                                                    'default',true); 
+                                                    ?>">Annulla</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

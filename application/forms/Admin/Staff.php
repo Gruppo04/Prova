@@ -57,7 +57,7 @@ class Application_Form_Admin_Staff extends Zend_Form
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(array(
-                'StringLength', true, array(6,25)))));
+                'StringLength', true, array(4,25)))));
         
         $this->addElement('password', 'verificapassword', array(
                 'label'      => 'Conferma password',

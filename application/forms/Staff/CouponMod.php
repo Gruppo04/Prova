@@ -92,7 +92,8 @@ class Application_Form_Staff_CouponMod extends Zend_Form
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella promozione',
-            'class' => 'btn btn-primary'));
+            'class' => 'btn btn-primary',
+            'style' => 'position: relative; left: 153px; bottom: 54px'));
     }
 
 }

@@ -1,13 +1,23 @@
 <div class="container">
-    <br><br>
-    <a class="btn btn-primary" href="<?= $this->url(array(
-                                    'controller' => 'admin',
-                                    'action'     => 'aziende',
-                                    ), 
-                                    'default',true); 
-                                    ?>">< Aziende</a><br>
-    <h3><b>Modifica azienda</b></h3>
-    <?= $this->aziendaModForm; ?>
     <br>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3><b>Modifica azienda</b></h3>
+            </div>
+            <div class="panel-body">
+                <div role="form">
+                    <?= $this->aziendaModForm; ?>
+                    <a class="btn btn-primary" style="position: relative; left: 300px; bottom: 108px"
+                       href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'aziende',
+                                        ), 
+                                        'default',true); 
+                                        ?>">Annulla</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

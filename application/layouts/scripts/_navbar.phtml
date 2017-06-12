@@ -1,6 +1,6 @@
 
     <!-- Nav -->
-    <nav class="navbar-default" role="navigation">
+    <nav class="navbar-default navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Logo e toggle x mobile -->
             <div class="navbar-header">
@@ -29,13 +29,6 @@
                                     ?>">Home</a>
                     </li>
                     <li>
-                        <a href=" <?= $this->url(array(
-                                    'controller' => 'public',
-                                    'action'     => 'faq'),
-                                    'default',true);
-                                    ?>">FAQ</a>
-                    </li>
-                    <li>
                         <a href="<?= $this->url(array(
                                     'controller' => 'public',
                                     'action'     => 'aziende'), 
@@ -50,23 +43,29 @@
                                     ?>" class="dropdown-toggle" >Categorie <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>                             
-                                <?php  
-                                  
+                                <?php
                                 $guestModel = new Application_Model_Guest();
-                                $categorie = $guestModel->getCategorie();  
-
-                                foreach ($categorie as $cat)
+                                $categorie = $guestModel->getCategorie();
+                                foreach ($categorie as $categoria)
                                 {
                                     echo '<li>';
-                                    echo '<a href='.$this->url(array(
+                                    echo '<a href='. $this->url(array(
                                         'controller' => 'public',
-                                        'action' => 'categoria'),
-                                        'default',true)
-                                    .'>'.$cat->nome.'</a>';
-                                    echo '</li>';      }                         
-                                    ?>                             
+                                        'action' => 'categoria',
+                                        'selCategoria' => $categoria->id),
+                                        'default', true)
+                                    .'>'. $categoria->nome .'</a>';
+                                    echo '</li>';
+                                }?>                             
                             </li>                       
                         </ul>
+                    </li>
+                    <li>
+                        <a href=" <?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'faq'),
+                                    'default',true);
+                                    ?>">FAQ</a>
                     </li>
                     <?php
                         switch ($this->authInfo('livello')){

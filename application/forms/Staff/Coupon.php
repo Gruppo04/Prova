@@ -82,10 +82,6 @@ class Application_Form_Staff_Coupon extends Zend_Form
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
-        $this->addElement('hidden', 'idModifica',array(
-            'required' => true
-        ));
-        
         $this->addElement('submit', 'modifica', array(
             'label' => 'Aggiungi promozione',
             'class' => 'btn btn-primary'));
