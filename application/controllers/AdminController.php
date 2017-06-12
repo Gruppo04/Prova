@@ -57,6 +57,8 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('aziende', 'admin');
         }
         $query = $this->_adminModel->getAziendaById($idModifica)->toArray();
+        $identity = Zend_Auth::getInstance()->getIdentity();
+        $ciao = Zend_Auth::getInstance()->getStorage();
         $query['idModifica'] = $idModifica;
         $this->_formAziendaMod->populate($query);        
     }
