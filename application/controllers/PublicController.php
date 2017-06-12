@@ -139,6 +139,36 @@ class PublicController extends Zend_Controller_Action
             return $this->render('login');
         }
         $livello = $this->_authService->getIdentity()->livello;
-        return $this->_helper->redirector('index', $livello);
+        return $this->_helper->redirector('index', $this->_authService->getIdentity()->livello);
+    }
+    
+    public function ricercaAction()
+    { 
+        $textbox = $_POST['testo']; //textbox
+        $filtro = $_POST['filtro']; //filtro di ricerca:categoria/coupon/entrambe
+        //$query = "SELECT * from coupon where categorie.nome like $value1 OR categorie.descrizione like $value1";
+        //print_r($_POST);
+
+        switch($filtro)
+        {                 
+            case 'categoria':
+                $risultati = $this->_guestModel->getRicercaByCat($textbox);
+                $this->view->assign(array('risultati'=>$risultati));
+                break;
+
+            case 'coupon':
+                $risultati = $this->_guestModel->getRicercaByCoupon($textbox);
+                $this->view->assign(array('risultati'=>$risultati));
+                break;
+
+            default:
+                $risultati = array();
+                $risultati['categoria']=$this->_guestModel->getRicercaByCat($textbox);
+                $risultati['coupon'] = $this->_guestModel->getRicercaByCoupon($textbox);
+                $this->view->assign(array(
+                                   'risultati1' => $risultati['categoria'],
+                                   'risultati2'  => $risultati['coupon']));
+                break;
+        }
     }
 }

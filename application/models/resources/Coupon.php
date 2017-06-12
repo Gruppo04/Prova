@@ -50,4 +50,10 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
         return $this->delete($where);
     }
     
+    public function getRicercaByCoupon($textbox)
+    {
+       $select = $this->select()->where('nome = ?',$textbox);
+       return $this ->fetchAll($select);
+    }
+    
 }

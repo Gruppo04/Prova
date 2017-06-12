@@ -66,4 +66,16 @@ class Application_Model_Guest extends App_Model_Abstract
     	return $this->getResource('Utenti')->getUtenteByUsername($info);
     }
     
+    public function getRicercaByCat($textbox)
+    {
+        return $this->getResource('Categorie')->getRicercaByCat($textbox);
+        //$this->getResource('Categorie')->getRicerca();
+    }
+
+    public function getRicercaByCoupon($textbox)
+    {
+        return $this->getResource('Coupon')->getRicercaByCoupon($textbox);
+        //return $this->getResource('Categorie')->getRicercaByCat($value1);
+    }
+    
 }

@@ -1,27 +1,31 @@
-<div>
+<div class="container">
     <br><br>
-    <ul>
-        <fieldset>
-            <legend>Gestione profilo</legend>
-            <li>Modifica dati personali</li>
-            <li>Modifica password</li>
-        </fieldset>
-        <br><br>
-        <fieldset>
-            <legend>Gestione promozioni</legend>
+    <div class="row">
+        <div class="col-md-6">
+            <ul style="list-style-type:none">
+                <h2>Gestione profilo</h2>
+                <li><h4>Modifica dati personali</h4></li>
+                <li><h4>Modifica password</h4></li>
+            </ul>
+        </div>
+        <div class="col-md-6">
+            <ul style="list-style-type:none">
+            <h2>Gestione promozioni</h2>
             <li><a href="<?= $this->url(array(
                                     'controller' => 'staff',
                                     'action'     => 'formcoupon',
                                     ), 
                                     'default',true); 
-                        ?>">Inserisci coupon</a></li>
+                        ?>"><h4>Inserisci coupon</h4></a></li>
             <li><a href="<?= $this->url(array(
                                     'controller' => 'staff',
                                     'action'     => 'coupon',
                                     ), 
                                     'default',true); 
-                        ?>">Modifica/cancella coupon</a></li>
-        </fieldset>
-    </ul>
+                        ?>"><h4>Modifica/cancella coupon</h4></a></li>
+            </ul>
+        </div>
+    </div>
 </div>
+<br><br>
 

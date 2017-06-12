@@ -1,4 +1,3 @@
-
     <!-- Nav -->
     <nav class="navbar-default" role="navigation">
         <div class="container">
@@ -47,10 +46,14 @@
                                     'controller' => 'public',
                                     'action'     => 'categorie'), 
                                     'default',true); 
-                                    ?>" class="dropdown-toggle" >Categorie <b class="caret"></b></a>
+                                    ?>" class="dropdown-toggle" data-toggle="dropdown">Categorie <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="#">Elettronica</a>
+                                <a href="<?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'categorie'), 
+                                    'default',true); 
+                                    ?>">Elettronica</a>
                             </li>
                             <li>
                                 <a href="#">Informatica</a>
@@ -58,23 +61,12 @@
                             <li>
                                 <a href="#">Abbigliamento</a>
                             </li>
-                            <li>                             
-                                <?php  
-                                  
-                                $guestModel = new Application_Model_Guest();
-                                $categorie = $guestModel->getCategorie();  
-
-                                foreach ($categorie as $cat)
-                                {
-                                    echo '<li>';
-                                    echo '<a href='.$this->url(array(
-                                        'controller' => 'public',
-                                        'action' => 'categoria'),
-                                        'default',true)
-                                    .'>'.$cat->nome.'</a>';
-                                    echo '</li>';      }                         
-                                    ?>                             
-                            </li>                       
+                            <li>
+                                <a href="#">Sport</a>
+                            </li>
+                            <li>
+                                <a href="#">Per la casa</a>
+                            </li>
                         </ul>
                     </li>
                     <?php
@@ -82,10 +74,10 @@
                             case 'user':?>
                             <li>
                                 <a href="<?= $this->url(array(
-                                    'controller' => 'user',
-                                    'action'     => 'profilo'), 
-                                    'default',true); 
-                                    ?>">Gestione Profilo</a>
+                                            'controller' => 'user',
+                                            'action'     => 'profilo'), 
+                                            'default',true); 
+                                            ?>">Gestione Profilo</a>
                             </li>
                             <li>
                                 <a href="<?= $this->url(array(
@@ -99,10 +91,10 @@
                             case 'staff':?>
                             <li>
                                 <a href="<?= $this->url(array(
-                                    'controller' => 'staff',
-                                    'action'     => 'strumenti'), 
-                                    'default',true); 
-                                    ?>">Strumenti Staff</a>
+                                        'controller' => 'staff',
+                                        'action'     => 'strumenti'), 
+                                        'default',true); 
+                                        ?>">Strumenti Staff</a>
                             </li>
                             <li>
                                 <a href="<?= $this->url(array(
@@ -149,36 +141,12 @@
                             break;
                             }?>
                 </ul>
-
-                <!--INIZIO BARRA DI RICERCA -->
-                <form method="post" action="<?= $this->url(array(
-                                        'controller' => 'public',
-                                        'action'     => 'ricerca'), 
-                                        'default',true); 
-                                        ?>">
-                <div class="input-group" style="padding-top:8px; margin-bottom:10px;" >
-                    <div class="input-group-btn search-panel">
-
-                    <select name="filtro" class="form-control" style="width:150px;">
-                        <option value="entrambe">>>Entrambe</option>
-                        <option value="categoria">>>Categoria</option>
-                        <option value="coupon">>>Coupon</option>  
-                    </select>
-
-                    </div>
-
-                   <!--<input type="hidden" name="search_param" value="name" id="search_param"> -->        
-                    <input type="text" class="form-control" name="testo" placeholder="Sconto nike, Unieuro coupon 2017.." id="search_key" value="">
-                    <span class="input-group-btn">
-                            <!--<a class="btn btn-default text-muted" href="" title="Clear"><i class="glyphicon glyphicon-remove"></i> </a>-->
-                            <button class="btn btn-info" type="submit">  Cerca!  </button> 
-                           <!-- <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </span>
-                </div>-->
-                </form>
-                   <!--FINE BARRA DI RICERCA 
-
-
+                      <form class="navbar-form navbar-right" role="search">
+                        <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Cerca coupon">
+                        </div>
+                        <button type="submit" class="btn btn-default">Cerca</button>
+                      </form>
             </div>
             <!-- /.navbar-collapse -->
         </div>

@@ -50,4 +50,10 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('id = ?', $id);
         return $this->delete($where);
     }
+    
+    public function getRicercaByCat($textbox)
+    {
+       $select = $this->select()->where('nome = ?',$textbox);
+       return $this ->fetchAll($select);
+    }
 }
