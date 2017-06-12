@@ -53,7 +53,8 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
     
     public function getRicercaByCat($textbox)
     {
-       $select = $this->select()->where('nome = ?',$textbox);
+       $select = $this->select()->where('descrizione LIKE ?',$textbox.'%')
+                                ->ORwhere('nome LIKE ?', '%'.$textbox.'%');
        return $this ->fetchAll($select);
     }
 }

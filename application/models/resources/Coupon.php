@@ -52,7 +52,8 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
     
     public function getRicercaByCoupon($textbox)
     {
-       $select = $this->select()->where('nome = ?',$textbox);
+       $select = $this->select()->where('descrizione LIKE ?','%'.$textbox.'%')
+                                ->ORwhere('nome LIKE ?', '%'.$textbox.'%');
        return $this ->fetchAll($select);
     }
     

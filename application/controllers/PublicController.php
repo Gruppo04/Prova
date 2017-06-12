@@ -60,10 +60,11 @@ class PublicController extends Zend_Controller_Action
         $this->view->assign(array('faq'=> $faq));
     }
     
-    public function viewstaticAction()
+    public function couponAction()
     {
-    	$page = $this->_getParam('staticPage');
-    	$this->render($page);
+        $id= $this->getParam('selCoupon');
+        $coupon=$this->_guestModel->getCouponById($id);
+        $this->view->assign(array('coupon' => $coupon));
     }
     
     public function loginAction()

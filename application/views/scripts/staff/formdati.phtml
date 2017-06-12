@@ -1,9 +1,9 @@
 <div class="container" style="text-align: center">
-    <h3>Modifica password</h3>
-    <?= $this->passwordForm; ?>
+    <h3>Modifica dati personali</h3>
+    <?= $this->datiForm; ?>
     <a class="btn btn-primary" href=" <?= $this->url(array(
-                                    'controller' => 'user',
-                                    'action'     => 'profilo',
+                                    'controller' => 'staff',
+                                    'action'     => 'strumenti',
                                     ), 
                                     'default',true); 
                                     ?>">Annulla</a>

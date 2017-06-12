@@ -1,0 +1,39 @@
+<div class="container">
+    <br>
+    <h3><b>Modifica avvenuta con successo!</b></h3>
+    <br>
+    <table class="table table-condensed">
+                <tr><th>Nome</th><th>Cognome</th><th>Data di nascita</th><th>Genere</th><th>Provincia</th><th>Comune</th>
+                    <th>e-mail</th><th>Telefono</th><th>Username</th></tr>
+                <?php
+                $dati = $this->modificato;
+                if($dati->telefono==null){
+                            $telefono = 'NON DISPONIBILE';
+                }
+                echo '<tr><td>' . $dati->nome . '</td>'
+                        . '<td>' . $dati->cognome . '</td>'
+                        . '<td>' . $dati->data_di_nascita . '</td>'
+                        . '<td>' . $dati->genere . '</td>'
+                        . '<td>' . $dati->provincia . '</td>'
+                        . '<td>' . $dati->citta . '</td>'
+                        . '<td>' . $dati->email . '</td>'
+                        . '<td>' . $telefono . '</td>'
+                        . '<td>' . $dati->username . '</td>';
+                ?>
+    </table>
+    <br>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'user',
+                                    'action'     => 'profilo',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna al tuo profilo</a>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla homepage</a>
+</div>
+
+

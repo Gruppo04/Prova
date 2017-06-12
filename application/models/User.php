@@ -7,9 +7,14 @@ class Application_Model_User extends App_Model_Abstract
     {
     }
     
-    public function modificaPassword($values)
+    public function modificaDati($values, $id)
     {
-        return $this->getResource('Utenti')->modificaPassword($values);
+        return $this->getResource('Utenti')->modificaDati($values, $id);
+    }
+    
+    public function modificaPassword($values, $id)
+    {
+        return $this->getResource('Utenti')->modificaPassword($values, $id);
     }
     
 }

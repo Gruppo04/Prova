@@ -8,11 +8,8 @@
             <?php
                 $modificata = $this->modificata;
                 if($modificata->immagine==null){
-                        $immagine = 'NON DISPONIBILE';
-                    }
-                    else{
-                        $immagine = $modificata->immagine;
-                    }
+                    $immagine = 'NON DISPONIBILE';
+                }
                 echo '<tr><td style="text-align:center;">' . $modificata->id . '</td>'
                         . '<td>' . $modificata->nome . '</td>'
                         . '<td>' . $modificata->descrizione . '</td>'

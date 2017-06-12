@@ -1,0 +1,22 @@
+<!-- Main jumbotron for a primary marketing message or call to action -->
+<div class="jumbotron">
+  <div class="container">
+    <h1>Pagina del coupon</h1>
+    <p>Breve descrizione del prodotto
+    </p>
+  </div>
+</div>
+
+<div class="container">
+  <!-- Example row of columns -->
+    <div class="row">
+        <?php $coupon=$this->coupon  ?>
+            <div class="col-md-12">
+                <?php echo '<h2>' . $coupon->nome . '</h2>';
+                echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                echo '<p>' . $coupon->descrizione . '</p>'; ?>
+                <p><a class="btn btn-default" href='this' role="button">Stampa</a></p> 
+            </div>
+	</div>
+  <hr>
+</div>

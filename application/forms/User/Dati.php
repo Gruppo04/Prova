@@ -74,10 +74,6 @@ class Application_Form_User_Dati extends Zend_Form
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
         
-        $this->addElement('hidden', 'idModifica',array(
-            'required' => true
-        ));
-        
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',
             'class' => 'btn btn-primary'));

@@ -5,17 +5,27 @@ class StaffController extends Zend_Controller_Action
     protected $_authService;
     protected $_staffModel;
     protected $_adminModel;
+    protected $_userModel;
     protected $_formCoupon;
     protected $_formCouponMod;
+    protected $_formPassword;
+    protected $_formDati;
+    protected $_auth;
 
     public function init()
     {
         $this->_helper->layout->setLayout('main');
+        $this->_auth = Zend_Auth::getInstance();
 	$this->_authService = new Application_Service_Auth();
         $this->_staffModel = new Application_Model_Staff();
         $this->_adminModel = new Application_Model_Admin();
+        $this->_userModel = new Application_Model_User();
+        $this->_formDati = new Application_Form_Staff_Dati();
+        $this->_formPassword = new Application_Form_Staff_Password();
         $this->view->couponForm = $this->getCouponForm();
         $this->view->couponModForm = $this->getCouponModForm();
+        $this->view->datiForm = $this->getDatiForm();
+        $this->view->passwordForm = $this->getPasswordForm();
     }
 
     public function indexAction()
@@ -132,5 +142,73 @@ class StaffController extends Zend_Controller_Action
         return $this->_formCouponMod;
     }
     
+    public function formdatiAction()
+    {
+        $idModifica = $this->_auth->getIdentity()->id;
+        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formDati->populate($query);       
+    }
+    
+    public function formpasswordAction()
+    {
+    }
+    
+    public function modificadatiAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('formdati','staff');
+        }
+        $formDati=$this->_formDati;
+        if (!$formDati->isValid($_POST)) {
+            return $this->render('formdati');
+        }
+        $values = $formDati->getValues();
+        $idModifica = $this->_auth->getIdentity()->id;
+       	$this->_userModel->modificaDati($values, $idModifica);
+        $modificato=$this->_adminModel->getUtenteById($idModifica);
+        $this->view->assign(array('modificato'=>$modificato));
+    }
+    
+    public function passwordAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('formpassword','staff');
+        }
+	$formPassword=$this->_formPassword;
+        if (!$formPassword->isValid($_POST)) {
+            return $this->render('formpassword');
+        }
+        $oldPass = $formPassword->getValue('old_password');
+        $newPass = $formPassword->getValue('password');
+        $idModifica = $this->_auth->getIdentity()->id;
+//        if ($values['old_password']!= $idModifica) {
+//            $this->_helper->redirector('formpassword','user');
+//        }
+       	$this->_userModel->modificaPassword($newPass, $idModifica);
+    }
+    
+    private function getDatiForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formDati->setAction($urlHelper->url(array(
+                        'controller' => 'staff',
+                        'action' => 'modificadati'),
+                        'default'
+                        ));
+        return $this->_formDati;
+    }
+    
+    
+    private function getPasswordForm()
+    {
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formPassword->setAction($urlHelper->url(array(
+                        'controller' => 'staff',
+                        'action' => 'password'),
+                        'default'
+                        ));
+        return $this->_formPassword;
+    }
 }
 

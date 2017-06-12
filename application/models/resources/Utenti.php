@@ -20,15 +20,21 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         $select = $this->select()->where('livello = ?', 'user')->order('id');
         return $this->fetchAll($select);
     }
+        
+    public function getStaff()
+    {
+        $select = $this->select()->where('livello = ?', 'staff')->order('id');
+        return $this->fetchAll($select);
+    }
     
     public function registraStaff($info)
     {
         return $this->insert($info);
     }
     
-    public function getUtenteByUsername($username)
+    public function getUtenteByUsername($info)
     {
-        $select = $this->select()->where('username = ?', $username);
+        $select = $this->select()->where('username = ?', $info);
         return $this->fetchRow($select);
     }
     
@@ -44,22 +50,15 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         return $this->delete($where);
     }
     
-    public function modificaUtente($info, $id)
+    public function modificaDati($info, $id)
     {
         $where = $this->getAdapter()->quoteInto('id = ?', $id);
         return $this->update($info, $where);
     }
     
-    public function getStaff()
+    public function modificaPassword($info, $id)
     {
-        $select = $this->select()->where('livello = ?', 'staff')->order('id');
-        return $this->fetchAll($select);
-    }
-    
-    public function modificaPassword($values)
-    {
-        //$select = $this->select()->where('password = ?', $password);
-        //$select = 'SELECT password FROM utenti WHERE password = ' . $values['password'];
-        //$this->fetchOne($select);
+        $where = $this->select()->where('id = ?', $id);
+        return $this->update($info, $where);
     }
 }

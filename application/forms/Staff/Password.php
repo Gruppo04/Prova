@@ -1,8 +1,7 @@
 <?php
 
-class Application_Form_User_Password extends Zend_Form
+class Application_Form_Staff_Password extends Zend_Form
 {
-    
     public function init() {
         
         $this->setMethod('post');

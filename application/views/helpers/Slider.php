@@ -1,14 +1,12 @@
 <?php
 class Zend_View_Helper_Slider extends Zend_View_Helper_Abstract
 {
-    private $percorso;
-    private $oggi; 
-    //private $diff;
+    private $oggi;
     
     public function slider($validita, $imageFile)
     {
         if(is_int($validita)===true){
-            $this->percorso=$imageFile;
+            $percorso=$imageFile;
         }else{
             $anno= substr($validita,0,4);
             $anno=(int)$anno;
@@ -16,16 +14,15 @@ class Zend_View_Helper_Slider extends Zend_View_Helper_Abstract
             $mese=(int)$mese;
             $giorno= substr($validita,8,2);
             $giorno=(int)$giorno;
-            $oggi= getdate();
-            if($anno < ($this->oggi['year']) || $mese < ($this->oggi['mon']) || $giorno < ($this->oggi['mday']))
+            $this->oggi= getdate();
+            if(($anno<$this->oggi['year']) || ($anno===$this->oggi['year'] && $mese<=$this->oggi['mon'] || $giorno<=$this->oggi['mday']))
             {
-                $this->percorso=$imageFile;
+                $percorso=$imageFile;
             }else{
-                $this->percorso=false;
+                $percorso=false;
             }
         }
-        return $this->percorso;
-            
+        return $percorso;
     }
 }
 

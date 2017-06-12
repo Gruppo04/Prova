@@ -8,23 +8,24 @@
     
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
-        <?php $count=0;?>
-        <?php foreach($this->coupon as $coupon) :?>
-        <?php $variab=$this->Slider($coupon->inizio_validita,$coupon->immagine);
+        <?php $count=0;
+        foreach($this->coupon as $coupon){
+        $variab = $this->Slider($coupon->inizio_validita, $coupon->immagine);
             if($variab!==false && $count<3){
-            echo '<a id="oggetto" class="item" href='.$this->url(array(
-                                    'controller' => 'public',
-                                    'action'     => 'coupon',
-                                    'selCoupon' => $coupon->id), 
-                                    'default',true).'>';
-            echo "<script>";
-            echo "$('#oggetto').removeClass('item');";
-            echo "$('#oggetto').addClass('item active');"; 
-            echo "</script>"; 
-            echo $this->generalImg($variab,'coupon/',array('class'=>'fill'));
-                 $count++;
-            echo '</a>'; } ?>
-        <?php endforeach ?>
+                echo '<a id="oggetto" class="item" href='.$this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'coupon',
+                                        'selCoupon' => $coupon->id), 
+                                        'default',true).'>';
+                echo "<script>";
+                echo "$('#oggetto').removeClass('item');";
+                echo "$('#oggetto').addClass('item active');"; 
+                echo "</script>"; 
+                echo $this->generalImg($variab,'coupon/',array('class'=>'fill'));
+                     $count++;
+                echo '</a>';
+            }
+        } ?>
     </div>
 
     <!-- Controls -->
@@ -43,10 +44,8 @@
 
     <!-- Marketing Icons Section -->
     <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Benvenuto in Coupon is Life!</h1>
-        </div>
         <div id="par" class="col-md-8">
+            <h1 class="page-header">Benvenuto in Coupon is Life!</h1><br>
             <p>La piattaforma per ricevere coupon a tutto spiano!</p>
             <ul>
                 <li><strong>Varie categorie prensenti nel sito:</strong>
@@ -64,6 +63,7 @@
             unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
         </div>
         <div class="col-md-4" id="login-form">
+            <br><br>
             <div class="panel panel-info" >
                 <div class="panel-heading">
                     <div class="panel-title">Login</div>

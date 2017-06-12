@@ -1,0 +1,24 @@
+<div class="container">
+    <br>
+    <h3><b>Modifica avvenuta con successo!</b></h3>
+    <br>
+    <table class="table table-condensed">
+                <tr><th>Nome</th><th>Cognome</th><th>e-mail</th><th>Username</th></tr>
+                <?php
+                $dati = $this->modificato;
+                echo '<tr><td>' . $dati->nome . '</td>'
+                        . '<td>' . $dati->cognome . '</td>'
+                        . '<td>' . $dati->email . '</td>'
+                        . '<td>' . $dati->username . '</td>';
+                ?>
+    </table>
+    <br>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'staff',
+                                    'action'     => 'strumenti',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla pagina degli strumenti staff</a>
+</div>
+
+
