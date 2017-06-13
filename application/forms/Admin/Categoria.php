@@ -18,7 +18,7 @@ class Application_Form_Admin_Categoria extends Zend_Form
                     'table' => 'categorie',
                     'field' => 'nome'
                     ));
-        $esiste->setMessage('Categoria già esistente');
+        $esiste->setMessage('This name already exists');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
@@ -36,7 +36,6 @@ class Application_Form_Admin_Categoria extends Zend_Form
         	'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione della categoria',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));

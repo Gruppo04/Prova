@@ -7,23 +7,23 @@ class Application_Form_Staff_Coupon extends Zend_Form
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('modifica coupon');
+        $this->setName('inserisci coupon');
         $this->setAction('');
         $this->_staffModel = new Application_Model_Staff();
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
-            'required' => 'true',
-            'autofocus' => 'true',
-            'filters' => array('StringTrim')
+            'size'=> '50',
+            'filters' => array('StringTrim'),
+            'required' => true,
+            'autofocus'  => true
             ));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-        	'cols' => '50', 'rows' => '5',
+            'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione della promozione',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
@@ -68,6 +68,7 @@ class Application_Form_Staff_Coupon extends Zend_Form
         
         $this->addElement('text', 'luogo_di_fruizione', array(
             'label' => 'Luogo di fruizione',
+            'size' => '50',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
@@ -82,7 +83,7 @@ class Application_Form_Staff_Coupon extends Zend_Form
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
-        $this->addElement('submit', 'modifica', array(
+        $this->addElement('submit', 'add', array(
             'label' => 'Aggiungi promozione',
             'class' => 'btn btn-primary'));
     }

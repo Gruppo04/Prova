@@ -6,7 +6,12 @@
                                     ), 
                                     'default',true); 
                                     ?>">< Amministrazione</a><br><br>
-    <form action="#" method="get">
+    <form action="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'cancellauser',
+                                    ), 
+                                    'default',true); 
+                        ?>" method="get">
         <table class="table table-condensed">
             <tr><th style="text-align:center;">Seleziona</th><th style="text-align:center;">ID</th><th>Nome</th>
                 <th>Cognome</th><th>Sesso</th><th>Data di nascita</th><th>Provincia</th><th>Comune</th><th>email</th>
@@ -34,6 +39,6 @@
             }?>
         </table>
         <br>
-        <input class="btn btn-primary" type="submit" name="button"  value="Statistiche">
+        <input class="btn btn-primary" type="submit" name="button"  value="Cancella">
     </form>
 </div>

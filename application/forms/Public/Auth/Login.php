@@ -15,7 +15,7 @@ class Application_Form_Public_Auth_Login extends Zend_Form
                     'table' => 'utenti',
                     'field' => 'username'
                     ));
-        $esisteUser->setMessage('Username errato');
+        $esisteUser->setMessage('Unknown username');
         
         $esistePass = new Zend_Validate_Db_RecordExists(
                 array(
@@ -23,10 +23,10 @@ class Application_Form_Public_Auth_Login extends Zend_Form
                     'table' => 'utenti',
                     'field' => 'password'
                     ));
-        $esistePass->setMessage('Password errata');
+        $esistePass->setMessage('Wrong password');
         
         $this->addElement('text', 'username', array(
-            'filters'    => array('StringTrim', 'StringToLower'),
+            'filters'    => array('StringTrim'),
             'required'   => true,
             'autofocus'  => true,
             'label'      => 'Username'

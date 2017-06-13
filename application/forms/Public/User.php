@@ -20,7 +20,7 @@ class Application_Form_Public_User extends Zend_Form
                     'table' => 'utenti',
                     'field' => 'username'
                     ));
-        $esiste->setMessage('Username già esistente');
+        $esiste->setMessage('Username already exists, choose another one');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',

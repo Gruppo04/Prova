@@ -3,16 +3,13 @@
     <h3><b>Modifica avvenuta con successo!</b></h3>
     <br>
     <table class="table table-condensed">
-            <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Cognome</th><th>email</th><th>Username</th>
-                <th>Password</th>
+            <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Cognome</th><th>email</th>
             <?php
                 $modificato = $this->modificato;
                 echo '<tr><td style="text-align:center;">' . $modificato->id . '</td>'
                     . '<td>' . $modificato->nome . '</td>'
                     . '<td>' . $modificato->cognome . '</td>'
-                    . '<td>' . $modificato->email . '</td>'
-                    . '<td>' . $modificato->username . '</td>'
-                    . '<td>' . $modificato->password . '</td>';
+                    . '<td>' . $modificato->email . '</td>';
             ?>
     </table>
     <br>

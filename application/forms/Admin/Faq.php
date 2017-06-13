@@ -10,7 +10,7 @@ class Application_Form_Admin_Faq extends Zend_Form
         
         $this->addElement('textarea', 'domanda', array(
             'label' => 'Domanda',
-        	'cols' => '100', 'rows' => '5',
+            'cols' => '100', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
             'autofocus'  => true,
@@ -20,7 +20,7 @@ class Application_Form_Admin_Faq extends Zend_Form
         
         $this->addElement('textarea', 'risposta', array(
             'label' => 'Risposta',
-        	'cols' => '100', 'rows' => '10',
+            'cols' => '100', 'rows' => '10',
             'filters' => array('StringTrim'),
             'required' => true,
             'placeholder' => 'Inserisci la risposta',

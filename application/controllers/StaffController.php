@@ -170,7 +170,7 @@ class StaffController extends Zend_Controller_Action
         $this->view->assign(array('modificato'=>$modificato));
     }
     
-    public function passwordAction()
+    public function modificapasswordAction()
     {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('formpassword','staff');
@@ -179,13 +179,14 @@ class StaffController extends Zend_Controller_Action
         if (!$formPassword->isValid($_POST)) {
             return $this->render('formpassword');
         }
-        $oldPass = $formPassword->getValue('old_password');
-        $newPass = $formPassword->getValue('password');
+        $values = $formPassword->getValues();
+        if($values['old_password'] != ($this->_auth->getIdentity()->password))
+        {
+            return $this->render('errorepassword');
+        }
         $idModifica = $this->_auth->getIdentity()->id;
-//        if ($values['old_password']!= $idModifica) {
-//            $this->_helper->redirector('formpassword','user');
-//        }
-       	$this->_userModel->modificaPassword($newPass, $idModifica);
+       	$this->_userModel->modificaPassword(array('password' => $values['password']), $idModifica);
+        $this->_authService->clear();
     }
     
     private function getDatiForm()
@@ -205,7 +206,7 @@ class StaffController extends Zend_Controller_Action
         $urlHelper = $this->_helper->getHelper('url');
         $this->_formPassword->setAction($urlHelper->url(array(
                         'controller' => 'staff',
-                        'action' => 'password'),
+                        'action' => 'modificapassword'),
                         'default'
                         ));
         return $this->_formPassword;

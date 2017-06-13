@@ -58,7 +58,7 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
     
     public function modificaPassword($info, $id)
     {
-        $where = $this->select()->where('id = ?', $id);
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
         return $this->update($info, $where);
     }
 }

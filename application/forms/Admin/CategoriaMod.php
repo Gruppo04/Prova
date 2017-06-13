@@ -26,7 +26,6 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         	'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione della categoria',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));

@@ -19,25 +19,22 @@ class Application_Form_Admin_Azienda extends Zend_Form
                     'table' => 'aziende',
                     'field' => 'nome'
                     ));
-        $esiste->setMessage('Azienda già esistente');
+        $esiste->setMessage('This name already exists');
    
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            'filters' => array('StringTrim')
             ));
         $this->getElement('nome')->addFilter(new Filter_Uc);
         $this->getElement('nome')->addValidator($esiste);
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-        	'cols' => '50', 'rows' => '5',
+            'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione dell\'azienda',
             'validators' => array(
                 array('StringLength',true, array(1,1000)))
@@ -52,9 +49,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('text', 'localizzazione', array(
             'label' => 'Localizzazione',
             'required' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            'filters' => array('StringTrim')
             ));
         
         $this->addElement('select', 'tipologia', array(

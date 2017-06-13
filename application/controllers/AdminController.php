@@ -246,6 +246,12 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('users' => $users));
     }
     
+    public function userstodeleteAction()
+    {
+        $users=$this->_adminModel->getUsers();
+        $this->view->assign(array('users' => $users));
+    }
+    
     public function cancellauserAction()
     {
         $idModifica = $_GET["chosen"];
@@ -438,7 +444,5 @@ class AdminController extends Zend_Controller_Action {
             return $this->render('cancellafaq');
         }
        	$this->_adminModel->modificaFaq($values, $idModifica);
-        $modificata=$this->_adminModel->getFaqById($idModifica);
-        $this->view->assign(array('modificata'=>$modificata));
     }
 }

@@ -19,7 +19,7 @@ class Application_Form_Admin_Staff extends Zend_Form
                     'table' => 'utenti',
                     'field' => 'nome'
                     ));
-        $esiste->setMessage('Username già esistente');
+        $esiste->setMessage('Username already exists');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',

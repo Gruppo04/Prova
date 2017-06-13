@@ -11,6 +11,9 @@
                 $dati = $this->dati;
                 if($dati->telefono==null){
                             $telefono = 'NON DISPONIBILE';
+                }else
+                {
+                    $telefono = $dati->telefono;                    
                 }
                 echo '<tr><td>' . $dati->nome . '</td>'
                         . '<td>' . $dati->cognome . '</td>'

@@ -176,13 +176,13 @@
                     <?php for($i=0;$i<5;$i++) :?>
                     <?php if(!empty($this->categorie[$i])){
                         echo '<li class="list-group-item">';
-                        $cat=$this->categorie[$i];
+                        $categoria=$this->categorie[$i];
                         echo'<a href='.$this->url(array(
                                     'controller' => 'public',
                                     'action'     => 'categoria',
-                                    'selCat' => $cat->id), 
+                                    'selCategoria' => $categoria->id), 
                                     'default',true)
-                            .'>'. $cat->nome .'</a>';}
+                            .'>'. $categoria->nome .'</a>';}
                         echo '</li>'; ?>
                     <?php endfor ?> 
                 </ul>

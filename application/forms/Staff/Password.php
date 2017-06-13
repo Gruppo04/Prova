@@ -11,9 +11,8 @@ class Application_Form_Staff_Password extends Zend_Form
         $this->addElement('password', 'old_password', array(
             'label' => 'Vecchia password',
             'required' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array(array(
-                'StringLength', true, array(6,25)))));
+            'filters' => array('StringTrim')
+            ));
         
         $this->addElement('password', 'password', array(
             'label' => 'Nuova password',

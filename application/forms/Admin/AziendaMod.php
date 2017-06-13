@@ -15,9 +15,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'label' => 'Nome',
             'required' => 'true',
             'autofocus' => 'true',
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true)))
+            'filters' => array('StringTrim')
             ));
         $this->getElement('nome')->addFilter(new Filter_Uc);
         
@@ -26,8 +24,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
-            'placeholder' => 'Inserisci una descrizione della categoria',
+            'placeholder' => 'Inserisci una descrizione dell\'azienda',
             'validators' => array(
                 array('StringLength',true, array(1,1000)))
         ));

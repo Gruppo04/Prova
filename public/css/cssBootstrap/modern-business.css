@@ -5,11 +5,13 @@
  */
 
 /* Global Styles */
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,300,700);
 
 html,
 body {
     padding-top: 20px;
     height: 100%;
+    font-family: 'Raleway', sans-serif;
 }
 
 .img-portfolio {

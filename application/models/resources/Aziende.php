@@ -18,7 +18,7 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
     
     public function getAziendeByCoupon_Emessi()
     {
-        $select = $this->select()->order('coupon_emessi DESC');
+        $select = $this->select()->order('tot_emissioni DESC');
         return $this ->fetchAll($select);        
     }
     
