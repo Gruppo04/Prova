@@ -13,9 +13,9 @@
                                     'default',true); 
                         ?>" method="get">
         <table class="table table-condensed">
-            <tr><th style="text-align:center;">Seleziona</th><th>ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validit&agrav&agrave;</th>
-                <th>Scadenza</th><th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th>
-                <th>Tot. emissioni</th><th>Immagine</th>
+            <tr><th style="text-align:center;">Seleziona</th><th style="text-align:center;">ID</th><th>Nome</th>
+                <th>Descrizione</th><th>Inizio validit&agrave;</th><th>Scadenza</th><th>Luogo di fruizione</th>
+                <th>Categoria</th><th>Azienda</th><th>Tot. emissioni</th><th>Immagine</th>
             <?php
                 foreach ($this->coupon as $promozione){
                     if($promozione['immagine']==null){
@@ -25,7 +25,7 @@
                         $immagine = $promozione['immagine'];
                     }
                 echo '<tr><td style="text-align:center;"><input type="radio" name="chosen" value="' . $promozione['id'] . '"</td>'
-                        . '<td>' . $promozione['id'] . '</td>'
+                        . '<td style="text-align:center;">' . $promozione['id'] . '</td>'
                         . '<td>' . $promozione['nome'] . '</td>'
                         . '<td>' . $promozione['descrizione'] . '</td>'
                         . '<td>' . $promozione['inizio_validita'] . '</td>'
@@ -33,7 +33,7 @@
                         . '<td>' . $promozione['luogo_di_fruizione'] . '</td>'
                         . '<td>' . $promozione['categoria'] . '</td>'
                         . '<td>' . $promozione['azienda'] . '</td>'
-                        . '<td>' . $promozione['emissioni'] . '</td>'
+                        . '<td style="text-align:center;">' . $promozione['emissioni'] . '</td>'
                         . '<td>' . $immagine . '</td>';
             }?>
         </table>

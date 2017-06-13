@@ -7,25 +7,25 @@
             <th>Tipologia</th><th>Immagine</th>
             <?php
                 $modificato = $this->modificato;
-                if($modificato->immagine==null){
+                if($modificato['immagine']==null){
                         $immagine = 'NON DISPONIBILE';
-                    }
-                    else{
-                        $immagine = $modificato->immagine;
-                    }
-                echo '<tr><td>' . $modificato->id . '</td>'
-                        . '<td>' . $modificato->nome . '</td>'
-                        . '<td>' . $modificato->descrizione . '</td>'
-                        . '<td>' . $modificato->ragione_sociale . '</td>'
-                        . '<td>' . $modificato->localizzazione . '</td>'
-                        . '<td>' . $modificato->tipologia . '</td>'
+                }
+                else{
+                    $immagine = $modificato['immagine'];
+                }
+                echo '<tr><td>' . $modificato['id'] . '</td>'
+                        . '<td>' . $modificato['nome'] . '</td>'
+                        . '<td>' . $modificato['descrizione'] . '</td>'
+                        . '<td>' . $modificato['ragione_sociale'] . '</td>'
+                        . '<td>' . $modificato['localizzazione'] . '</td>'
+                        . '<td>' . $modificato['tipologia'] . '</td>'
                         . '<td>' . $immagine . '</td>';
             ?>
     </table>
     <br>
     <a class="btn btn-primary" href=" <?= $this->url(array(
-                                    'controller' => 'admin',
-                                    'action'     => 'aziende',
+                                    'controller' => 'staff',
+                                    'action'     => 'coupon',
                                     ), 
                                     'default',true); 
                                     ?>">Modifica/cancella altre promozioni</a>

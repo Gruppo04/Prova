@@ -1,0 +1,18 @@
+<?= $this->headLink(); ?>
+<div class="container">
+  <!-- Example row of columns -->
+    <div class="row">
+        <?php $coupon=$this->coupon;
+              $emissione = $this->emissione ?>
+        <div class="col-md-12">
+            <?php echo '<h4>' . $coupon->nome . '</h4>';
+            echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+            echo '<p>' . $coupon->descrizione . '</p><br>';
+            echo '<p><b>Valido dal:&emsp;</b> ' . $coupon->inizio_validita . '<br>';
+            echo '<b>al:</b>&emsp;&emsp;' . $coupon->scadenza .'<br>';
+            echo '<b>Presso:</b>&emsp;&emsp;' . $coupon->luogo_di_fruizione . '<br>';
+            echo '<b>Data e ora emissione:</b>&emsp;' . $emissione['data_emissione'] . '<br>';
+            echo '<b>Codice:</b>&emsp;</p>'; ?>
+        </div>
+    </div>
+</div>

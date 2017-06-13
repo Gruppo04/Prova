@@ -5,6 +5,7 @@ class UserController extends Zend_Controller_Action
     protected $_authService;
     protected $_adminModel;
     protected $_userModel;
+    protected $_guestModel;
     protected $_formPassword;
     protected $_formDati;
     protected $_auth;
@@ -16,6 +17,7 @@ class UserController extends Zend_Controller_Action
 	$this->_authService = new Application_Service_Auth();
         $this->_adminModel = new Application_Model_Admin();
         $this->_userModel = new Application_Model_User();
+        $this->_guestModel = new Application_Model_Guest();
         $this->_formDati = new Application_Form_User_Dati();
         $this->_formPassword = new Application_Form_User_Password();
         $this->view->datiForm = $this->getDatiForm();
@@ -114,6 +116,5 @@ class UserController extends Zend_Controller_Action
                         ));
         return $this->_formPassword;
     }
-    
 }
 

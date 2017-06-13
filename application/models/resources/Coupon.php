@@ -69,4 +69,9 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
        return $this ->fetchAll($select);
     }
     
+    public function incrementaCoupon($value, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($value, $where);
+    }
 }

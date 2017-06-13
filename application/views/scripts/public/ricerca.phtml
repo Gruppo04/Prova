@@ -13,60 +13,104 @@
 
     <!-- Content Row -->
     <div class="row">
-        <div class="panel-group" id="accordion">
-            <p>    
-                <!--<div class="col-md-4"> -->    
-                <?php
-                $ris =$this->risultati;  //si occupa di filtrare sia per l'option categoria che coupon 
-                $ris1 =$this->risultati1; // entrambe - per appoggiarmi il valore di cat
-                $ris2 =$this->risultati2; // entrambe - per appoggiarmi il valore di coupon
-                if(!$ris=="") {
-                    foreach ($this->risultati as $ris) 
-                    {
-                        echo '<div class="col-md-4">' ;
-                        echo '<h2>' . $ris->nome . '</h2>';
-                        echo '<img src="/../../public/img/Logo_Fileni.jpg" width="300" height="150">';
-                        echo '<p>' . $ris->descrizione . '</p>';
-                        echo '<p><a class="btn btn-default" href="#" role="button">Vedi i dettagli &raquo;</a></p>';
-                        echo '</div>';
-                        echo "<script>";
-                        echo "$(document).ready(function(){
-                            $('#notfound').remove(); });";
-                        echo "</script>";
-                    }
-                }
-                else if(!$ris1=="" && !$ris2=="") {
 
-                    foreach ($this->risultati1 as $ris1) 
-                    {
-                        echo '<div class="col-md-4">' ;    
-                        echo '<h2>' . $ris1->nome . '</h2>';
-                        echo '<img src="/../../public/img/Logo_Fileni.jpg" width="300" height="150">';
-                        echo '<p>' . $ris1->descrizione . '</p>';
-                        echo '<p><a class="btn btn-default" href="#" role="button">Vedi i dettagli &raquo;</a></p>';
-                        echo '</div>';
-                        echo "<script>";
-                        echo "$(document).ready(function(){ 
-                        $('#notfound').hide(); });";
-                        echo "</script>";
-                    }
-                    foreach ($this->risultati2 as $ris2) 
-                    {
-                        echo '<div class="col-md-4">' ;  
-                        echo '<h2>' . $ris2->nome . '</h2>';
-                        echo '<img src="/../../public/img/Logo_Fileni.jpg" width="300" height="150">';
-                        echo '<p>' . $ris2->descrizione . '</p>';
-                        echo '<p><a class="btn btn-default" href="#" role="button">Vedi i dettagli &raquo;</a></p>';
-                        echo '</div>';
-                        echo "<script>";
-                        echo "$(document).ready(function(){ 
-                            $('#notfound').hide(); });";
-                        echo "</script>";
-                    }
-                }?>
-            </p>
-        </div>
-        <!-- /.panel-group -->
+            <div class="panel-group" id="accordion">
+                <p>
+                   
+                     <!--<div class="col-md-4"> -->
+                      
+                     <?php
+                              $f=$this->filtro;
+                              $ris =$this->risultati;  //filtra in base a ciò che scegli o Categorie o Coupon
+                              $ris1 =$this->risultati1; //Entrambe trova le CATEGORIE
+                              $ris2 =$this->risultati2; //Entrambe trova i COUPON
+
+                              if(!$ris=="") {
+
+                                foreach ($this->risultati as $ris) 
+                                {
+                                    //in base alla scelta del filtro
+                                    echo '<div class="col-md-4">' ;
+                                    echo '<h2>' . $ris->nome . '</h2>';
+                                    if($f=="categoria")
+                                    {
+                                        echo $this->generalImg($ris->immagine,'categorie/' ,array('class' => 'imagefrm'));
+                                        echo '<p>' . $ris->descrizione . '</p>';
+                                        echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'categoria',
+                                            'selCategoria' => $ris->id), 
+                                            'default',true).'>
+                                             Vedi i dettagli &raquo;</a></p>'; 
+                                        echo "entrato nell'if";
+                                    }else{
+                                        echo $this->generalImg($ris->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                                        echo '<p>' . $ris->descrizione . '</p>';
+                                        echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'coupon',
+                                            'selCoupon' => $ris->id), 
+                                            'default',true).'>
+                                             Vedi i dettagli &raquo;</a></p>'; 
+                                             echo "entrato nell'else";
+                                    }
+                                    echo '</div>';
+                                    echo "<script>";
+                                    echo "$(document).ready(function(){ 
+                                        $('#notfound').hide(); });";
+                                    echo "</script>";
+                                    echo "risultati";
+                                }
+                            }else if(!$ris1=="" && !$ris2=="")
+                                {
+                                    foreach ($this->risultati1 as $ris1) 
+                                    {
+                                        //entrambe 
+                                        echo '<div class="col-md-4">' ;    
+                                        echo '<h2>' . $ris1->nome . '</h2>';
+                                        echo $this->generalImg($ris1->immagine,'categorie/' ,array('class' => 'imagefrm'));
+                                        echo '<p>' . $ris1->descrizione . '</p>';
+                                        echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'categoria',
+                                            'selCategoria' => $ris1->id), 
+                                            'default',true).'>
+                                             Vedi i dettagli &raquo;</a></p>'; 
+                                        echo '</div>';
+                                        echo "<script>";
+                                        echo "$(document).ready(function(){ 
+                                        $('#notfound').hide(); });";
+                                        echo "</script>";
+                                        echo "risultati1";
+                                    }
+                                    foreach ($this->risultati2 as $ris2) 
+                                    {
+                                        //entrambe
+                                        echo '<div class="col-md-4">' ;  
+                                        echo '<h2>' . $ris2->nome . '</h2>';
+                                        echo $this->generalImg($ris2->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                                        echo '<p>' . $ris2->descrizione . '</p>';
+                                        echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                            'controller' => 'public',
+                                            'action'     => 'coupon',
+                                            'selCoupon' => $ris2->id), 
+                                            'default',true).'>
+                                             Vedi i dettagli &raquo;</a></p>'; 
+                                        echo '</div>';
+                                        echo "<script>";
+                                        echo "$(document).ready(function(){ 
+                                        $('#notfound').hide(); });";
+                                        echo "</script>";
+                                        echo "risultati2";
+                                    }
+                                }
+                            ?>
+            </div>
+
+                </p>
+
+            </div>
+            <!-- /.panel-group -->
         <!--</div>-->
         <!-- /.col-lg-12 -->
     </div>

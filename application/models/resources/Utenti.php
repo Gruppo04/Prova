@@ -61,4 +61,10 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('id = ?', $id);
         return $this->update($info, $where);
     }
+    
+    public function incrementaUtente($value, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($value, $where);
+    }
 }

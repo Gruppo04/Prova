@@ -1,0 +1,34 @@
+<div class="container">
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a><br><br>
+    <table class="table table-condensed">
+        <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validit&agrave;</th>
+            <th>Scadenza</th><th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th>
+            <th>Tot. emissioni</th><th>Immagine</th>
+        <?php
+            foreach ($this->coupon as $promozione){
+                if($promozione['immagine']==null){
+                    $immagine = 'NON DISPONIBILE';
+                }
+                else{
+                    $immagine = $promozione['immagine'];
+                }
+            echo '<tr><td style="text-align:center;">' . $promozione['id'] . '</td>'
+                    . '<td>' . $promozione['nome'] . '</td>'
+                    . '<td>' . $promozione['descrizione'] . '</td>'
+                    . '<td>' . $promozione['inizio_validita'] . '</td>'
+                    . '<td>' . $promozione['scadenza'] . '</td>'
+                    . '<td>' . $promozione['luogo_di_fruizione'] . '</td>'
+                    . '<td>' . $promozione['categoria'] . '</td>'
+                    . '<td>' . $promozione['azienda'] . '</td>'
+                    . '<td style="text-align:center;">' . $promozione['emissioni'] . '</td>'
+                    . '<td>' . $immagine . '</td>';
+        }?>
+    </table>
+    <br>
+</div>

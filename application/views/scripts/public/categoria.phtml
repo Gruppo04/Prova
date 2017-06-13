@@ -2,10 +2,10 @@
 <div class="jumbo">
     <div class="col-lg-12">
     <?php $cat=$this->categoria;
-          echo '<p class="col-md-5">'.$this->generalImg($cat->immagine,'categorie/' ,array('class' => 'img-circle')).'</p>';
-          echo '<p class="col-md-7"> '
-                .'<h2>' . $cat->nome . '</h2>'.
-                 '<p>' . $cat->descrizione . '</p>'.'</p>';?>   
+        echo '<p class="col-md-5">'.$this->generalImg($cat->immagine,'categorie/' ,array('class' => 'img-circle')).'</p>';
+        echo '<p class="col-md-7"> '
+              .'<h2>' . $cat->nome . '</h2>'.
+               '<p>' . $cat->descrizione . '</p>'.'</p>';?>   
     </div>
 </div>
 
@@ -13,14 +13,17 @@
   <!-- Example row of columns -->
     <div class="row">
     <h3>Ecco tutti i coupon della categoria </h3>
-            
-                
-                 <?php foreach ($this->coupon as $coupon) {
-                    echo'<div class="col-md-4 style="padding-top:20px;">';
-                    echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
-                    echo '<h4>' .$coupon ->descrizione .' </h4>';
-                     echo'</div>';}?>
-            
-  </div>
-  <hr>
+        <?php foreach ($this->coupon as $coupon) {
+            echo'<div class="col-md-4 style="padding-top:20px;">';
+            echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+            echo '<h4>' .$coupon ->descrizione .' </h4>';
+            echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                'controller' => 'public',
+                                'action'     => 'coupon',
+                                'selCoupon' => $coupon->id), 
+                                'default',true).'>
+                                Vedi i dettagli &raquo;</a></p>'; 
+            echo'</div>';}?> 
+    </div>
+    <hr>
 </div>

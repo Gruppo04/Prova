@@ -50,4 +50,10 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
         $where = $this->getAdapter()->quoteInto('id = ?', $id);
         return $this->update($info, $where);
     }
+    
+    public function incrementaAzienda($value, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($value, $where);
+    }
 }

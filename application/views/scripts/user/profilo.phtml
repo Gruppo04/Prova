@@ -6,7 +6,8 @@
             <br>
             <table class="table table-condensed">
                 <tr><th>Nome</th><th>Cognome</th><th>Data di nascita</th><th>Genere</th><th>Provincia</th><th>Comune</th>
-                    <th>e-mail</th><th>Telefono</th><th>Username</th></tr>
+                    <th>e-mail</th><th>Telefono</th><th>Username</th>
+                    <th style="text-align:center;">Coupon acquisiti</th></tr>
                 <?php
                 $dati = $this->dati;
                 if($dati->telefono==null){
@@ -23,7 +24,8 @@
                         . '<td>' . $dati->citta . '</td>'
                         . '<td>' . $dati->email . '</td>'
                         . '<td>' . $telefono . '</td>'
-                        . '<td>' . $dati->username . '</td>';
+                        . '<td>' . $dati->username . '</td>'
+                        . '<td style="text-align:center;">' . $dati->coupon_acquisiti . '</td>';
                 ?>
             </table>
         </div>

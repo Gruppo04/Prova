@@ -57,4 +57,10 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
                                 ->ORwhere('nome LIKE ?', '%'.$textbox.'%');
        return $this ->fetchAll($select);
     }
+    
+    public function incrementaCategoria($value, $id)
+    {
+        $where = $this->getAdapter()->quoteInto('id = ?', $id);
+        return $this->update($value, $where);
+    }
 }

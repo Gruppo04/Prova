@@ -3,6 +3,7 @@
 class AdminController extends Zend_Controller_Action {
     
     protected $_adminModel;
+    protected $_staffModel;
     protected $_authService;
     protected $_formStaff;
     protected $_formStaffMod;
@@ -18,6 +19,7 @@ class AdminController extends Zend_Controller_Action {
     public function init() {
 	$this->_helper->layout->setLayout('main');
         $this->_adminModel = new Application_Model_Admin();
+        $this->_staffModel = new Application_Model_Staff();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
         $this->view->staffModForm = $this->getStaffModForm();
@@ -361,6 +363,20 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('modificato'=>$modificato));   
     }
     /* FUNZIONI PER LA GESTIONE DELLE PROMOZIONI */
+    
+    public function couponAction()
+    {
+        $coupon = $this->_staffModel->getCoupon()->toArray();
+        $size = count($coupon);
+        for ($i=0; $i<$size; $i++)
+        {
+            $azienda = $this->_adminModel->getAziendaById($coupon[$i]['idAzienda']);
+            $categoria = $this->_adminModel->getCategoriaById($coupon[$i]['idCategoria']);
+            $coupon[$i]['azienda'] = $azienda->nome;
+            $coupon[$i]['categoria'] = $categoria->nome;
+        }
+        $this->view->assign(array('coupon' => $coupon));
+    }
     
     /* FUNZIONI PER LA GESTIONE DELLE FAQ */    
         

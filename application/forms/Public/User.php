@@ -21,6 +21,13 @@ class Application_Form_Public_User extends Zend_Form
                     'field' => 'username'
                     ));
         $esiste->setMessage('Username already exists, choose another one');
+        $esisteMail = new Zend_Validate_Db_NoRecordExists(
+                array(
+                    'adapter'=> Zend_Db_Table_Abstract::getDefaultAdapter(),
+                    'table' => 'utenti',
+                    'field' => 'email'
+                    ));
+        $esisteMail->setMessage('Email address already exists');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
@@ -85,6 +92,7 @@ class Application_Form_Public_User extends Zend_Form
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
+        $this->getElement('email')->addValidator($esisteMail);
         
         $this->addElement('text', 'username', array(
             'label' => 'Scegli un nome utente',

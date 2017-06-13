@@ -77,7 +77,12 @@
         <div class="col-md-6">
             <ul style="list-style-type:none">
                 <h2>Gestione promozioni</h2>
-                <li><h4>Visualizza statistiche relative ai coupon</h4></li>
+                <li><a href="<?= $this->url(array(
+                                        'controller' => 'admin',
+                                        'action'     => 'coupon',
+                                        ), 
+                                        'default',true); 
+                            ?>"><h4>Visualizza informazioni relative ai coupon</h4></a></li>
             </ul>
         </div>
         <div class="col-md-6">
