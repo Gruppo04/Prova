@@ -25,4 +25,11 @@ class Application_Resource_Emissioni extends Zend_Db_Table_Abstract
         $select = $this->select()->where('id = ?', $id);
         return $this->fetchRow($select);
     }
+    
+    public function getEmissioneByUserCoupon($idUtente, $idCoupon)
+    {
+        $select = $this->select()->where('idUtente = ?', $idUtente)
+                                ->where('idCoupon = ?', $idCoupon);
+        return $this->fetchRow($select);
+    }
 }

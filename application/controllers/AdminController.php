@@ -4,6 +4,7 @@ class AdminController extends Zend_Controller_Action {
     
     protected $_adminModel;
     protected $_staffModel;
+    protected $_guestModel;
     protected $_authService;
     protected $_formStaff;
     protected $_formStaffMod;
@@ -20,6 +21,7 @@ class AdminController extends Zend_Controller_Action {
 	$this->_helper->layout->setLayout('main');
         $this->_adminModel = new Application_Model_Admin();
         $this->_staffModel = new Application_Model_Staff();
+        $this->_guestModel = new Application_Model_Guest();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
         $this->view->staffModForm = $this->getStaffModForm();
@@ -29,6 +31,8 @@ class AdminController extends Zend_Controller_Action {
         $this->view->aziendaModForm = $this->getAziendaModForm();
         $this->view->categoriaForm = $this->getCategoriaForm();
         $this->view->categoriaModForm = $this->getCategoriaModForm();
+        $categorie=$this->_guestModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie));
     }
 
     public function indexAction()
@@ -66,7 +70,9 @@ class AdminController extends Zend_Controller_Action {
     public function aziendeAction()
     {
         $aziende=$this->_adminModel->getAziende();
-        $this->view->assign(array('aziende' => $aziende));
+        $size = count($aziende->toArray());
+        $this->view->assign(array('aziende' => $aziende))
+                    ->assign(array('numero' => $size));
     }
     
     public function registraaziendaAction()
@@ -165,7 +171,9 @@ class AdminController extends Zend_Controller_Action {
     public function categorieAction()
     {
         $categorie=$this->_adminModel->getCategorie();
-        $this->view->assign(array('categorie' => $categorie));
+        $size = count($categorie->toArray());
+        $this->view->assign(array('categorie' => $categorie))
+                    ->assign(array('numero' => $size));
     }
     
     public function registracategoriaAction()

@@ -1,18 +1,21 @@
 <?= $this->headLink(); ?>
-<div class="container">
-  <!-- Example row of columns -->
-    <div class="row">
-        <?php $coupon=$this->coupon;
-              $emissione = $this->emissione ?>
-        <div class="col-md-12">
-            <?php echo '<h4>' . $coupon->nome . '</h4>';
-            echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
-            echo '<p>' . $coupon->descrizione . '</p><br>';
-            echo '<p><b>Valido dal:&emsp;</b> ' . $coupon->inizio_validita . '<br>';
-            echo '<b>al:</b>&emsp;&emsp;' . $coupon->scadenza .'<br>';
-            echo '<b>Presso:</b>&emsp;&emsp;' . $coupon->luogo_di_fruizione . '<br>';
-            echo '<b>Data e ora emissione:</b>&emsp;' . $emissione['data_emissione'] . '<br>';
-            echo '<b>Codice:</b>&emsp;</p>'; ?>
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default" style="margin-left: 20px">
+            <div class="panel-body">
+                <?php $coupon=$this->coupon;
+                echo '<h4>' . $coupon->nome . '</h4>';
+                echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                echo '<p>' . $coupon->descrizione . '</p><br>'
+                . '<p><b>Valido dal:</b>&emsp;' . $coupon->inizio_validita . '<br>'
+                . '<b>al:</b>&emsp;&emsp;' . $coupon->scadenza .'<br>'
+                . '<b>Presso:</b>&emsp;&emsp;' . $coupon->luogo_di_fruizione . '<br>'
+                . '<b>Data e ora emissione:</b>&emsp;' . $this->data_emissione . '<br>'
+                . '<b>Codice identificativo:</b>&emsp;#COUPONISLIFE' . $this->id . '</p>'; ?>
+            </div>
+            <div class="panel-footer" style="text-align: right">
+                <b>Coupon is Life</b>
+            </div>
         </div>
     </div>
 </div>

@@ -8,18 +8,18 @@ class PublicController extends Zend_Controller_Action
     protected $_formReg;
     protected $_formLog;
     protected $_authService;
-    protected $_auth;
     
     public function init()
     {
 	$this->_helper->layout->setLayout('main');
-        $this->_auth = Zend_Auth::getInstance();
         $this->_guestModel = new Application_Model_Guest();
         $this->_adminModel = new Application_Model_Admin();
         $this->_userModel = new Application_Model_User();
         $this->_authService = new Application_Service_Auth();
         $this->view->userForm = $this->getUserForm();
         $this->view->loginForm = $this->getLoginForm();
+        $categorie=$this->_guestModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie)); 
     }
     
     public function indexAction()
@@ -52,9 +52,8 @@ class PublicController extends Zend_Controller_Action
     
     public function categorieAction()
     {
-        $categorie=$this->_guestModel->getCategorie();
-        $this->view->assign(array('categorie' => $categorie)); 
     }
+    
     public function categoriaAction()
     {
         $id = $this->getParam('selCategoria');
@@ -72,9 +71,22 @@ class PublicController extends Zend_Controller_Action
     
     public function couponAction()
     {
-        $id = $this->getParam('selCoupon');
-        $coupon = $this->_guestModel->getCouponById($id);
-        $this->view->assign(array('coupon' => $coupon));
+        $idCoupon = $this->getParam('selCoupon');
+        $idUtente = $this->_authService->getIdentity()->id;
+        if($idUtente){
+            $emesso = $this->_userModel->getEmissioneByUserCoupon($idUtente, $idCoupon);
+        }else{
+            $emesso === '';
+        }
+        $coupon = $this->_guestModel->getCouponById($idCoupon);
+        $azienda = $this->_guestModel->getAziendaById($coupon->idAzienda);
+        $categoria = $this->_guestModel->getCategoriaById($coupon->idCategoria);
+        $this->view->assign(array('coupon' => $coupon))
+                    ->assign(array('emesso' => $emesso))
+                    ->assign(array('azienda' => $azienda->nome,
+                                    'idAzienda' => $azienda->id,
+                                    'categoria' => $categoria->nome,
+                                    'idCategoria' => $categoria->id));
     }
     
     public function stampaAction()
@@ -86,7 +98,7 @@ class PublicController extends Zend_Controller_Action
         $valueCoupon = array('emissioni' => $emissioni);
         $this->_userModel->incrementaCoupon($valueCoupon, $idCoupon);
         
-        $idUtente = $this->_auth->getIdentity()->id;
+        $idUtente = $this->_authService->getIdentity()->id;
         $utente = $this->_adminModel->getUtenteById($idUtente);
         $acquisizioni = $utente->coupon_acquisiti;
         $acquisizioni++;
@@ -107,14 +119,14 @@ class PublicController extends Zend_Controller_Action
         $valueCategoria = array('tot_emissioni' => $emissCategoria);
         $this->_userModel->incrementaCategoria($valueCategoria, $idCategoria);
         
-        $datetime = date("Y-m-d H:i:s");
         $emissione = array(
             'idUtente' => $idUtente,
             'idCoupon' => $idCoupon,
-            'data_emissione' => $datetime
+            'data_emissione' => date("Y-m-d H:i:s")
             );
         $this->_userModel->registraEmissione($emissione);
-        $this->view->assign($emissione);
+        $emissionenew = $this->_userModel->getEmissioneByUserCoupon($idUtente, $idCoupon)->toArray();
+        $this->view->assign($emissionenew);
         $this->_helper->layout()->disableLayout();
         $this->view->assign(array('coupon' => $coupon));
     }

@@ -1,57 +1,93 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-<div class="jumbotron">
-  <div class="container">
-    <h1>Pagina del coupon</h1>
-    <p>Breve descrizione del prodotto
-    </p>
-  </div>
-</div>
-
 <div class="container">
-  <!-- Example row of columns -->
     <div class="row">
-        <?php $coupon=$this->coupon  ?>
-            <div class="col-md-12">
-                <?php echo '<h2>' . $coupon->nome . '</h2>';
-                echo $this->generalImg($coupon->immagine, 'coupon/', array('class' => 'imagefrm'));
-                echo '<p>' . $coupon->descrizione . '</p>';
-                switch ($this->authInfo('livello')){
-                    case 'user':?>
-                        <p><a class="btn btn-primary" role="button" target="_blank"  
+        <div class="col-md-8">
+            <?php $coupon = $this->coupon;
+            echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'img-responsive img-rounded imgcoupon'));?>
+        </div>
+        <!-- /.col-md-8 -->
+        <div class="col-md-4">
+            <?php
+            echo '<h1>' . $coupon->nome . '</h1>';
+            echo '<p>' . $coupon->descrizione . '</p><br>';
+            switch ($this->authInfo('livello')){
+                case 'user':
+                    if($this->emesso){
+                        echo '<h5><b>Coupon gi&agrave; scaricato</b></h5>';
+                    }else{ ?>
+                        <p><a class="btn btn-primary btn-lg" role="button" target="_blank"  
                                 href=" <?= $this->url(array(
                                               'controller' => 'public',
                                               'action'     => 'stampa',
                                               'selCoupon'  => $coupon->id
                                               ), 
                                               'default',true); 
-                                              ?>">Stampa</a></p>
-                    <?php break;
-                    case 'admin':                    
-                        break;
-                    case 'staff':                    
-                        break;
-                    default : ?>
-                        <br>
-                        <h5><b>Per scaricare il coupon devi essere registrato</b></h5>
-                        <p><a class="btn btn-primary"
-                                href=" <?= $this->url(array(
-                                              'controller' => 'public',
-                                              'action'     => 'login',
-                                              'selCoupon'  => $coupon->id
-                                              ), 
-                                              'default',true); 
-                                              ?>">Login</a></p>
-                        <p><a class="btn btn-primary" style="position: relative; left: 82px; bottom: 44px" 
-                                href=" <?= $this->url(array(
-                                              'controller' => 'public',
-                                              'action'     => 'register',
-                                              'selCoupon'  => $coupon->id
-                                              ), 
-                                              'default',true); 
-                                              ?>">Registrati</a></p>
-                    <?php break;
-                    }?>
-            </div>
-	</div>
+                                              ?>">Stampa il tuo coupon!</a></p>
+                <?php }?>
+                <?php break;
+                case 'admin':                    
+                    break;
+                case 'staff':                    
+                    break;
+                default : ?>
+                    <h5><b>Per scaricare il coupon devi essere registrato</b></h5>
+                    <p><a class="btn btn-primary"
+                            href=" <?= $this->url(array(
+                                          'controller' => 'public',
+                                          'action'     => 'login',
+                                          'selCoupon'  => $coupon->id
+                                          ), 
+                                          'default',true); 
+                                          ?>">Login</a></p>
+                    <p><a class="btn btn-primary" style="position: relative; left: 82px; bottom: 44px" 
+                            href=" <?= $this->url(array(
+                                          'controller' => 'public',
+                                          'action'     => 'register',
+                                          'selCoupon'  => $coupon->id
+                                          ), 
+                                          'default',true); 
+                                          ?>">Registrati</a></p>
+            <?php break;
+            }?>
+        </div>
+        <!-- /.col-md-4 -->
+    </div>
+    <!-- /.row -->
     <hr>
+    <!-- Content Row -->
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Informazioni del coupon</h2>
+            <p><b>Azienda:</b>&emsp;
+            <a href ="<?=$this->url(array(
+                                  'controller' => 'public',
+                                  'action'     => 'azienda',
+                                  'selAzienda'  => $this->idAzienda
+                                  ), 
+                                  'default',true);?>"> <?= $this->azienda ?> </a></p>
+            <p><b>Categoria:</b>&emsp;
+            <a href ="<?=$this->url(array(
+                                  'controller' => 'public',
+                                  'action'     => 'categoria',
+                                  'selCategoria'  => $this->idCategoria
+                                  ), 
+                                  'default',true);?>"> <?= $this->categoria ?> </a></p>
+            <p><b>Valido dal:</b>&emsp;<?= $coupon->inizio_validita?></p>
+            <p><b>Al:</b>&emsp;<?= $coupon->scadenza?></p>
+            <p><b>Presso:</b>&emsp;<?= $coupon->luogo_di_fruizione?></p>
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-primary" role="button" href="<?=$this->url(array(
+                                  'controller' => 'public',
+                                  'action'     => 'azienda',
+                                  'selAzienda'  => $this->idAzienda
+                                  ), 
+                                  'default',true);?>">< Torna a: <?=$this->azienda?></a>
+    <a class="btn btn-primary" role="button" style="position: relative; left: 20px;"
+       href = "<?=$this->url(array(
+                                  'controller' => 'public',
+                                  'action'     => 'categoria',
+                                  'selCategoria'  => $this->idCategoria
+                                  ), 
+                                  'default',true);?>">< Torna a: <?=$this->categoria?></a>
 </div>

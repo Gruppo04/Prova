@@ -43,8 +43,9 @@
                     <ul class="dropdown-menu">
                         <li>                             
                             <?php
-                            $guestModel = new Application_Model_Guest();
-                            $categorie = $guestModel->getCategorie();
+                            //$guestModel = new Application_Model_Guest();
+                            //$categorie = $guestModel->getCategorie();
+                            $categorie = $this->categorie;
                             foreach ($categorie as $categoria)
                             {
                                 echo '<li>';

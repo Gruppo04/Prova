@@ -8,12 +8,10 @@ class UserController extends Zend_Controller_Action
     protected $_guestModel;
     protected $_formPassword;
     protected $_formDati;
-    protected $_auth;
     
     public function init()
     {
 	$this->_helper->layout->setLayout('main');
-        $this->_auth = Zend_Auth::getInstance();
 	$this->_authService = new Application_Service_Auth();
         $this->_adminModel = new Application_Model_Admin();
         $this->_userModel = new Application_Model_User();
@@ -21,7 +19,9 @@ class UserController extends Zend_Controller_Action
         $this->_formDati = new Application_Form_User_Dati();
         $this->_formPassword = new Application_Form_User_Password();
         $this->view->datiForm = $this->getDatiForm();
-        $this->view->passwordForm = $this->getPasswordForm();  
+        $this->view->passwordForm = $this->getPasswordForm();
+        $categorie=$this->_guestModel->getCategorie();
+        $this->view->assign(array('categorie' => $categorie));
     }
 
     public function indexAction()
@@ -37,7 +37,7 @@ class UserController extends Zend_Controller_Action
     
     public function profiloAction()
     {
-        $idModifica = $this->_auth->getIdentity()->id;
+        $idModifica = $this->_authService->getIdentity()->id;
         $select = $this->_adminModel->getUtenteById($idModifica);
         if($select['telefono']=='0'){
             $select['telefono']='';
@@ -47,7 +47,7 @@ class UserController extends Zend_Controller_Action
     
     public function formdatiAction()
     {
-        $idModifica = $this->_auth->getIdentity()->id;
+        $idModifica = $this->_authService->getIdentity()->id;
         $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
         if($query['telefono']=='0'){
             $query['telefono']='';
@@ -70,7 +70,7 @@ class UserController extends Zend_Controller_Action
             return $this->render('formdati');
         }
         $values = $formDati->getValues();
-        $idModifica = $this->_auth->getIdentity()->id;
+        $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));
@@ -86,11 +86,11 @@ class UserController extends Zend_Controller_Action
             return $this->render('formpassword');
         }
         $values = $formPassword->getValues();
-        if($values['old_password'] != ($this->_auth->getIdentity()->password))
+        if($values['old_password'] != ($this->_authService->getIdentity()->password))
         {
             return $this->render('errorepassword');
         }
-        $idModifica = $this->_auth->getIdentity()->id;
+        $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaPassword(array('password' => $values['password']), $idModifica);
         $this->_authService->clear();
     }

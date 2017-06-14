@@ -37,6 +37,11 @@ class Application_Model_User extends App_Model_Abstract
         return $this->getResource('Categorie')->incrementaCategoria($value, $id);
     }
     
+    public function getEmissioneByUserCoupon($idUtente, $idCoupon)
+    {
+        return $this->getResource('Emissioni')->getEmissioneByUserCoupon($idUtente, $idCoupon);
+    }
+    
     public function registraEmissione($value)
     {
         return $this->getResource('Emissioni')->registraEmissione($value);
