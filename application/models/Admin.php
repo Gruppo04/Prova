@@ -6,7 +6,7 @@ class Application_Model_Admin extends App_Model_Abstract
 
     }
     
-    /* FUNZIONI GENERICHE */
+    /* FUNZIONI VARIE */
     
     public function getUtenteById($id)
     {
@@ -18,14 +18,19 @@ class Application_Model_Admin extends App_Model_Abstract
     	return $this->getResource('Utenti')->getUtenteByUsername($username);
     }
     
-    public function modificaUtente($info, $id)
+    public function modificaDati($info, $id)
     {
-    	return $this->getResource('Utenti')->modificaUtente($info, $id);
+    	return $this->getResource('Utenti')->modificaDati($info, $id);
     }
     
     public function delUtente($id)
     {
     	return $this->getResource('Utenti')->delUtente($id);
+    }
+    
+    public function getEmissioni()
+    {
+    	return $this->getResource('Emissioni')->getEmissioni();
     }
     
     /* FUNZIONI PER LA GESTIONE DELLE AZIENDE */

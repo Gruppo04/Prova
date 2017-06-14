@@ -5,7 +5,8 @@
                                     'action'     => 'amministrazione',
                                     ), 
                                     'default',true); 
-                                    ?>">< Amministrazione</a><br><br>
+                                    ?>">< Amministrazione</a>
+    <h4 style="text-align:right;"><b>Totale utenti registrati:&emsp;<?= $this->numero ?></b></h4><br>
     <form action="<?= $this->url(array(
                                     'controller' => 'admin',
                                     'action'     => 'cancellauser',

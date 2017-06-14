@@ -245,13 +245,17 @@ class AdminController extends Zend_Controller_Action {
     public function usersAction()
     {
         $users=$this->_adminModel->getUsers();
-        $this->view->assign(array('users' => $users));
+        $size = count($users->toArray());
+        $this->view->assign(array('users' => $users))
+                    ->assign(array('numero' => $size));
     }
     
     public function userstodeleteAction()
     {
         $users=$this->_adminModel->getUsers();
-        $this->view->assign(array('users' => $users));
+        $size = count($users->toArray());
+        $this->view->assign(array('users' => $users))
+                    ->assign(array('numero' => $size));
     }
     
     public function cancellauserAction()
@@ -284,8 +288,10 @@ class AdminController extends Zend_Controller_Action {
     
     public function staffAction()
     {
-        $staff=$this->_adminModel->getStaff();
-        $this->view->assign(array('staff' => $staff));
+        $staff = $this->_adminModel->getStaff();
+        $size = count($staff->toArray());
+        $this->view->assign(array('staff' => $staff))
+                    ->assign(array('numero' => $size));
     }
     
     private function getStaffForm()
@@ -358,7 +364,7 @@ class AdminController extends Zend_Controller_Action {
             $this->_adminModel->delUtente($idModifica);
             return $this->render('cancellastaff');
         }
-       	$this->_adminModel->modificaUtente($values, $idModifica);
+       	$this->_adminModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));   
     }
@@ -375,7 +381,30 @@ class AdminController extends Zend_Controller_Action {
             $coupon[$i]['azienda'] = $azienda->nome;
             $coupon[$i]['categoria'] = $categoria->nome;
         }
-        $this->view->assign(array('coupon' => $coupon));
+        $this->view->assign(array('coupon' => $coupon))
+                    ->assign(array('numero' => $size));
+    }
+    
+    public function emissioniAction()
+    {
+        $emissioni = $this->_adminModel->getEmissioni()->toArray();
+        $size = count($emissioni);
+        for ($i=0; $i<$size; $i++)
+        {
+            $datetime = $emissioni[$i]['data_emissione'];
+            $id = $emissioni[$i]['id'];
+            $coupon = $this->_adminModel->getAziendaById($emissioni[$i]['idCoupon']);
+            $utente = $this->_adminModel->getUtenteById($emissioni[$i]['idUtente']);
+            $emissione[$i] = array(
+                'id' => $id,
+                'coupon' => $coupon->nome,
+                'nome' => $utente->nome,
+                'cognome' => $utente->cognome,
+                'username' => $utente->username,
+                'datetime' => $datetime);
+        }
+        $this->view->assign(array('emissione' => $emissione))
+                    ->assign(array('numero' => $size));
     }
     
     /* FUNZIONI PER LA GESTIONE DELLE FAQ */    

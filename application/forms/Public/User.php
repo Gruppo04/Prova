@@ -11,6 +11,9 @@ class Application_Form_Public_User extends Zend_Form
         // La seguente istruzione permette di usare i filtri custom
         $this->addElementPrefixPath('Filter', APPLICATION_PATH . '/../library/Filter', 'filter');
         
+         // La seguente istruzione permette di usare i validator custom
+        $this->addElementPrefixPath('Validator', APPLICATION_PATH . '/../library/Validator', 'validate');
+        
         /* validatori per controllare se lo username e l'email sono già usati
          * da qualcun'altro
          */
@@ -20,14 +23,7 @@ class Application_Form_Public_User extends Zend_Form
                     'table' => 'utenti',
                     'field' => 'username'
                     ));
-        $esiste->setMessage('Username already exists, choose another one');
-        $esisteMail = new Zend_Validate_Db_NoRecordExists(
-                array(
-                    'adapter'=> Zend_Db_Table_Abstract::getDefaultAdapter(),
-                    'table' => 'utenti',
-                    'field' => 'email'
-                    ));
-        $esisteMail->setMessage('Email address already exists');
+        $esiste->setMessage('Username già esistente');
         
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
@@ -55,6 +51,8 @@ class Application_Form_Public_User extends Zend_Form
             'filters' => array('StringTrim'),
             'validators' => array('Date')
             ));
+        
+        $this->getElement('data_di_nascita')->addValidator(new Validator_DataReg());
         
         $this->addElement('radio', 'genere', array(
             'MultiOptions' => array('M' => 'Maschio', 'F' => 'Femmina'),
@@ -92,7 +90,6 @@ class Application_Form_Public_User extends Zend_Form
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
-        $this->getElement('email')->addValidator($esisteMail);
         
         $this->addElement('text', 'username', array(
             'label' => 'Scegli un nome utente',
@@ -105,7 +102,7 @@ class Application_Form_Public_User extends Zend_Form
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(array(
-                'StringLength', true, array(4,25)))));
+                'StringLength', true, array(6,25)))));
         
         $this->addElement('password', 'verificapassword', array(
                 'label'      => 'Conferma password',

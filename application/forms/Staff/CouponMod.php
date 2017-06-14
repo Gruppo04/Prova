@@ -11,19 +11,22 @@ class Application_Form_Staff_CouponMod extends Zend_Form
         $this->setAction('');
         $this->_staffModel = new Application_Model_Staff();
         
+         // La seguente istruzione permette di usare i validator custom
+        $this->addElementPrefixPath('Validator', APPLICATION_PATH . '/../library/Validator', 'validate');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
-            'size' => '50',
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'autofocus'  => true            
+            'required' => 'true',
+            'autofocus' => 'true',
+            'filters' => array('StringTrim')
             ));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-            'cols' => '50', 'rows' => '5',
+        	'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione della promozione',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
@@ -58,6 +61,8 @@ class Application_Form_Staff_CouponMod extends Zend_Form
             'validators' => array('Date')
             ));
         
+        $this->getElement('inizio_validita')->addValidator(new Validator_DataScad());
+        
         $this->addElement('text', 'scadenza', array(
             'label' => 'Data di scadenza',
             'required' => 'true',
@@ -66,9 +71,10 @@ class Application_Form_Staff_CouponMod extends Zend_Form
             'validators' => array('Date')
             ));
         
+        $this->getElement('scadenza')->addValidator(new Validator_DataScad());
+        
         $this->addElement('text', 'luogo_di_fruizione', array(
             'label' => 'Luogo di fruizione',
-            'size' => '50',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
@@ -93,8 +99,7 @@ class Application_Form_Staff_CouponMod extends Zend_Form
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella promozione',
-            'class' => 'btn btn-primary',
-            'style' => 'position: relative; left: 153px; bottom: 54px'));
+            'class' => 'btn btn-primary'));
     }
 
 }

@@ -10,6 +10,11 @@ class Application_Resource_Emissioni extends Zend_Db_Table_Abstract
     {
     }
     
+    public function getEmissioni()
+    {
+        return $this->fetchAll($this->select());
+    }
+    
     public function registraEmissione($info)
     {
         return $this ->insert($info);

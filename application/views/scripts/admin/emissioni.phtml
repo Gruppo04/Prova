@@ -1,0 +1,24 @@
+<div class="container">
+    <br><br>
+    <a class="btn btn-primary" href="<?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'amministrazione',
+                                    ), 
+                                    'default',true); 
+                                    ?>">< Amministrazione</a>
+    <h4 style="text-align:right;"><b>Totale coupon emessi:&emsp;<?= $this->numero ?></b></h4><br>
+    <table class="table table-condensed">
+        <tr><th style="text-align:center;">ID</th><th>Coupon</th><th>Nome</th><th>Cognome</th><th>Username</th>
+            <th>Data e ora emissione</th>
+        <?php
+            foreach ($this->emissione as $emissione){
+            echo '<tr><td style="text-align:center;">' . $emissione['id'] . '</td>'
+                    . '<td>' . $emissione['coupon'] . '</td>'
+                    . '<td>' . $emissione['nome'] . '</td>'
+                    . '<td>' . $emissione['cognome'] . '</td>'
+                    . '<td>' . $emissione['username'] . '</td>'
+                    . '<td>' . $emissione['datetime'] . '</td>';
+        }?>
+    </table>
+    <br>
+</div>

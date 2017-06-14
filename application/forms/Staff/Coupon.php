@@ -7,23 +7,26 @@ class Application_Form_Staff_Coupon extends Zend_Form
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('inserisci coupon');
+        $this->setName('modifica coupon');
         $this->setAction('');
         $this->_staffModel = new Application_Model_Staff();
         
+         // La seguente istruzione permette di usare i validator custom
+        $this->addElementPrefixPath('Validator', APPLICATION_PATH . '/../library/Validator', 'validate');
+        
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
-            'size'=> '50',
-            'filters' => array('StringTrim'),
-            'required' => true,
-            'autofocus'  => true
+            'required' => 'true',
+            'autofocus' => 'true',
+            'filters' => array('StringTrim')
             ));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-            'cols' => '50', 'rows' => '5',
+        	'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus'  => true,
             'placeholder' => 'Inserisci una descrizione della promozione',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
@@ -58,6 +61,8 @@ class Application_Form_Staff_Coupon extends Zend_Form
             'validators' => array('Date')
             ));
         
+        $this->getElement('inizio_validita')->addValidator(new Validator_DataScad());
+        
         $this->addElement('text', 'scadenza', array(
             'label' => 'Data di scadenza',
             'required' => 'true',
@@ -66,9 +71,10 @@ class Application_Form_Staff_Coupon extends Zend_Form
             'validators' => array('Date')
             ));
         
+        $this->getElement('scadenza')->addValidator(new Validator_DataScad());
+        
         $this->addElement('text', 'luogo_di_fruizione', array(
             'label' => 'Luogo di fruizione',
-            'size' => '50',
             'required' => 'true',
             'filters' => array('StringTrim'),
             'validators' => array(
@@ -83,7 +89,11 @@ class Application_Form_Staff_Coupon extends Zend_Form
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
-        $this->addElement('submit', 'add', array(
+        $this->addElement('hidden', 'idModifica',array(
+            'required' => true
+        ));
+        
+        $this->addElement('submit', 'modifica', array(
             'label' => 'Aggiungi promozione',
             'class' => 'btn btn-primary'));
     }
