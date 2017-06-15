@@ -7,7 +7,7 @@ class Application_Form_Staff_Coupon extends App_Form_Abstract
     public function init() {
         
         $this->setMethod('post');
-        $this->setName('modifica coupon');
+        $this->setName('registra coupon');
         $this->setAction('');
         $this->_staffModel = new Application_Model_Staff();
         
@@ -17,13 +17,14 @@ class Application_Form_Staff_Coupon extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'size' => '50',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-        	'cols' => '50', 'rows' => '5',
+            'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
             'decorators' => $this->elementDecorators,
@@ -79,11 +80,10 @@ class Application_Form_Staff_Coupon extends App_Form_Abstract
         $this->addElement('text', 'luogo_di_fruizione', array(
             'label' => 'Luogo di fruizione',
             'required' => 'true',
+            'size' => '50',
             'decorators' => $this->elementDecorators,
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true))
-                )));
+            'filters' => array('StringTrim')
+            ));
         
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',
@@ -93,9 +93,6 @@ class Application_Form_Staff_Coupon extends App_Form_Abstract
         			array('Size', false, 204800),
         			array('Extension', false, array('jpg', 'gif', 'png', 'bmp')))));
         
-        $this->addElement('hidden', 'idModifica',array(
-            'required' => true
-        ));
         
         $this->addElement('submit', 'modifica', array(
             'label' => 'Aggiungi promozione',
@@ -108,5 +105,4 @@ class Application_Form_Staff_Coupon extends App_Form_Abstract
             'Form'
         ));
     }
-
 }

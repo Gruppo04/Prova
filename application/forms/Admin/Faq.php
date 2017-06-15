@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_Faq extends Zend_Form
+class Application_Form_Admin_Faq extends App_Form_Abstract
 {
     public function init() {
         
@@ -13,7 +13,7 @@ class Application_Form_Admin_Faq extends Zend_Form
             'cols' => '100', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
-            'autofocus'  => true,
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci il testo della domanda',
             'validators' => array(array('StringLength',true, array(1,2500)))
         ));
@@ -23,6 +23,7 @@ class Application_Form_Admin_Faq extends Zend_Form
             'cols' => '100', 'rows' => '10',
             'filters' => array('StringTrim'),
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci la risposta',
             'validators' => array(array('StringLength',true, array(1,2500)))
         ));
@@ -30,6 +31,13 @@ class Application_Form_Admin_Faq extends Zend_Form
         $this->addElement('submit', 'add', array(
             'label' => 'Inserisci FAQ',
             'class' => 'btn btn-primary'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

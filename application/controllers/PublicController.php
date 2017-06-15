@@ -18,7 +18,7 @@ class PublicController extends Zend_Controller_Action
         $this->_authService = new Application_Service_Auth();
         $this->view->userForm = $this->getUserForm();
         $this->view->loginForm = $this->getLoginForm();
-        $categorie=$this->_guestModel->getCategorie();
+        $categorie = $this->_guestModel->getCategorie();
         $this->view->assign(array('categorie' => $categorie)); 
     }
     
@@ -31,8 +31,7 @@ class PublicController extends Zend_Controller_Action
         $this->view->assign(array(
                                 'coupon' => $coupon,
                                 'coup'=> $coup,
-                                'aziende'=> $aziende,
-                                'categorie'=>$categorie));
+                                'aziende'=> $aziende));
     }
     
     public function aziendeAction()

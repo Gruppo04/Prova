@@ -17,6 +17,7 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'size' => '50',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
@@ -64,8 +65,6 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
             'validators' => array('Date')
             ));
         
-        $this->getElement('inizio_validita')->addValidator(new Validator_DataScad());
-        
         $this->addElement('text', 'scadenza', array(
             'label' => 'Data di scadenza',
             'required' => 'true',
@@ -79,11 +78,10 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
         $this->addElement('text', 'luogo_di_fruizione', array(
             'label' => 'Luogo di fruizione',
             'required' => 'true',
+            'size' => '50',
             'decorators' => $this->elementDecorators,
-            'filters' => array('StringTrim'),
-            'validators' => array(
-                array('Alpha', true, array('allowWhiteSpace'=>true))
-                )));
+            'filters' => array('StringTrim')
+            ));
         
         $this->addElement('file', 'immagine', array(
         	'label' => 'Immagine',

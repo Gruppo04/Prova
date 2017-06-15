@@ -35,8 +35,8 @@ class Application_Resource_Coupon extends Zend_Db_Table_Abstract
     
     public function getCouponByAzienda($id) 
     {
-       $select = $this->select()->where('idAzienda = ?',$id);
-        return $this->fetchAll($select);  
+       $select = $this->select()->where('idAzienda = ?', $id);
+       return $this->fetchAll($select);  
     }
     
     public function getCouponByCategoria($id) 

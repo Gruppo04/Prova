@@ -13,7 +13,10 @@ class Zend_View_Helper_GeneralImg extends Zend_View_Helper_HtmlElement
                     $_attrs = $this->_htmlAttribs($attrs); 
             } else { 
                     $_attrs = ''; 
-            } 
+            }
+            if(!file_exists($this->view->baseUrl('images/'. $path . $imgFile))){
+                $imgFile = 'default.jpg';
+            }
             $tag = '<img src="' . $this->view->baseUrl('images/'. $path . $imgFile) . '" ' . $_attrs . '>'; 
             return $tag;
 	} 

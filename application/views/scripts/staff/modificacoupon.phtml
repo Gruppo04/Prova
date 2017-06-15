@@ -3,8 +3,8 @@
     <h3><b>Modifica avvenuta con successo!</b></h3>
     <br>
     <table class="table table-condensed">
-            <tr><th>ID</th><th>Nome</th><th>Descrizione</th><th>Ragione sociale</th><th>Localizzazione</th>
-            <th>Tipologia</th><th>Immagine</th>
+        <tr><th style="text-align: center">ID</th><th>Nome</th><th>Descrizione</th><th>Inizio validità</th><th>Scadenza</th>
+            <th>Luogo di fruizione</th><th>Categoria</th><th>Azienda</th><th>Tot. emissioni</th><th>Immagine</th>
             <?php
                 $modificato = $this->modificato;
                 if($modificato['immagine']==null){
@@ -13,12 +13,15 @@
                 else{
                     $immagine = $modificato['immagine'];
                 }
-                echo '<tr><td>' . $modificato['id'] . '</td>'
+                echo '<tr><td style="text-align: center">' . $modificato['id'] . '</td>'
                         . '<td>' . $modificato['nome'] . '</td>'
                         . '<td>' . $modificato['descrizione'] . '</td>'
-                        . '<td>' . $modificato['ragione_sociale'] . '</td>'
-                        . '<td>' . $modificato['localizzazione'] . '</td>'
-                        . '<td>' . $modificato['tipologia'] . '</td>'
+                        . '<td>' . $modificato['inizio_validita'] . '</td>'
+                        . '<td>' . $modificato['scadenza'] . '</td>'
+                        . '<td>' . $modificato['luogo_di_fruizione'] . '</td>'
+                        . '<td>' . $modificato['categoria'] . '</td>'
+                        . '<td>' . $modificato['azienda'] . '</td>'
+                        . '<td style="text-align: center">' . $modificato['emissioni'] . '</td>'
                         . '<td>' . $immagine . '</td>';
             ?>
     </table>

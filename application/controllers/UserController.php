@@ -56,8 +56,32 @@ class UserController extends Zend_Controller_Action
         $this->_formDati->populate($query);       
     }
     
+     public function validatedatiAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_User_Dati();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function formpasswordAction()
     {
+    }
+    
+     public function validatepasswordAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_User_Password();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     public function modificadatiAction()
@@ -67,6 +91,7 @@ class UserController extends Zend_Controller_Action
         }
         $formDati=$this->_formDati;
         if (!$formDati->isValid($_POST)) {
+            $formDati->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formdati');
         }
         $values = array(
@@ -99,6 +124,7 @@ class UserController extends Zend_Controller_Action
         }
 	$formPassword=$this->_formPassword;
         if (!$formPassword->isValid($_POST)) {
+            $formPassword->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formpassword');
         }
         $values = $formPassword->getValues();

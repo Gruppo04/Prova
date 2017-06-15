@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_AziendaMod extends Zend_Form
+class Application_Form_Admin_AziendaMod extends App_Form_Abstract
 {    
     public function init() {
         
@@ -14,7 +14,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
         $this->getElement('nome')->addFilter(new Filter_Uc);
@@ -24,6 +24,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci una descrizione dell\'azienda',
             'validators' => array(
                 array('StringLength',true, array(1,1000)))
@@ -32,11 +33,13 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         $this->addElement('text', 'ragione_sociale', array(
             'label' => 'Ragione sociale',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')));
         
         $this->addElement('text', 'localizzazione', array(
             'label' => 'Localizzazione',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -45,6 +48,7 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
         $this->addElement('select', 'tipologia', array(
             'label' => 'Tipologia',
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'multiOptions' => array(
                 ''          => 'Seleziona',
                 'Prodotti'  => 'Prodotti',
@@ -74,5 +78,12 @@ class Application_Form_Admin_AziendaMod extends Zend_Form
             'label' => 'Cancella azienda',
             'class' => 'btn btn-primary',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 }

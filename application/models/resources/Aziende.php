@@ -12,7 +12,7 @@ class Application_Resource_Aziende extends Zend_Db_Table_Abstract
     
     public function getAziende()
     {
-        $select = $this->select();
+        $select = $this->select()->order('nome');
         return $this ->fetchAll($select);        
     }
     

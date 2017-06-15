@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_User_Dati extends Zend_Form
+class Application_Form_User_Dati extends App_Form_Abstract
 {
     public function init() {
         
@@ -25,7 +25,7 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -35,6 +35,7 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -44,6 +45,7 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'data_di_nascita', array(
             'label' => 'Data di nascita',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'aaaa-mm-gg',
             'filters' => array('StringTrim'),
             'validators' => array('Date')
@@ -58,6 +60,7 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'provincia', array(
             'label' => 'Provincia',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -66,6 +69,7 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'citta', array(
             'label' => 'Comune',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -83,12 +87,15 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
         
         $this->addElement('text', 'nuovo_username', array(
             'label' => 'Nome utente',
             'required' => 'true',
+            'placeholder' => '(invariato)',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')));
         $this->getElement('nuovo_username')->addValidator($esiste);
         
@@ -97,6 +104,13 @@ class Application_Form_User_Dati extends Zend_Form
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',
             'class' => 'btn btn-primary'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

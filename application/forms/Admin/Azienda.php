@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_Azienda extends Zend_Form
+class Application_Form_Admin_Azienda extends App_Form_Abstract
 {
     
     public function init() {
@@ -24,6 +24,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'autofocus' => 'true',
             'filters' => array('StringTrim')
             ));
@@ -35,6 +36,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
             'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci una descrizione dell\'azienda',
             'validators' => array(
                 array('StringLength',true, array(1,1000)))
@@ -43,12 +45,14 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('text', 'ragione_sociale', array(
             'label' => 'Ragione sociale',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
         
         $this->addElement('text', 'localizzazione', array(
             'label' => 'Localizzazione',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
         
@@ -56,6 +60,7 @@ class Application_Form_Admin_Azienda extends Zend_Form
             'label' => 'Tipologia',
             'value' => '',
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'multiOptions' => array(
                 ''          => 'Seleziona',
                 'Prodotti'  => 'Prodotti',
@@ -74,5 +79,12 @@ class Application_Form_Admin_Azienda extends Zend_Form
         $this->addElement('submit', 'add', array(
             'label' => 'Inserisci azienda',
             'class' => 'btn btn-primary'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_CategoriaMod extends Zend_Form
+class Application_Form_Admin_CategoriaMod extends App_Form_Abstract
 {
     public function init() {
         
@@ -14,7 +14,7 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true))
@@ -26,6 +26,7 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
         	'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci una descrizione della categoria',
             'validators' => array(array('StringLength',true, array(1,1000)))
         ));
@@ -52,6 +53,13 @@ class Application_Form_Admin_CategoriaMod extends Zend_Form
             'label' => 'Cancella categoria',
             'class' => 'btn btn-primary',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

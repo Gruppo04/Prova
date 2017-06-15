@@ -57,6 +57,18 @@ class AdminController extends Zend_Controller_Action {
     {
     }
     
+    public function validateaziendaAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_Azienda();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function formaziendamodAction()
     {
         $idModifica = $_GET["chosen"];
@@ -67,6 +79,18 @@ class AdminController extends Zend_Controller_Action {
         $query = $this->_adminModel->getAziendaById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formAziendaMod->populate($query);        
+    }
+    
+    public function validateaziendamodAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_AziendaMod();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     public function aziendeAction()
@@ -84,6 +108,7 @@ class AdminController extends Zend_Controller_Action {
         }
 	$formAzienda=$this->_formAzienda;
         if (!$formAzienda->isValid($_POST)) {
+            $formAzienda->setDescription('Attention: some data are incorrect.');
             return $this->render('formazienda');
         }
         $values = $formAzienda->getValues();
@@ -98,7 +123,15 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formaziendamod','admin');
         }
         $formAziendaMod=$this->_formAziendaMod;
+        $idModifica = $formAziendaMod->getValue('idModifica');
+        $cancella = $formAziendaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delAzienda($idModifica);
+            return $this->render('cancellaazienda');
+        }
         if (!$formAziendaMod->isValid($_POST)) {
+            $formAziendaMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formaziendamod');
         }
         $values = array(
@@ -115,13 +148,6 @@ class AdminController extends Zend_Controller_Action {
             $values['immagine'] = $immagine;
         }else{
             $values['immagine'] = $formAziendaMod->getValue('immagine');
-        }
-        $idModifica = $formAziendaMod->getValue('idModifica');
-        $cancella = $formAziendaMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delAzienda($idModifica);
-            return $this->render('cancellaazienda');
         }
        	$this->_adminModel->modificaAzienda($values, $idModifica);
         $modificata=$this->_adminModel->getAziendaById($idModifica);
@@ -158,6 +184,18 @@ class AdminController extends Zend_Controller_Action {
     {
     }
     
+    public function validatecategoriaAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_Categoria();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function formcategoriamodAction()
     {
         $idModifica = $_GET["chosen"];
@@ -168,6 +206,18 @@ class AdminController extends Zend_Controller_Action {
         $query = $this->_adminModel->getcategoriaById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formCategoriaMod->populate($query);        
+    }
+    
+    public function validatecategoriamodAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_CategoriaMod();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     public function categorieAction()
@@ -185,6 +235,7 @@ class AdminController extends Zend_Controller_Action {
         }
 	$formCategoria=$this->_formCategoria;
         if (!$formCategoria->isValid($_POST)) {
+            $formCategoria->setDescription('Attention: some data are incorrect.');
             return $this->render('formcategoria');
         }
         $values = $formCategoria->getValues();
@@ -199,7 +250,15 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formcategoriamod','admin');
         }
         $formCategoriaMod=$this->_formCategoriaMod;
+        $idModifica = $formCategoriaMod->getValue('idModifica');
+        $cancella = $formCategoriaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delCategoria($idModifica);
+            return $this->render('cancellacategoria');
+        }
         if (!$formCategoriaMod->isValid($_POST)) {
+            $formCategoriaMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formcategoriamod');
         }
         $values = array(
@@ -213,13 +272,6 @@ class AdminController extends Zend_Controller_Action {
             $values['immagine'] = $immagine;
         }else{
             $values['immagine'] = $formCategoriaMod->getValue('immagine');
-        }
-        $idModifica = $formCategoriaMod->getValue('idModifica');
-        $cancella = $formCategoriaMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delCategoria($idModifica);
-            return $this->render('cancellacategoria');
         }
        	$this->_adminModel->modificaCategoria($values, $idModifica);
         $modificata=$this->_adminModel->getCategoriaById($idModifica);
@@ -280,13 +332,33 @@ class AdminController extends Zend_Controller_Action {
         $this->_formUserMod->populate($query);       
     }
     
+    public function validateusermodAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_UserMod();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function modificauserAction()
     {
         if (!$this->getRequest()->isPost()) {
             $this->_helper->redirector('formusermod', 'admin');
         }
         $formUserMod=$this->_formUserMod;
+        $idModifica = $formUserMod->getValue('idModifica');
+        $cancella = $formUserMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellauser');
+        }
         if (!$formUserMod->isValid($_POST)) {
+            $formUserMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formusermod');
         }
         $values = array(
@@ -307,13 +379,6 @@ class AdminController extends Zend_Controller_Action {
         }else{
             $values['username'] = $formUserMod->getValue('username');
         }
-        $idModifica = $formUserMod->getValue('idModifica');
-        $cancella = $formUserMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delUtente($idModifica);
-            return $this->render('cancellauser');
-        }
        	$this->_adminModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));   
@@ -332,22 +397,24 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formUserMod;
     }
     
-//    public function cancellauserAction()
-//    {
-//        $idModifica = $_GET["chosen"];
-//        if(!$idModifica)
-//        {
-//            $this->_helper->redirector('users', 'admin');
-//        }
-//        $this->_adminModel->delUtente($idModifica);  
-//    }
-    
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
     
     public function formstaffAction()
     {
     }
-        
+    
+    public function validatestaffAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_Staff();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function formstaffmodAction()
     {
         $idModifica = $_GET["chosen"];
@@ -358,6 +425,18 @@ class AdminController extends Zend_Controller_Action {
         $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formStaffMod->populate($query);       
+    }
+    
+    public function validatestaffmodAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_StaffMod();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     public function staffAction()
@@ -399,6 +478,7 @@ class AdminController extends Zend_Controller_Action {
         }
 	$formStaff=$this->_formStaff;
         if (!$formStaff->isValid($_POST)) {
+            $formStaff->setDescription('Attention: some data are incorrect.');
             return $this->render('formstaff');
         }
         $values = array(
@@ -421,7 +501,15 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formstaffmod', 'admin');
         }
         $formStaffMod=$this->_formStaffMod;
+        $idModifica = $formStaffMod->getValue('idModifica');
+        $cancella = $formStaffMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellastaff');
+        }
         if (!$formStaffMod->isValid($_POST)) {
+            $formStaffMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formstaffmod');
         }
         $values = array(
@@ -431,13 +519,6 @@ class AdminController extends Zend_Controller_Action {
             'username'=>$formStaffMod->getValue('username'),
             'password'=>$formStaffMod->getValue('password')
                 );
-        $idModifica = $formStaffMod->getValue('idModifica');
-        $cancella = $formStaffMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delUtente($idModifica);
-            return $this->render('cancellastaff');
-        }
        	$this->_adminModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));   
@@ -493,6 +574,18 @@ class AdminController extends Zend_Controller_Action {
     {
     }
     
+    public function validatefaqAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_Faq();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function formfaqmodAction()
     {
         $idModifica = $_GET["chosen"];
@@ -503,6 +596,18 @@ class AdminController extends Zend_Controller_Action {
         $query = $this->_adminModel->getFaqById($idModifica)->toArray();
         $query['idModifica'] = $idModifica;
         $this->_formFaqMod->populate($query);
+    }
+    
+    public function validatefaqmodAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $loginform = new Application_Form_Admin_FaqMod();
+        $response = $loginform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     private function getFaqForm()
@@ -536,6 +641,7 @@ class AdminController extends Zend_Controller_Action {
         }
 	$formFaq=$this->_formFaq;
         if (!$formFaq->isValid($_POST)) {
+            $formFaq->setDescription('Attention: some data are incorrect.');
             return $this->render('formfaq');
         }
         $values = $formFaq->getValues();
@@ -545,16 +651,9 @@ class AdminController extends Zend_Controller_Action {
     public function modificafaqAction()
     {
         if (!$this->getRequest()->isPost()) {
-            $this->_helper->redirector('forfaqmod', 'admin');
+            $this->_helper->redirector('formfaqmod', 'admin');
         }
         $formFaqMod=$this->_formFaqMod;
-        if (!$formFaqMod->isValid($_POST)) {
-            return $this->render('forfaqmod');
-        }
-        $values = array(
-            'domanda'=>$formFaqMod->getValue('domanda'),
-            'risposta'=>$formFaqMod->getValue('risposta')
-                );
         $idModifica = $formFaqMod->getValue('idModifica');
         $cancella = $formFaqMod->getValue('cancella');
         if($cancella)
@@ -562,6 +661,14 @@ class AdminController extends Zend_Controller_Action {
             $this->_adminModel->delFaq($idModifica);
             return $this->render('cancellafaq');
         }
+        if (!$formFaqMod->isValid($_POST)) {
+            $formFaqMod->setDescription('Attention: some modifications are incorrect.');
+            return $this->render('formfaqmod');
+        }
+        $values = array(
+            'domanda'=>$formFaqMod->getValue('domanda'),
+            'risposta'=>$formFaqMod->getValue('risposta')
+                );
        	$this->_adminModel->modificaFaq($values, $idModifica);
     }
 }

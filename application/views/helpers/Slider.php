@@ -15,7 +15,7 @@ class Zend_View_Helper_Slider extends Zend_View_Helper_Abstract
             $giorno= substr($validita,8,2);
             $giorno=(int)$giorno;
             $this->oggi= getdate();
-            if(($anno<$this->oggi['year']) || ($anno===$this->oggi['year'] && $mese<=$this->oggi['mon'] || $giorno<=$this->oggi['mday']))
+            if(($anno<$this->oggi['year']) || ($anno===$this->oggi['year'] && $mese<=$this->oggi['mon'] && $giorno<=$this->oggi['mday']))
             {
                 $percorso=$imageFile;
             }else{

@@ -90,12 +90,12 @@ class StaffController extends Zend_Controller_Action
     public function validatecouponAction() 
     {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         $userform = new Application_Form_Staff_Coupon();
         $response = $userform->processAjax($_POST); 
         if ($response !== null) {
-        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
         }
     }
     
@@ -105,8 +105,14 @@ class StaffController extends Zend_Controller_Action
             $this->_helper->redirector('formcouponmod','staff');
         }
         $formCouponMod=$this->_formCouponMod;
+        $cancella = $formCouponMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_staffModel->delCoupon($idModifica);
+            return $this->render('cancellacoupon');
+        }
         if (!$formCouponMod->isValid($_POST)) {
-            $formDati->setDescription('Attention: some modifications are incorrect.');
+            $formCouponMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formcouponmod');
         }
         $values = array(
@@ -121,15 +127,13 @@ class StaffController extends Zend_Controller_Action
             'immagine'=>$formCouponMod->getValue('immagine')
                 );
         $idModifica = $formCouponMod->getValue('idModifica');
-        $cancella = $formCouponMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_staffModel->delCoupon($idModifica);
-            return $this->render('cancellacoupon');
-        }
        	$this->_staffModel->modificaCoupon($values, $idModifica);
-        $modificato=$this->_staffModel->getCouponById($idModifica);
-        $this->view->assign(array('modificata'=>$modificata));   
+        $modificato=$this->_staffModel->getCouponById($idModifica)->toArray();
+        $azienda = $this->_adminModel->getAziendaById($modificato['idAzienda']);
+        $categoria = $this->_adminModel->getCategoriaById($modificato['idCategoria']);
+        $modificato['azienda'] = $azienda->nome;
+        $modificato['categoria'] = $categoria->nome;
+        $this->view->assign(array('modificato'=>$modificato));   
     }
     
     public function validatemodcouponAction() 
@@ -216,7 +220,7 @@ class StaffController extends Zend_Controller_Action
         }
 	$formPassword=$this->_formPassword;
         if (!$formPassword->isValid($_POST)) {
-            $formDati->setDescription('Attention: some modifications are incorrect.');
+            $formPassword->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formpassword');
         }
         $values = $formPassword->getValues();

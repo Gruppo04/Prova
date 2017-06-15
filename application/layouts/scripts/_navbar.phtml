@@ -39,12 +39,10 @@
                                 'controller' => 'public',
                                 'action'     => 'categorie'), 
                                 'default',true); 
-                                ?>" class="dropdown-toggle" >Categorie <b class="caret"></b></a>
+                                ?>" class="dropdown-toggle" >Categorie<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>                             
                             <?php
-                            //$guestModel = new Application_Model_Guest();
-                            //$categorie = $guestModel->getCategorie();
                             $categorie = $this->categorie;
                             foreach ($categorie as $categoria)
                             {

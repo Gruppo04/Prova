@@ -12,7 +12,7 @@ class Application_Resource_Categorie extends Zend_Db_Table_Abstract
     
     public function getCategorie()
     {
-        $select = $this->select();
+        $select = $this->select()->order('nome');
         return $this ->fetchAll($select);
     }
     

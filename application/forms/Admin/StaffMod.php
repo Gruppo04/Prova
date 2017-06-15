@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_StaffMod extends Zend_Form
+class Application_Form_Admin_StaffMod extends App_Form_Abstract
 {       
     
     public function init() {
@@ -15,7 +15,7 @@ class Application_Form_Admin_StaffMod extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -25,6 +25,7 @@ class Application_Form_Admin_StaffMod extends Zend_Form
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -34,6 +35,7 @@ class Application_Form_Admin_StaffMod extends Zend_Form
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
 
@@ -49,6 +51,13 @@ class Application_Form_Admin_StaffMod extends Zend_Form
             'label' => 'Cancella membro staff',
             'class' => 'btn btn-primary',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

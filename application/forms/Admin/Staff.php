@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Admin_Staff extends Zend_Form
+class Application_Form_Admin_Staff extends App_Form_Abstract
 {       
     
     public function init() {
@@ -24,7 +24,7 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -34,6 +34,7 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -43,18 +44,21 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
         
         $this->addElement('text', 'username', array(
             'label' => 'Scegli un nome utente',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')));
         $this->getElement('username')->addValidator($esiste);
         
         $this->addElement('password', 'password', array(
             'label' => 'Scegli una password',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(array(
                 'StringLength', true, array(4,25)))));
@@ -62,6 +66,7 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->addElement('password', 'verificapassword', array(
                 'label'      => 'Conferma password',
                 'required'   => true,
+                'decorators' => $this->elementDecorators,
                 'validators' => array(
                     array('Identical', false, array('token' => 'password'))
                     )));
@@ -69,6 +74,13 @@ class Application_Form_Admin_Staff extends Zend_Form
         $this->addElement('submit', 'add', array(
             'label' => 'Inserisci membro staff',
             'class' => 'btn btn-primary'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

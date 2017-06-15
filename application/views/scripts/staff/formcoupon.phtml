@@ -5,8 +5,8 @@
 
 $(function()
 {
-	var actionUrl='<?= $this->url(array('controller' => 'public', 'action' => 'validatelogin',), 'default'); ?>';
-	var formName='<?= $this->loginForm->getName() ?>';
+	var actionUrl='<?= $this->url(array('controller' => 'staff', 'action' => 'validatecoupon',), 'default'); ?>';
+	var formName='<?= $this->couponForm->getName() ?>';
 	$(":input").on('blur', function(event) {
         var formElementId = $(this).attr('id');
         doValidation(formElementId, actionUrl, formName);

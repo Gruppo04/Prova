@@ -1,4 +1,6 @@
-<header id="myCarousel" class="carousel slide">
+<h3 style="text-align:center; margin-top:15px; margin-bottom:0px;"><i class="fa fa-arrow-down" aria-hidden="true"></i>
+    &nbsp; Più recenti &nbsp;<i class="fa fa-arrow-down" aria-hidden="true"></i></h3>
+<header id="myCarousel" class="carousel slide" style="margin-top: 11px;">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -44,22 +46,13 @@
 
     <!-- Marketing Icons Section -->
     <div class="row">
-        <div id="par" class="col-md-8">
+        <div  id="titolo" class="col-md-8">
             <h1 class="page-header">Benvenuto in Coupon is Life!</h1><br>
-            <p>La piattaforma per ricevere coupon a tutto spiano!</p>
-            <p><strong>Varie categorie prensenti nel sito:</strong></p>
-            <ul>
-                <li>Sconti su smartphone</li>
-                <li>Sconti su abbigliamento</li>
-                <li>Sconti per la casa</li>
-                <li>Sconti per la scuola</li>
-            </ul>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis,
-            omnis doloremque non cum id reprehenderit, quisquam totam aspernatur
-            tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis
-            doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima
-            unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
+            <h4 id="par" >La piattaforma per ricevere coupon a tutto spiano!
+            <br>
+            <br>
+            Nel nostro sito potrai ottenere degli sconti favolosi per i tuoi acquisti!Basta che ti registri per poi accedere con le tue credenziali in maniera del tutto gratuita! Dopodichè potrai effettuare una ricerca per trovare il prodotto dei tuoi sogni a prezzi assurdi! Per qualsiasi dubbio che ti verrà puoi visitare le nostre FAQ,altrimenti puoi contattarci in ogni momento tramite e-mail. Saremo felici di aiutarti!Cerchiamo ogni giorno nuovi partner commerciali in modo da poterti dare una scelta sempre più amplia di prodotti in offerta! Che aspetti? Entra a far parte di Coupon is Life!
+            </h4>
         </div>
         <div class="col-md-4" id="login-form">
             <br><br>
@@ -70,27 +63,34 @@
 
                 <div style="text-align:center; padding-top:30px" class="panel-body">
 
-                    <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+                    <div style="display:none" id="login-alert"\.
+                         class="alert alert-danger col-sm-12"></div>
                     
                     <?php
                         switch ($this->authInfo('livello')){
                             case 'user':?>
                             <script type="text/javascript">
                                 $('#login-form').remove();
-                                $('#par').toggleClass('col-md-8','col-md-12');
+                                $('#titolo').toggleClass('col-md-8','col-md-12');
+                                $('#par').addClass('col-md-12');
+                                $('#par').text('Complimenti ora sei loggato e puoi ottenere qualsiasi coupon presente nel nostro catalogo!');
                             </script>
 
                     <?php break;
                             case 'staff':?>
                             <script type="text/javascript">
                                 $('#login-form').remove();
-                                $('#par').toggleClass('col-md-8','col-md-12');
+                                $('#titolo').toggleClass('col-md-8','col-md-12');
+                                $('#par').addClass('col-md-12');
+                                $('#par').text('Benvenuto membro dello staff! Ora puoi gestire le promozioni dedicate ai clienti!');
                             </script>
                     <?php break;
                             case 'admin':?>
                             <script type="text/javascript">
                                 $('#login-form').remove();
-                                $('#par').toggleClass('col-md-8','col-md-12');
+                                $('#titolo').toggleClass('col-md-8','col-md-12');
+                                $('#par').addClass('col-md-12');
+                                $('#par').text('Benvenuto amministratore! Puoi navigare nel sito o in alternativa gestirlo tramite il menù apposito.')
                             </script>
 
                     <?php break;
@@ -98,8 +98,8 @@
                                 echo $this->loginForm;
                             break;                                 
                         }?>
-                            
-                    <div class="col-md-12 control"><br>
+                    <br> 
+                    <div class="col-md-12 control">
                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                             Non hai un account?
                         <a href="<?= $this->url(array(
@@ -113,6 +113,8 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
     <!-- /.row -->
 
     <div class="row">
@@ -166,11 +168,7 @@
                     <div class="panel-heading">
                         <span class="fa-stack fa-5x">
                               <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <a href="<?= $this->url(array(
-                                    'controller' => 'public',
-                                    'action'     => 'categorie'), 
-                                    'default',true); 
-                                ?>" class="fa fa-sitemap fa-stack-1x fa-inverse"></a>
+                              <i class="fa fa-sitemap fa-stack-1x fa-inverse"></i>
                         </span>
                     </div>
                     </p>
@@ -190,7 +188,7 @@
                     <?php endfor ?> 
                 </ul>
                 <div class="panel-footer">
-                    <a href="<?= $this->url(array(
+                    <a <a href="<?= $this->url(array(
                                     'controller' => 'public',
                                     'action'     => 'categorie'), 
                                     'default',true); 
@@ -231,8 +229,6 @@
                     echo '</a>'; } ?>
                 <?php endforeach ?>
             </div>
-
-
             <!-- Left and right controls -->
             <a class="left carousel-control" href="#myCarousel2" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left"></span>
@@ -243,6 +239,9 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+        <h3 style="text-align:center; margin-top:15px; margin-bottom:0px;">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i> &nbsp; Più popolari &nbsp;
+            <i class="fa fa-arrow-up" aria-hidden="true"></i></h3>
     </div>
 </div>
 <!-- /.container -->
