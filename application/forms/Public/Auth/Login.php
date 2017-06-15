@@ -39,7 +39,6 @@ class Application_Form_Public_Auth_Login extends App_Form_Abstract
             'decorators' => $this->elementDecorators,
             'label'      => 'Password'
             ));
-        $this->getElement('password')->addValidator($esistePass);
 
         $this->addElement('submit', 'login', array(
             'label'    => 'Login',

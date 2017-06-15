@@ -13,6 +13,7 @@ class Application_Form_Admin_Faq extends App_Form_Abstract
             'cols' => '100', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus' => true,
             'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci il testo della domanda',
             'validators' => array(array('StringLength',true, array(1,2500)))

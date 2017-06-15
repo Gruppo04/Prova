@@ -12,6 +12,7 @@ class Application_Form_User_Password extends App_Form_Abstract
         $this->addElement('password', 'old_password', array(
             'label' => 'Vecchia password',
             'required' => 'true',
+            'autofocus' => 'true',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(array(

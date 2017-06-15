@@ -5,6 +5,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_adminModel;
     protected $_staffModel;
     protected $_guestModel;
+    protected $_userModel;
     protected $_authService;
     protected $_formStaff;
     protected $_formUserMod;
@@ -22,6 +23,7 @@ class AdminController extends Zend_Controller_Action {
 	$this->_helper->layout->setLayout('main');
         $this->_adminModel = new Application_Model_Admin();
         $this->_staffModel = new Application_Model_Staff();
+        $this->_userModel =new Application_Model_User();
         $this->_guestModel = new Application_Model_Guest();
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
@@ -123,13 +125,6 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formaziendamod','admin');
         }
         $formAziendaMod=$this->_formAziendaMod;
-        $idModifica = $formAziendaMod->getValue('idModifica');
-        $cancella = $formAziendaMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delAzienda($idModifica);
-            return $this->render('cancellaazienda');
-        }
         if (!$formAziendaMod->isValid($_POST)) {
             $formAziendaMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formaziendamod');
@@ -148,6 +143,13 @@ class AdminController extends Zend_Controller_Action {
             $values['immagine'] = $immagine;
         }else{
             $values['immagine'] = $formAziendaMod->getValue('immagine');
+        }
+        $idModifica = $formAziendaMod->getValue('idModifica');
+        $cancella = $formAziendaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delAzienda($idModifica);
+            return $this->render('cancellaazienda');
         }
        	$this->_adminModel->modificaAzienda($values, $idModifica);
         $modificata=$this->_adminModel->getAziendaById($idModifica);
@@ -250,13 +252,6 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formcategoriamod','admin');
         }
         $formCategoriaMod=$this->_formCategoriaMod;
-        $idModifica = $formCategoriaMod->getValue('idModifica');
-        $cancella = $formCategoriaMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delCategoria($idModifica);
-            return $this->render('cancellacategoria');
-        }
         if (!$formCategoriaMod->isValid($_POST)) {
             $formCategoriaMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formcategoriamod');
@@ -272,6 +267,13 @@ class AdminController extends Zend_Controller_Action {
             $values['immagine'] = $immagine;
         }else{
             $values['immagine'] = $formCategoriaMod->getValue('immagine');
+        }
+        $idModifica = $formCategoriaMod->getValue('idModifica');
+        $cancella = $formCategoriaMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delCategoria($idModifica);
+            return $this->render('cancellacategoria');
         }
        	$this->_adminModel->modificaCategoria($values, $idModifica);
         $modificata=$this->_adminModel->getCategoriaById($idModifica);
@@ -350,13 +352,6 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formusermod', 'admin');
         }
         $formUserMod=$this->_formUserMod;
-        $idModifica = $formUserMod->getValue('idModifica');
-        $cancella = $formUserMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delUtente($idModifica);
-            return $this->render('cancellauser');
-        }
         if (!$formUserMod->isValid($_POST)) {
             $formUserMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formusermod');
@@ -379,6 +374,13 @@ class AdminController extends Zend_Controller_Action {
         }else{
             $values['username'] = $formUserMod->getValue('username');
         }
+        $idModifica = $formUserMod->getValue('idModifica');
+        $cancella = $formUserMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellauser');
+        }
        	$this->_adminModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));   
@@ -397,6 +399,16 @@ class AdminController extends Zend_Controller_Action {
         return $this->_formUserMod;
     }
     
+//    public function cancellauserAction()
+//    {
+//        $idModifica = $_GET["chosen"];
+//        if(!$idModifica)
+//        {
+//            $this->_helper->redirector('users', 'admin');
+//        }
+//        $this->_adminModel->delUtente($idModifica);  
+//    }
+    
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
     
     public function formstaffAction()
@@ -414,7 +426,7 @@ class AdminController extends Zend_Controller_Action {
         	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
         }
     }
-    
+        
     public function formstaffmodAction()
     {
         $idModifica = $_GET["chosen"];
@@ -501,13 +513,6 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formstaffmod', 'admin');
         }
         $formStaffMod=$this->_formStaffMod;
-        $idModifica = $formStaffMod->getValue('idModifica');
-        $cancella = $formStaffMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delUtente($idModifica);
-            return $this->render('cancellastaff');
-        }
         if (!$formStaffMod->isValid($_POST)) {
             $formStaffMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formstaffmod');
@@ -519,6 +524,13 @@ class AdminController extends Zend_Controller_Action {
             'username'=>$formStaffMod->getValue('username'),
             'password'=>$formStaffMod->getValue('password')
                 );
+        $idModifica = $formStaffMod->getValue('idModifica');
+        $cancella = $formStaffMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellastaff');
+        }
        	$this->_adminModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
         $this->view->assign(array('modificato'=>$modificato));   
@@ -570,7 +582,7 @@ class AdminController extends Zend_Controller_Action {
         $this->view->assign(array('faq' => $faq));
     }
     
-    public function formfaqAction()
+     public function formfaqAction()
     {
     }
     
@@ -654,13 +666,6 @@ class AdminController extends Zend_Controller_Action {
             $this->_helper->redirector('formfaqmod', 'admin');
         }
         $formFaqMod=$this->_formFaqMod;
-        $idModifica = $formFaqMod->getValue('idModifica');
-        $cancella = $formFaqMod->getValue('cancella');
-        if($cancella)
-        {
-            $this->_adminModel->delFaq($idModifica);
-            return $this->render('cancellafaq');
-        }
         if (!$formFaqMod->isValid($_POST)) {
             $formFaqMod->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formfaqmod');
@@ -669,6 +674,13 @@ class AdminController extends Zend_Controller_Action {
             'domanda'=>$formFaqMod->getValue('domanda'),
             'risposta'=>$formFaqMod->getValue('risposta')
                 );
+        $idModifica = $formFaqMod->getValue('idModifica');
+        $cancella = $formFaqMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delFaq($idModifica);
+            return $this->render('cancellafaq');
+        }
        	$this->_adminModel->modificaFaq($values, $idModifica);
     }
 }

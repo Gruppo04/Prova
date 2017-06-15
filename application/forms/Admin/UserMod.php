@@ -26,6 +26,7 @@ class Application_Form_Admin_UserMod extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'autofocus' => 'true',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
@@ -122,7 +123,7 @@ class Application_Form_Admin_UserMod extends App_Form_Abstract
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella utente',
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-danger',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
         
         $this->setDecorators(array(

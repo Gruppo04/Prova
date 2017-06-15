@@ -25,6 +25,7 @@ class Application_Form_User_Dati extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'autofocus' => 'true',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
@@ -93,7 +94,6 @@ class Application_Form_User_Dati extends App_Form_Abstract
         
         $this->addElement('text', 'nuovo_username', array(
             'label' => 'Nome utente',
-            'required' => 'true',
             'placeholder' => '(invariato)',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')));

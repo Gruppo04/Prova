@@ -13,6 +13,7 @@ class Application_Form_Admin_FaqMod extends App_Form_Abstract
         	'cols' => '100', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
+            'autofocus' => true,
             'decorators' => $this->elementDecorators,
             'placeholder' => 'Inserisci il testo della domanda',
             'validators' => array(array('StringLength',true, array(1,2500)))
@@ -38,7 +39,7 @@ class Application_Form_Admin_FaqMod extends App_Form_Abstract
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella FAQ',
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-danger',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
         
         $this->setDecorators(array(

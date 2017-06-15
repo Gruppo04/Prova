@@ -14,6 +14,7 @@ class Application_Form_Admin_AziendaMod extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'autofocus' => 'true',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
             ));
@@ -55,7 +56,7 @@ class Application_Form_Admin_AziendaMod extends App_Form_Abstract
                 'Servizi'   => 'Servizi'
                 )));
         
-        $this->addElement('hidden', 'idModifica',array(
+        $this->addElement('hidden', 'idModifica', array(
             'required' => true
         ));
 
@@ -76,7 +77,7 @@ class Application_Form_Admin_AziendaMod extends App_Form_Abstract
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella azienda',
-            'class' => 'btn btn-primary',
+            'class' => 'btn btn-danger',
             'style' => 'position: relative; left: 150px; bottom: 54px'));
         
         $this->setDecorators(array(

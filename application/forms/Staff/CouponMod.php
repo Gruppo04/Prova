@@ -17,6 +17,7 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'autofocus' => 'true',
             'size' => '50',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim')
@@ -83,7 +84,7 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
             'filters' => array('StringTrim')
             ));
         
-        $this->addElement('file', 'immagine', array(
+        $this->addElement('file', 'nuovaimmagine', array(
         	'label' => 'Immagine',
         	'destination' => APPLICATION_PATH . '/../public/images/coupon',
         	'validators' => array( 
@@ -95,13 +96,16 @@ class Application_Form_Staff_CouponMod extends App_Form_Abstract
             'required' => true
         ));
         
+        $this->addElement('hidden', 'immagine');
+        
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',
             'class' => 'btn btn-primary'));
         
         $this->addElement('submit', 'cancella', array(
             'label' => 'Cancella promozione',
-            'class' => 'btn btn-primary'));
+            'class' => 'btn btn-danger',
+            'style' => 'position: relative; left: 150px; bottom: 54px'));
         
         $this->setDecorators(array(
             'FormElements',

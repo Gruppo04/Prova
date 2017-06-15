@@ -17,13 +17,13 @@ class Application_Resource_Utenti extends Zend_Db_Table_Abstract
     
     public function getUsers()
     {
-        $select = $this->select()->where('livello = ?', 'user')->order('id');
+        $select = $this->select()->where('livello = ?', 'user')->order('cognome');
         return $this->fetchAll($select);
     }
         
     public function getStaff()
     {
-        $select = $this->select()->where('livello = ?', 'staff')->order('id');
+        $select = $this->select()->where('livello = ?', 'staff')->order('cognome');
         return $this->fetchAll($select);
     }
     
