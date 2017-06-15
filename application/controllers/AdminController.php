@@ -7,6 +7,7 @@ class AdminController extends Zend_Controller_Action {
     protected $_guestModel;
     protected $_authService;
     protected $_formStaff;
+    protected $_formUserMod;
     protected $_formStaffMod;
     protected $_formFaq;
     protected $_formFaqMod;
@@ -25,6 +26,7 @@ class AdminController extends Zend_Controller_Action {
         $this->_authService = new Application_Service_Auth();
         $this->view->staffForm = $this->getStaffForm();
         $this->view->staffModForm = $this->getStaffModForm();
+        $this->view->userModForm = $this->getUserModForm();
         $this->view->faqForm = $this->getFaqForm();
         $this->view->faqModForm = $this->getFaqModForm();
         $this->view->aziendaForm = $this->getAziendaForm();
@@ -258,7 +260,7 @@ class AdminController extends Zend_Controller_Action {
                     ->assign(array('numero' => $size));
     }
     
-    public function userstodeleteAction()
+    public function userstomodifyAction()
     {
         $users=$this->_adminModel->getUsers();
         $size = count($users->toArray());
@@ -266,15 +268,79 @@ class AdminController extends Zend_Controller_Action {
                     ->assign(array('numero' => $size));
     }
     
-    public function cancellauserAction()
+    public function formusermodAction()
     {
         $idModifica = $_GET["chosen"];
         if(!$idModifica)
         {
-            $this->_helper->redirector('users', 'admin');
+            $this->_helper->redirector('userstomodify', 'admin');
         }
-        $this->_adminModel->delUtente($idModifica);  
+        $query = $this->_adminModel->getUtenteById($idModifica)->toArray();
+        $query['idModifica'] = $idModifica;
+        $this->_formUserMod->populate($query);       
     }
+    
+    public function modificauserAction()
+    {
+        if (!$this->getRequest()->isPost()) {
+            $this->_helper->redirector('formusermod', 'admin');
+        }
+        $formUserMod=$this->_formUserMod;
+        if (!$formUserMod->isValid($_POST)) {
+            return $this->render('formusermod');
+        }
+        $values = array(
+            'nome' => $formUserMod->getValue('nome'),
+            'cognome' => $formUserMod->getValue('cognome'),
+            'data_di_nascita' => $formUserMod->getValue('data_di_nascita'),
+            'genere' => $formUserMod->getValue('genere'),
+            'provincia' => $formUserMod->getValue('provincia'),
+            'citta' => $formUserMod->getValue('citta'),
+            'telefono' => $formUserMod->getValue('telefono'),
+            'email' => $formUserMod->getValue('email'),
+            'password' => $formUserMod->getValue('password'));
+        $username = $formUserMod->getValue('nuovo_username');
+        /* Se durante la modifica non è stata aggiunto uno username significa che si
+        * deve mantenere quello precedente */
+        if($username){
+            $values['username'] = $username;
+        }else{
+            $values['username'] = $formUserMod->getValue('username');
+        }
+        $idModifica = $formUserMod->getValue('idModifica');
+        $cancella = $formUserMod->getValue('cancella');
+        if($cancella)
+        {
+            $this->_adminModel->delUtente($idModifica);
+            return $this->render('cancellauser');
+        }
+       	$this->_adminModel->modificaDati($values, $idModifica);
+        $modificato=$this->_adminModel->getUtenteById($idModifica);
+        $this->view->assign(array('modificato'=>$modificato));   
+    }
+    
+     private function getUserModForm()
+    { 
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formUserMod = new Application_Form_Admin_UserMod();
+        $urlHelper = $this->_helper->getHelper('url');
+        $this->_formUserMod->setAction($urlHelper->url(array(
+                        'controller' => 'admin',
+                        'action' => 'modificauser'),
+                        'default'
+                        ));
+        return $this->_formUserMod;
+    }
+    
+//    public function cancellauserAction()
+//    {
+//        $idModifica = $_GET["chosen"];
+//        if(!$idModifica)
+//        {
+//            $this->_helper->redirector('users', 'admin');
+//        }
+//        $this->_adminModel->delUtente($idModifica);  
+//    }
     
     /* FUNZIONI PER LA GESTIONE DELLO STAFF */
     
@@ -401,7 +467,7 @@ class AdminController extends Zend_Controller_Action {
         {
             $datetime = $emissioni[$i]['data_emissione'];
             $id = $emissioni[$i]['id'];
-            $coupon = $this->_adminModel->getAziendaById($emissioni[$i]['idCoupon']);
+            $coupon = $this->_staffModel->getCouponById($emissioni[$i]['idCoupon']);
             $utente = $this->_adminModel->getUtenteById($emissioni[$i]['idUtente']);
             $emissione[$i] = array(
                 'id' => $id,

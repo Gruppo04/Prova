@@ -1,29 +1,36 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbo2">
-  <div class="container">
-    <h1>Pagina delle Aziende</h1>
-    <p>Bla bla bla bla bla bla... non so nemmeno se serve tenere questo pannella qua... oppure possiamo scrivere qua cose del tipo "clicca sull'immagine per maggiori info" e togliamo i pulsanti "vedi i dettagli"
-    </p>
-  </div>
+    <div class="container">
+        <h1>Pagina delle Aziende</h1>
+        <p>Bla bla bla bla bla bla... non so nemmeno se serve tenere questo pannella qua...
+            oppure possiamo scrivere qua cose del tipo "clicca sull'immagine per maggiori info" e togliamo i pulsanti
+            "vedi i dettagli"</p>
+    </div>
 </div>
 
 <div class="container">
-  <!-- Example row of columns -->
+    <!-- Example row of columns -->
     <div class="row">
-        <?php foreach ($this->aziende as $azienda) :?>
+        <?php $i=1;
+            foreach ($this->aziende as $azienda) :
+            if($i%3 === 0){?>
+            <div class="row">
+            <?php } ?>
             <div class="col-md-4">
                 <?php echo '<h2>' . $azienda->nome . '</h2>';
-                echo $this->generalImg($azienda->immagine,'aziende/' ,array('class' => 'imagefrm'));
-                echo '<p>' . $azienda->descrizione . '</p>';
+                echo $this->generalImg($azienda->immagine, 'aziende/' ,array('class' => 'imagefrm'));
+                echo '<p>' . $this->text($azienda->descrizione) . '</p>';
                 echo '<p><a class="btn btn-default" href='.$this->url(array(
                                         'controller' => 'public',
                                         'action'     => 'azienda',
                                         'selAzienda' => $azienda->id), 
                                         'default',true).'>
-                                         Vedi i dettagli &raquo;</a></p>'; ?>
+                                        Vedi i dettagli &raquo;</a></p>'; ?>
             </div>
-        <?php endforeach ?>
-	</div>
-  <hr>
+            <?php if($i%3 === 0){?>
+            </div> 
+            <?php } ?>
+        <?php $i++; endforeach ?>
+    </div>
 </div> 
 <!-- /container --> 

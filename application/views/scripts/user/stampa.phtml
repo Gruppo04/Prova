@@ -9,9 +9,10 @@
                 echo '<p>' . $coupon->descrizione . '</p><br>'
                 . '<p><b>Valido dal:</b>&emsp;' . $coupon->inizio_validita . '<br>'
                 . '<b>al:</b>&emsp;&emsp;' . $coupon->scadenza .'<br>'
-                . '<b>Presso:</b>&emsp;&emsp;' . $coupon->luogo_di_fruizione . '<br>'
+                . '<b>Presentare presso:</b>&emsp;&emsp;' . $coupon->luogo_di_fruizione . '<br>'
                 . '<b>Data e ora emissione:</b>&emsp;' . $this->data_emissione . '<br>'
-                . '<b>Codice identificativo:</b>&emsp;#COUPONISLIFE' . $this->id . '</p>'; ?>
+                . '<b>Codice identificativo:</b>&emsp;#COUPONISLIFE' . $this->id . '<br>'
+                . '<b>Intestato a:</b>&emsp;' . $this->nome . ' ' . $this->cognome . '</p>'; ?>
             </div>
             <div class="panel-footer" style="text-align: right">
                 <b>Coupon is Life</b>

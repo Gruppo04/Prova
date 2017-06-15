@@ -1,0 +1,37 @@
+<div class="container">
+    <br>
+    <h3><b>Modifica avvenuta con successo!</b></h3>
+    <br>
+    <table class="table table-condensed">
+            <tr><th style="text-align:center;">ID</th><th>Nome</th><th>Cognome</th><th>email</th>
+            <?php
+                $modificato = $this->modificato;
+                echo '<tr><td style="text-align:center;">' . $modificato->id . '</td>'
+                    . '<td>' . $modificato->nome . '</td>'
+                    . '<td>' . $modificato->cognome . '</td>'
+                    . '<td>' . $modificato->data_di_nascita . '</td>'
+                    . '<td>' . $modificato->genere . '</td>'
+                    . '<td>' . $modificato->provincia . '</td>'
+                    . '<td>' . $modificato->citta . '</td>'
+                    . '<td>' . $modificato->telefono . '</td>'
+                    . '<td>' . $modificato->email . '</td>'
+                    . '<td>' . $modificato->username . '</td>'
+                    . '<td>' . $modificato->password . '</td>';
+            ?>
+    </table>
+    <br>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'userstomodify',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Modifica/cancella altri utenti</a>
+    <a class="btn btn-primary" href=" <?= $this->url(array(
+                                    'controller' => 'admin',
+                                    'action'     => 'index',
+                                    ), 
+                                    'default',true); 
+                                    ?>">Torna alla pagina di amministrazione</a>
+</div>
+
+

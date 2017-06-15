@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Staff_Dati extends Zend_Form
+class Application_Form_Staff_Dati extends App_Form_Abstract
 {
     public function init() {
         
@@ -14,7 +14,7 @@ class Application_Form_Staff_Dati extends Zend_Form
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
-            'autofocus' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -24,6 +24,7 @@ class Application_Form_Staff_Dati extends Zend_Form
         $this->addElement('text', 'cognome', array(
             'label' => 'Cognome',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(
                 array('Alpha', true, array('allowWhiteSpace'=>true)))
@@ -33,12 +34,20 @@ class Application_Form_Staff_Dati extends Zend_Form
         $this->addElement('text', 'email', array(
             'label' => 'Indirizzo e-mail',
             'required' => 'true',
+            'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array('EmailAddress')));
         
         $this->addElement('submit', 'modifica', array(
             'label' => 'Applica modifiche',
             'class' => 'btn btn-primary'));
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 
 }

@@ -11,17 +11,24 @@
             echo '<p>' . $coupon->descrizione . '</p><br>';
             switch ($this->authInfo('livello')){
                 case 'user':
-                    if($this->emesso){
+                    if($this->emesso !== 0){
                         echo '<h5><b>Coupon gi&agrave; scaricato</b></h5>';
                     }else{ ?>
-                        <p><a class="btn btn-primary btn-lg" role="button" target="_blank"  
+                        <p><a id="stampa" class="btn btn-primary btn-lg" role="button" target="_blank"  
                                 href=" <?= $this->url(array(
-                                              'controller' => 'public',
+                                              'controller' => 'user',
                                               'action'     => 'stampa',
                                               'selCoupon'  => $coupon->id
                                               ), 
                                               'default',true); 
                                               ?>">Stampa il tuo coupon!</a></p>
+                                            <script>$('#stampa').click(function(){
+                                                location.reload();
+                                            });
+                                            </script>
+                        
+                        <h5 style="color: #ff0000 "><b>N.B. NON CHIUDERE LA PAGINA CHE SI APRIR&Agrave;
+                                PRIMA DI AVERLA STAMPATA!</b></h5>
                 <?php }?>
                 <?php break;
                 case 'admin':                    

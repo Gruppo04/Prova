@@ -80,10 +80,23 @@ class StaffController extends Zend_Controller_Action
         }
 	$formCoupon=$this->_formCoupon;
         if (!$formCoupon->isValid($_POST)) {
+            $formCoupon->setDescription('Attention: some data are incorrect.');
             return $this->render('formcoupon');
         }
         $values = $formCoupon->getValues();
        	$this->_staffModel->registraCoupon($values);
+    }
+    
+    public function validatecouponAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $userform = new Application_Form_Staff_Coupon();
+        $response = $userform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     public function modificacouponAction()
@@ -93,6 +106,7 @@ class StaffController extends Zend_Controller_Action
         }
         $formCouponMod=$this->_formCouponMod;
         if (!$formCouponMod->isValid($_POST)) {
+            $formDati->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formcouponmod');
         }
         $values = array(
@@ -116,6 +130,18 @@ class StaffController extends Zend_Controller_Action
        	$this->_staffModel->modificaCoupon($values, $idModifica);
         $modificato=$this->_staffModel->getCouponById($idModifica);
         $this->view->assign(array('modificata'=>$modificata));   
+    }
+    
+    public function validatemodcouponAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $userform = new Application_Form_Staff_CouponMod();
+        $response = $userform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     private function getCouponForm()
@@ -161,6 +187,7 @@ class StaffController extends Zend_Controller_Action
         }
         $formDati=$this->_formDati;
         if (!$formDati->isValid($_POST)) {
+            $formDati->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formdati');
         }
         $values = $formDati->getValues();
@@ -170,6 +197,18 @@ class StaffController extends Zend_Controller_Action
         $this->view->assign(array('modificato'=>$modificato));
     }
     
+    public function validatedatiAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $userform = new Application_Form_Staff_Dati();
+        $response = $userform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
+    }
+    
     public function modificapasswordAction()
     {
         if (!$this->getRequest()->isPost()) {
@@ -177,6 +216,7 @@ class StaffController extends Zend_Controller_Action
         }
 	$formPassword=$this->_formPassword;
         if (!$formPassword->isValid($_POST)) {
+            $formDati->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formpassword');
         }
         $values = $formPassword->getValues();
@@ -187,6 +227,18 @@ class StaffController extends Zend_Controller_Action
         $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaPassword(array('password' => $values['password']), $idModifica);
         $this->_authService->clear();
+    }
+    
+    public function validatepassAction() 
+    {
+        $this->_helper->getHelper('layout')->disableLayout();
+    		$this->_helper->viewRenderer->setNoRender();
+
+        $userform = new Application_Form_Staff_Password();
+        $response = $userform->processAjax($_POST); 
+        if ($response !== null) {
+        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+        }
     }
     
     private function getDatiForm()

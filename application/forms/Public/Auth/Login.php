@@ -1,6 +1,6 @@
 <?php
 
-class Application_Form_Public_Auth_Login extends Zend_Form
+class Application_Form_Public_Auth_Login extends App_Form_Abstract
 {
     public function init()
     {               
@@ -28,7 +28,7 @@ class Application_Form_Public_Auth_Login extends Zend_Form
         $this->addElement('text', 'username', array(
             'filters'    => array('StringTrim'),
             'required'   => true,
-            'autofocus'  => true,
+            'decorators' => $this->elementDecorators,
             'label'      => 'Username'
             ));
         $this->getElement('username')->addValidator($esisteUser);
@@ -36,6 +36,7 @@ class Application_Form_Public_Auth_Login extends Zend_Form
         $this->addElement('password', 'password', array(
             'filters'    => array('StringTrim'),
             'required'   => true,
+            'decorators' => $this->elementDecorators,
             'label'      => 'Password'
             ));
         $this->getElement('password')->addValidator($esistePass);
@@ -44,6 +45,12 @@ class Application_Form_Public_Auth_Login extends Zend_Form
             'label'    => 'Login',
             'class' => 'btn btn-primary'
         ));
-
+        
+        $this->setDecorators(array(
+            'FormElements',
+            array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
+        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            'Form'
+        ));
     }
 }

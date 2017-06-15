@@ -69,11 +69,27 @@ class UserController extends Zend_Controller_Action
         if (!$formDati->isValid($_POST)) {
             return $this->render('formdati');
         }
-        $values = $formDati->getValues();
+        $values = array(
+            'nome' => $formDati->getValue('nome'),
+            'cognome' => $formDati->getValue('cognome'),
+            'data_di_nascita' => $formDati->getValue('data_di_nascita'),
+            'genere' => $formDati->getValue('genere'),
+            'provincia' => $formDati->getValue('provincia'),
+            'citta' => $formDati->getValue('citta'),
+            'telefono' => $formDati->getValue('telefono'),
+            'email' => $formDati->getValue('email'));
+        $username = $formDati->getValue('nuovo_username');
+        /* Se durante la modifica non è stata aggiunto uno username significa che si
+        * deve mantenere quello precedente */
+        if($username){
+            $values['username'] = $username;
+        }else{
+            $values['username'] = $formDati->getValue('username');
+        }
         $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaDati($values, $idModifica);
         $modificato=$this->_adminModel->getUtenteById($idModifica);
-        $this->view->assign(array('modificato'=>$modificato));
+        $this->_authService->clear();
     }
     
     public function modificapasswordAction()
@@ -115,6 +131,52 @@ class UserController extends Zend_Controller_Action
                         'default'
                         ));
         return $this->_formPassword;
+    }
+    
+    public function stampaAction()
+    {
+        $idCoupon = $this->getParam('selCoupon');
+        $coupon = $this->_guestModel->getCouponById($idCoupon);
+        $emissioni = $coupon->emissioni;
+        $emissioni++;
+        $valueCoupon = array('emissioni' => $emissioni);
+        $this->_userModel->incrementaCoupon($valueCoupon, $idCoupon);
+        
+        $idUtente = $this->_authService->getIdentity()->id;
+        $utente = $this->_adminModel->getUtenteById($idUtente);
+        $acquisizioni = $utente->coupon_acquisiti;
+        $acquisizioni++;
+        $valueUtente = array('coupon_acquisiti' => $acquisizioni);
+        $this->_userModel->incrementaUtente($valueUtente, $idUtente);
+        
+        $idAzienda = $coupon->idAzienda;
+        $azienda = $this->_adminModel->getAziendaById($idAzienda);
+        $emissAzienda = $azienda->tot_emissioni;
+        $emissAzienda++;
+        $valueAzienda = array('tot_emissioni' => $emissAzienda);
+        $this->_userModel->incrementaAzienda($valueAzienda, $idAzienda);
+        
+        $idCategoria = $coupon->idCategoria;
+        $categoria = $this->_adminModel->getCategoriaById($idCategoria);
+        $emissCategoria = $categoria->tot_emissioni;
+        $emissCategoria++;
+        $valueCategoria = array('tot_emissioni' => $emissCategoria);
+        $this->_userModel->incrementaCategoria($valueCategoria, $idCategoria);
+        
+        $emissione = array(
+            'idUtente' => $idUtente,
+            'idCoupon' => $idCoupon,
+            'data_emissione' => date("Y-m-d H:i:s")
+            );
+        $this->_userModel->registraEmissione($emissione);
+        $emissionenew = $this->_userModel->getEmissioneByUserCoupon($idUtente, $idCoupon)->toArray();
+        $this->view->assign($emissionenew);
+        $this->view->assign(array(
+                    'nome' => $utente->nome,
+                    'cognome' => $utente->cognome
+                    ));
+        $this->view->assign(array('coupon' => $coupon));
+        $this->_helper->layout()->disableLayout();
     }
 }
 

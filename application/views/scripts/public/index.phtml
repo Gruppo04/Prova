@@ -47,9 +47,8 @@
         <div id="par" class="col-md-8">
             <h1 class="page-header">Benvenuto in Coupon is Life!</h1><br>
             <p>La piattaforma per ricevere coupon a tutto spiano!</p>
+            <p><strong>Varie categorie prensenti nel sito:</strong></p>
             <ul>
-                <li><strong>Varie categorie prensenti nel sito:</strong>
-                </li>
                 <li>Sconti su smartphone</li>
                 <li>Sconti su abbigliamento</li>
                 <li>Sconti per la casa</li>
@@ -100,7 +99,7 @@
                             break;                                 
                         }?>
                             
-                    <div class="col-md-12 control">
+                    <div class="col-md-12 control"><br>
                         <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
                             Non hai un account?
                         <a href="<?= $this->url(array(
@@ -167,7 +166,11 @@
                     <div class="panel-heading">
                         <span class="fa-stack fa-5x">
                               <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-sitemap fa-stack-1x fa-inverse"></i>
+                              <a href="<?= $this->url(array(
+                                    'controller' => 'public',
+                                    'action'     => 'categorie'), 
+                                    'default',true); 
+                                ?>" class="fa fa-sitemap fa-stack-1x fa-inverse"></a>
                         </span>
                     </div>
                     </p>
@@ -187,7 +190,7 @@
                     <?php endfor ?> 
                 </ul>
                 <div class="panel-footer">
-                    <a <a href="<?= $this->url(array(
+                    <a href="<?= $this->url(array(
                                     'controller' => 'public',
                                     'action'     => 'categorie'), 
                                     'default',true); 
