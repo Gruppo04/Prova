@@ -130,7 +130,8 @@ class UserController extends Zend_Controller_Action
         $values = $formPassword->getValues();
         if($values['old_password'] != ($this->_authService->getIdentity()->password))
         {
-            return $this->render('errorepassword');
+            $formPassword->setDescription('Wrong old password.');
+            return $this->render('formpassword');
         }
         $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaPassword(array('password' => $values['password']), $idModifica);

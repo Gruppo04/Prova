@@ -1,3 +1,16 @@
+<?php $this->headScript()
+ ->appendFile('https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js')
+ ->appendFile($this->baseUrl('js/functionsButton.js'))
+ ->captureStart() ?>
+
+$(function()
+{
+    $("#stampa").on('click', function(event) {
+        doRemove('stampa');
+    });
+});
+
+<?php $this->headScript()->captureEnd() ?>
 <div class="container">
     <div class="row">
         <div class="col-md-8">
@@ -14,21 +27,18 @@
                     if($this->emesso !== 0){
                         echo '<h5><b>Coupon gi&agrave; scaricato</b></h5>';
                     }else{ ?>
-                        <p><a id="stampa" class="btn btn-primary btn-lg" role="button" target="_blank"  
-                                href=" <?= $this->url(array(
-                                              'controller' => 'user',
-                                              'action'     => 'stampa',
-                                              'selCoupon'  => $coupon->id
-                                              ), 
-                                              'default',true); 
-                                              ?>">Stampa il tuo coupon!</a></p>
-                                            <script>$('#stampa').click(function(){
-                                                location.reload();
-                                            });
-                                            </script>
-                        
-                        <h5 style="color: #ff0000 "><b>N.B. NON CHIUDERE LA PAGINA CHE SI APRIR&Agrave;
-                                PRIMA DI AVERLA STAMPATA!</b></h5>
+                        <div id="stampa"
+                            <p><a class="btn btn-primary btn-lg" role="button" target="_blank"  
+                                    href=" <?= $this->url(array(
+                                                  'controller' => 'user',
+                                                  'action'     => 'stampa',
+                                                  'selCoupon'  => $coupon->id
+                                                  ), 
+                                                  'default',true); 
+                                                  ?>">Stampa il tuo coupon!</a></p>                        
+                            <h5 style="color: #ff0000 "><b>N.B. NON CHIUDERE LA PAGINA CHE SI APRIR&Agrave;
+                                    PRIMA DI AVERLA STAMPATA!</b></h5>
+                        </div>
                 <?php }?>
                 <?php break;
                 case 'admin':                    

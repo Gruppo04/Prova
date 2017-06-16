@@ -16,7 +16,8 @@ class Validator_DataScad extends Zend_Validate_Abstract
         $giorno= (int)substr($value,8,2);
         $oggi= getdate();
         
-        if(($anno>$oggi['year']) || ($anno===$oggi['year'] && $mese>=$oggi['mon'] && $giorno>=$oggi['mday'])){
+        if(($anno>$oggi['year']) || ($anno===$oggi['year'] && $mese>$oggi['mon']) ||
+                ($anno===$oggi['year'] && $mese===$oggi['mon'] && $giorno>=$oggi['mday'])){
             return true;
         }
         else{

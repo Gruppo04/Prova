@@ -28,6 +28,7 @@ class Application_Form_Public_User extends App_Form_Abstract
         $this->addElement('text', 'nome', array(
             'label' => 'Nome',
             'required' => 'true',
+            'autofocus' => 'true',
             'decorators' => $this->elementDecorators,
             'filters' => array('StringTrim'),
             'validators' => array(

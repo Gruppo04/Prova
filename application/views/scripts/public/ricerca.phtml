@@ -15,69 +15,88 @@
         <div class="panel-group" id="accordion">
             <p>  
             <?php
-            $filtro=$this->filtro;
-            $risultati =$this->risultati;  //filtra in base a ciò che scegli o Categorie o Coupon
-            $categorieTrovate =$this->risultati1; //Entrambe trova le CATEGORIE
-            $couponTrovati =$this->risultati2; //Entrambe trova i COUPON
-
-            if(!$risultati=="") {
+            $filtro = $this->filtro;
+            //$risultati = $this->risultati;  //filtra in base a ciò che scegli o Categorie o Coupon
+            //$categorieTrovate = $this->risultati1; //Entrambe trova le CATEGORIE
+            //$couponTrovati = $this->risultati2; //Entrambe trova i COUPON
+            if(!$this->risultati=="") {
+                $i=1;
                 foreach ($this->risultati as $risultati) 
-                {
-                    //in base alla scelta del filtro
-                    echo '<div class="col-md-4">' ;
-                    echo '<h2>' . $risultati->nome . '</h2>';
-                    if($filtro=="categoria")
-                    {
-                        echo $this->generalImg($risultati->immagine,'categorie/' ,array('class' => 'imagefrm'));
-                        echo '<p>' . $this->text($risultati->descrizione) . '</p>';
-                        echo '<p><a class="btn btn-default" href='.$this->url(array(
-                            'controller' => 'public',
-                            'action'     => 'categoria',
-                            'selCategoria' => $risultati->id), 
-                            'default',true).'>
-                             Vedi i dettagli &raquo;</a></p>'; 
-                        echo "entrato nell'if";
-                    }else{
-                        echo $this->generalImg($risultati->immagine,'coupon/' ,array('class' => 'imagefrm'));
-                        echo '<p>' . $this->text($risultati->descrizione) . '</p>';
-                        echo '<p><a class="btn btn-default" href='.$this->url(array(
-                            'controller' => 'public',
-                            'action'     => 'coupon',
-                            'selCoupon' => $risultati->id), 
-                            'default',true).'>
-                             Vedi i dettagli &raquo;</a></p>'; 
-                             echo "entrato nell'else";
-                    }
-                    echo '</div>';
-                    echo "<script>";
-                    echo "$(document).ready(function(){ 
-                        $('#notfound').hide(); });";
-                    echo "</script>";
-                }
-            }else if(!$categorieTrovate=="" && !$couponTrovati=="")
-                {
-                    foreach ($this->risultati1 as $categorieTrovate) 
-                    {
-                        //entrambe 
-                        echo '<div class="col-md-4">' ;    
-                        echo '<h2>' . $categorieTrovate->nome . '</h2>';
-                        echo $this->generalImg($categorieTrovate->immagine,'categorie/' ,array('class' => 'imagefrm'));
-                        echo '<p>' . $this->text($categorieTrovate->descrizione) . '</p>';
-                        echo '<p><a class="btn btn-default" href='.$this->url(array(
-                            'controller' => 'public',
-                            'action'     => 'categoria',
-                            'selCategoria' => $categorieTrovate->id), 
-                            'default',true).'>
-                             Vedi i dettagli &raquo;</a></p>'; 
+                {   
+                    if($this->deadline($risultati->scadenza)){
+                        //in base alla scelta del filtro
+                        if($i%3 === 0){
+                        echo '<div class="row">';
+                        }
+                        echo '<div class="col-md-4">' ;
+                        echo '<h2>' . $risultati->nome . '</h2>';
+                        if($filtro=="categoria")
+                        {
+                            echo $this->generalImg($risultati->immagine,'categorie/' ,array('class' => 'imagefrm'));
+                            echo '<p>' . $this->text($risultati->descrizione) . '</p>';
+                            echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                'controller' => 'public',
+                                'action'     => 'categoria',
+                                'selCategoria' => $risultati->id), 
+                                'default',true).'>
+                                Vedi i dettagli &raquo;</a></p>'; 
+                        }else{
+                            echo $this->generalImg($risultati->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                            echo '<p>' . $this->text($risultati->descrizione) . '</p>';
+                            echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                'controller' => 'public',
+                                'action'     => 'coupon',
+                                'selCoupon' => $risultati->id), 
+                                'default',true).'>
+                                 Vedi i dettagli &raquo;</a></p>';
+                        }
                         echo '</div>';
+                        if($i%3 === 0){
+                        echo '</div>';
+                        }
                         echo "<script>";
                         echo "$(document).ready(function(){ 
-                        $('#notfound').hide(); });";
+                            $('#notfound').hide(); });";
                         echo "</script>";
+                        $i++;
                     }
-                    foreach ($this->risultati2 as $couponTrovati) 
-                    {
+                }
+            }else if(!$this->risultati1=="" && !$this->risultati2=="")
+            {   
+                $i=1;
+                foreach ($this->risultati1 as $categorieTrovate) 
+                {
+                    //entrambe
+                    if($i%3 === 0){
+                    echo '<div class="row">';
+                    }
+                    echo '<div class="col-md-4">' ;    
+                    echo '<h2>' . $categorieTrovate->nome . '</h2>';
+                    echo $this->generalImg($categorieTrovate->immagine,'categorie/' ,array('class' => 'imagefrm'));
+                    echo '<p>' . $this->text($categorieTrovate->descrizione) . '</p>';
+                    echo '<p><a class="btn btn-default" href='.$this->url(array(
+                        'controller' => 'public',
+                        'action'     => 'categoria',
+                        'selCategoria' => $categorieTrovate->id), 
+                        'default',true).'>
+                         Vedi i dettagli &raquo;</a></p>'; 
+                    echo '</div>';
+                    if($i%3 === 0){
+                    echo '</div>';
+                    }
+                    echo "<script>";
+                    echo "$(document).ready(function(){ 
+                    $('#notfound').hide(); });";
+                    echo "</script>";
+                    $i++;
+                }
+                foreach ($this->risultati2 as $couponTrovati) 
+                {
+                    if($this->deadline($couponTrovati->scadenza)){
                         //entrambe
+                        if($i%3 === 0){
+                        echo '<div class="row">';
+                        }
                         echo '<div class="col-md-4">' ;  
                         echo '<h2>' . $couponTrovati->nome . '</h2>';
                         echo $this->generalImg($couponTrovati->immagine,'coupon/' ,array('class' => 'imagefrm'));
@@ -89,12 +108,17 @@
                             'default',true).'>
                              Vedi i dettagli &raquo;</a></p>'; 
                         echo '</div>';
+                        if($i%3 === 0){
+                        echo '</div>';
+                        }
                         echo "<script>";
                         echo "$(document).ready(function(){ 
                         $('#notfound').hide(); });";
                         echo "</script>";
+                        $i++;
                     }
                 }
+            }
             ?>
             </p>
         </div>

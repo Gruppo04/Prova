@@ -229,13 +229,14 @@ class StaffController extends Zend_Controller_Action
         }
 	$formPassword=$this->_formPassword;
         if (!$formPassword->isValid($_POST)) {
-            $formDati->setDescription('Attention: some modifications are incorrect.');
+            $formPassword->setDescription('Attention: some modifications are incorrect.');
             return $this->render('formpassword');
         }
         $values = $formPassword->getValues();
         if($values['old_password'] != ($this->_authService->getIdentity()->password))
         {
-            return $this->render('errorepassword');
+            $formPassword->setDescription('Wrong old password.');
+            return $this->render('formpassword');
         }
         $idModifica = $this->_authService->getIdentity()->id;
        	$this->_userModel->modificaPassword(array('password' => $values['password']), $idModifica);

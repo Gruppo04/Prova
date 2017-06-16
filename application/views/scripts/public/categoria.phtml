@@ -13,20 +13,29 @@
   <!-- Example row of columns -->
     <div class="row">
     <h3>Ecco tutti i coupon della categoria </h3>
-        <?php foreach ($this->coupon as $coupon) {
-            echo'<div class="col-md-4 style="padding-top:20px;">';
-            if($this->deadline($coupon->scadenza))
-            {
-                echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
-                echo '<h4>' . $this->text($coupon ->descrizione) . ' </h4>';
-                echo '<p><a class="btn btn-default" href='.$this->url(array(
-                                    'controller' => 'public',
-                                    'action'     => 'coupon',
-                                    'selCoupon' => $coupon->id), 
-                                    'default',true).'>
-                                    Vedi i dettagli &raquo;</a></p>';
-            }
-            echo'</div>';}?> 
+        <?php $i=1;
+            foreach ($this->coupon as $coupon) {
+                if($i%3 === 0){
+                echo '<div class="row">';
+                }
+                echo'<div class="col-md-4 style="padding-top:20px;">';
+                if($this->deadline($coupon->scadenza))
+                {
+                    echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
+                    echo '<h4>' . $this->text($coupon ->descrizione) . ' </h4>';
+                    echo '<p><a class="btn btn-default" href='.$this->url(array(
+                                        'controller' => 'public',
+                                        'action'     => 'coupon',
+                                        'selCoupon' => $coupon->id), 
+                                        'default',true).'>
+                                        Vedi i dettagli &raquo;</a></p>';
+                }
+                echo'</div>';
+                if($i%3 === 0){
+                echo '</div>';
+                }
+                $i++;
+            }?> 
     </div>
     <hr>
     <a class="btn btn-primary" role="button" href=" <?= $this->url(array(
