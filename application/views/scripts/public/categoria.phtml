@@ -18,9 +18,12 @@
                 if($i%3 === 0){
                 echo '<div class="row">';
                 }
-                echo'<div class="col-md-4 style="padding-top:20px;">';
                 if($this->deadline($coupon->scadenza))
                 {
+                    if($i%3 === 0){
+                        echo '<div class="row">';
+                    }
+                    echo'<div class="col-md-4 style="padding-top:20px;">';
                     echo $this->generalImg($coupon->immagine,'coupon/' ,array('class' => 'imagefrm'));
                     echo '<h4>' . $this->text($coupon ->descrizione) . ' </h4>';
                     echo '<p><a class="btn btn-default" href='.$this->url(array(
@@ -29,10 +32,10 @@
                                         'selCoupon' => $coupon->id), 
                                         'default',true).'>
                                         Vedi i dettagli &raquo;</a></p>';
-                }
-                echo'</div>';
-                if($i%3 === 0){
-                echo '</div>';
+                    echo'</div>';
+                    if($i%3 === 0){
+                        echo '</div>';  // end row
+                    }
                 }
                 $i++;
             }?> 

@@ -556,22 +556,28 @@ class AdminController extends Zend_Controller_Action {
     {
         $emissioni = $this->_adminModel->getEmissioni()->toArray();
         $size = count($emissioni);
-        for ($i=0; $i<$size; $i++)
+        if($size>0)
         {
-            $datetime = $emissioni[$i]['data_emissione'];
-            $id = $emissioni[$i]['id'];
-            $coupon = $this->_staffModel->getCouponById($emissioni[$i]['idCoupon']);
-            $utente = $this->_adminModel->getUtenteById($emissioni[$i]['idUtente']);
-            $emissione[$i] = array(
-                'id' => $id,
-                'coupon' => $coupon->nome,
-                'nome' => $utente->nome,
-                'cognome' => $utente->cognome,
-                'username' => $utente->username,
-                'datetime' => $datetime);
+            for ($i=0; $i<$size; $i++)
+            {
+                $datetime = $emissioni[$i]['data_emissione'];
+                $id = $emissioni[$i]['id'];
+                $coupon = $this->_staffModel->getCouponById($emissioni[$i]['idCoupon']);
+                $utente = $this->_adminModel->getUtenteById($emissioni[$i]['idUtente']);
+                $emissione[$i] = array(
+                    'id' => $id,
+                    'coupon' => $coupon->nome,
+                    'nome' => $utente->nome,
+                    'cognome' => $utente->cognome,
+                    'username' => $utente->username,
+                    'datetime' => $datetime);
+            }
+            $this->view->assign(array('emissione' => $emissione))
+                        ->assign(array('numero' => $size));
+        }else
+        {
+            $this->view->assign(array('numero' => $size));
         }
-        $this->view->assign(array('emissione' => $emissione))
-                    ->assign(array('numero' => $size));
     }
     
     /* FUNZIONI PER LA GESTIONE DELLE FAQ */    

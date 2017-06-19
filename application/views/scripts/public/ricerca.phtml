@@ -26,7 +26,7 @@
                     if($this->deadline($risultati->scadenza)){
                         //in base alla scelta del filtro
                         if($i%3 === 0){
-                        echo '<div class="row">';
+                            echo '<div class="row">';
                         }
                         echo '<div class="col-md-4">' ;
                         echo '<h2>' . $risultati->nome . '</h2>';
@@ -52,7 +52,7 @@
                         }
                         echo '</div>';
                         if($i%3 === 0){
-                        echo '</div>';
+                            echo '</div>';  // end row
                         }
                         echo "<script>";
                         echo "$(document).ready(function(){ 
@@ -68,7 +68,7 @@
                 {
                     //entrambe
                     if($i%3 === 0){
-                    echo '<div class="row">';
+                        echo '<div class="row">';
                     }
                     echo '<div class="col-md-4">' ;    
                     echo '<h2>' . $categorieTrovate->nome . '</h2>';
@@ -82,7 +82,7 @@
                          Vedi i dettagli &raquo;</a></p>'; 
                     echo '</div>';
                     if($i%3 === 0){
-                    echo '</div>';
+                        echo '</div>';  // end row
                     }
                     echo "<script>";
                     echo "$(document).ready(function(){ 
@@ -95,7 +95,7 @@
                     if($this->deadline($couponTrovati->scadenza)){
                         //entrambe
                         if($i%3 === 0){
-                        echo '<div class="row">';
+                            echo '<div class="row">';
                         }
                         echo '<div class="col-md-4">' ;  
                         echo '<h2>' . $couponTrovati->nome . '</h2>';
@@ -109,7 +109,7 @@
                              Vedi i dettagli &raquo;</a></p>'; 
                         echo '</div>';
                         if($i%3 === 0){
-                        echo '</div>';
+                            echo '</div>';  // end row
                         }
                         echo "<script>";
                         echo "$(document).ready(function(){ 
