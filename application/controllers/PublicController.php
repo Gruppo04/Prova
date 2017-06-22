@@ -95,52 +95,6 @@ class PublicController extends Zend_Controller_Action
                                     'idCategoria' => $categoria->id));
     }
     
-//    public function stampaAction()
-//    {
-//        $idCoupon = $this->getParam('selCoupon');
-//        $coupon = $this->_guestModel->getCouponById($idCoupon);
-//        $emissioni = $coupon->emissioni;
-//        $emissioni++;
-//        $valueCoupon = array('emissioni' => $emissioni);
-//        $this->_userModel->incrementaCoupon($valueCoupon, $idCoupon);
-//        
-//        $idUtente = $this->_authService->getIdentity()->id;
-//        $utente = $this->_adminModel->getUtenteById($idUtente);
-//        $acquisizioni = $utente->coupon_acquisiti;
-//        $acquisizioni++;
-//        $valueUtente = array('coupon_acquisiti' => $acquisizioni);
-//        $this->_userModel->incrementaUtente($valueUtente, $idUtente);
-//        
-//        $idAzienda = $coupon->idAzienda;
-//        $azienda = $this->_adminModel->getAziendaById($idAzienda);
-//        $emissAzienda = $azienda->tot_emissioni;
-//        $emissAzienda++;
-//        $valueAzienda = array('tot_emissioni' => $emissAzienda);
-//        $this->_userModel->incrementaAzienda($valueAzienda, $idAzienda);
-//        
-//        $idCategoria = $coupon->idCategoria;
-//        $categoria = $this->_adminModel->getCategoriaById($idCategoria);
-//        $emissCategoria = $categoria->tot_emissioni;
-//        $emissCategoria++;
-//        $valueCategoria = array('tot_emissioni' => $emissCategoria);
-//        $this->_userModel->incrementaCategoria($valueCategoria, $idCategoria);
-//        
-//        $emissione = array(
-//            'idUtente' => $idUtente,
-//            'idCoupon' => $idCoupon,
-//            'data_emissione' => date("Y-m-d H:i:s")
-//            );
-//        $this->_userModel->registraEmissione($emissione);
-//        $emissionenew = $this->_userModel->getEmissioneByUserCoupon($idUtente, $idCoupon)->toArray();
-//        $this->view->assign($emissionenew);
-//        $this->view->assign(array(
-//                    'nome' => $utente->nome,
-//                    'cognome' => $utente->cognome
-//                    ));
-//        $this->view->assign(array('coupon' => $coupon));
-//        $this->_helper->layout()->disableLayout();
-//    }
-    
     public function loginAction()
     {
     }
@@ -148,12 +102,12 @@ class PublicController extends Zend_Controller_Action
     public function validateloginAction() 
     {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         $loginform = new Application_Form_Public_Auth_Login();
         $response = $loginform->processAjax($_POST); 
         if ($response !== null) {
-        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
         }
     }
     

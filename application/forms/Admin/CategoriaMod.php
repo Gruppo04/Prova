@@ -24,7 +24,7 @@ class Application_Form_Admin_CategoriaMod extends App_Form_Abstract
         
         $this->addElement('textarea', 'descrizione', array(
             'label' => 'Descrizione',
-        	'cols' => '50', 'rows' => '5',
+            'cols' => '50', 'rows' => '5',
             'filters' => array('StringTrim'),
             'required' => true,
             'decorators' => $this->elementDecorators,
@@ -58,9 +58,9 @@ class Application_Form_Admin_CategoriaMod extends App_Form_Abstract
         $this->setDecorators(array(
             'FormElements',
             array('HtmlTag', array('tag' => 'div', 'class' => 'zend_form')),
-        	array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
+            array('Description', array('placement' => 'prepend', 'class' => 'formerror')),
             'Form'
-        ));
+            ));
     }
 
 }

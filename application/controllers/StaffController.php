@@ -148,12 +148,12 @@ class StaffController extends Zend_Controller_Action
     public function validatemodcouponAction() 
     {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         $userform = new Application_Form_Staff_CouponMod();
         $response = $userform->processAjax($_POST); 
         if ($response !== null) {
-        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
         }
     }
     

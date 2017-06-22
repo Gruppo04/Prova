@@ -62,12 +62,12 @@ class AdminController extends Zend_Controller_Action {
     public function validateaziendaAction() 
     {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+        $this->_helper->viewRenderer->setNoRender();
 
         $loginform = new Application_Form_Admin_Azienda();
         $response = $loginform->processAjax($_POST); 
         if ($response !== null) {
-        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);
         }
     }
     
@@ -86,12 +86,12 @@ class AdminController extends Zend_Controller_Action {
     public function validateaziendamodAction() 
     {
         $this->_helper->getHelper('layout')->disableLayout();
-    		$this->_helper->viewRenderer->setNoRender();
+    	$this->_helper->viewRenderer->setNoRender();
 
         $loginform = new Application_Form_Admin_AziendaMod();
         $response = $loginform->processAjax($_POST); 
         if ($response !== null) {
-        	   $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
+            $this->getResponse()->setHeader('Content-type','application/json')->setBody($response);        	
         }
     }
     
@@ -153,7 +153,7 @@ class AdminController extends Zend_Controller_Action {
         }
        	$this->_adminModel->modificaAzienda($values, $idModifica);
         $modificata=$this->_adminModel->getAziendaById($idModifica);
-        $this->view->assign(array('modificata'=>$modificata));   
+        $this->view->assign(array('modificata'=>$modificata));
     }
     
     private function getAziendaForm()
